@@ -1,0 +1,94 @@
+<template>
+  <div>
+    <div 
+      class="item-wrapper" 
+      v-for="(list,index) of blogLists"
+      :key="index"
+    >
+      <img class="item-left" :src="list.picUrl" alt="博客列表图片"/>
+      <div class="item-right">
+        <p class="createTime">No.{{blogLists.length-index}} | {{list.createTime}}</p>
+        <h2>{{list.title}}</h2>
+        <p class="introduction">{{list.context}}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name:'items',
+  props:{
+    blogsLen:Number,
+    blogLists:Array
+  },
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+
+  },
+  mounted(){
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+  .item-wrapper
+    width 864px
+    height auto 
+    background white
+    border-radius 8px
+    padding 40px
+    margin 0 auto 20px
+    overflow hidden
+    box-sizing border-box
+    .item-left
+      width 192px
+      height 192px
+      float left
+      border-radius 4px
+    .item-right
+      float right
+      width 552px
+      .createTime
+        font-size 12px
+        line-height 16px
+        text-transform uppercase
+        display inline-block
+        letter-spacing 0.8px
+        margin-bottom 16px
+        font-family IBMPlexSans
+        color gray
+      h2
+        color #3D3634
+        font-size 24px
+        margin-bottom 30px
+        width 100%
+        height 24px
+        overflow hidden
+        text-overflow ellipsis
+        white-space no-wrap
+      h2:hover
+        cursor pointer
+      .introduction
+        margin-bottom 20px
+        font-size: 14px;
+        line-height: 24px;
+  //小于屏幕宽度时，博客列表左边的图片消失
+  @media screen and (max-width: 768px) 
+    .item-wrapper
+      padding 20px
+      .item-left
+        float none
+        width 0
+        height 0
+        display none
+        visibility none
+      .item-right
+        float none
+        width 100% !important
+</style>

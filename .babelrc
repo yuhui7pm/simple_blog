@@ -1,0 +1,8 @@
+// 使用vue-cli搭建项目，面临着解决ie兼容性问题(ie9+)，因为ie浏览器并不支持es6语法等。
+// 首先安装babel-polyfill，解决ie不支持promise对象的问题
+
+// 在Babel执行编译的过程中，会从项目的根目录下的 .babelrc文件中读取配置。.babelrc是一个json格式的文件。
+// 在.babelrc配置文件中，主要是对预设(presets) 和 插件(plugins) 进行配置。.babelrc配置文件一般为如下：
+{
+  "presets":["env"]
+}
