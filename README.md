@@ -3,10 +3,6 @@
 
 ## 启动项目
 
-> 安装依赖  
+> 安装依赖  `npm install`
 
-`npm install`
-
-> 启动项目  
-
-`npm run dev`
+> 启动项目  `npm run dev`
