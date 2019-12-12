@@ -5,9 +5,12 @@
       class="blog-lists"
       :blogsLen="blogsNum"
       :blogLists="blogsListsFilter"
+      :page="page"
+      :blogsIndex="blogsIndex"
     ></Item>
     <PagePagination
       :maxPage="maxPage"
+      :pageDefault="pageDefault"
       @updatePage="change"
     ></PagePagination>
   </div>
@@ -32,10 +35,12 @@ export default {
       page:1,//博客页码数
       blogsLists:[],//博客数据
       blogsIndex:6,//每一页最多包含的博客数目
-      maxPage:0,
+      maxPage:0,//博客最大页码数
+      pageDefault:1,//默认博客页码
     }
   },
   methods:{
+    //首页挂载获取博客数据
     getBlogItem(){
       axios.get('../../../static/mock/lists.json')
         .then(res=>{
@@ -48,12 +53,12 @@ export default {
           }
       })
     },
+    // 改变页码
     change(pages){
-      console.log('pages',pages)
       if(pages!==this.page){
-        this.page=pages
+        this.page=pages;
+        this.pageDefault = pages;
       }
-      console.log('this.page',this.page)
     }
   },
   mounted(){
@@ -62,11 +67,9 @@ export default {
   computed:{
     //过滤之后显示到页面的博客
     blogsListsFilter:function(){
-      let ans = this.blogsLists.filter((value,index)=>{
+     return this.blogsLists.filter((value,index)=>{
         return ((this.page-1)*this.blogsIndex<=index)&&(this.page*this.blogsIndex>index)
       })
-      console.log(ans);
-      return ans;
     }
   }
 }

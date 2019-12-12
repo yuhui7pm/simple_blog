@@ -77,9 +77,10 @@ if(isDev){
   // config.devTool = 'cheap-module-eval-source-map',
   config.devServer = {
     port:3002,
-    host:'localhost',//0.0.0.0就是表示所有的IP地址
+    host:'127.0.0.1',//0.0.0.0就是表示所有的IP地址
     overlay:{
       errors:true,//有错误就显示在网页上
+      warnings:false
     },
     open:true,//自动打开页面
     // historyFallback:{

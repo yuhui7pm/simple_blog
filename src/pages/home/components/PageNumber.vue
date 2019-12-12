@@ -3,6 +3,7 @@
     <li
       v-for="value of maxPage"
       :key="value"
+      :class="[value===pageDefault?'seleced':'']"
       @click="changePage(value)"
     >
       {{value}}
@@ -11,23 +12,31 @@
 </template>
 
 <script>
+import { eventBus } from '../../../assets/bus';
 export default {
   name:"pagePagination",
   data(){
     return{
+      hei:0
     }
   },
   props:{
-    maxPage:{
-      type:Number
-    },
+    maxPage:Number,
+    pageDefault:Number
   },
   methods:{
     changePage(val){
-      this.$emit("updatePage",val);
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0
+      if(val!==this.pageDefault){
+        this.$emit("updatePage",val);
+        document.body.scrollTop = this.hei/2;
+        document.documentElement.scrollTop = this.hei/2;
+      }
     }
+  },
+  created() {
+    eventBus.$on('getCoverHei', message => {
+        this.hei = message
+    })
   }
 }
 </script>
@@ -44,15 +53,19 @@ export default {
       width 42px
       height 100%
       line-height 42px
-      color  #555
+      color  #aaa
       font-weight bold
-      border 1px solid #555 
-      box-sizing border-box
+      border-radius 50%
+      transition-duration 0.5s; //停留时间显示
+      transition-timing-function: ease-out;
     li:first-child
-      background #555 
-      color white
+      border-right 0
     li:hover
-      background #555 
-      color white
+      font-size 20px
       cursor pointer
+    li:not(:last-child)
+      border-right 0
+    .seleced
+      color #555
+      font-size 20px
 </style>

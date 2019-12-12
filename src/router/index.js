@@ -9,5 +9,9 @@ export default new Router({
     path:'/',
     name:'Home',
     component:Home
-  }]
+  }],
+  //滚动到顶部
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })

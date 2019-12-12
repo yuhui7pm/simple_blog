@@ -1,5 +1,5 @@
 <template>
-  <div class="cover">
+  <div class="cover" ref="cover">
     <header>
       <div class="header-wrapper">
         <img src="../../../assets/icons/coffee.svg" alt="博客icon"/>
@@ -17,8 +17,16 @@
 </template>
 
 <script>
+import { eventBus } from '../../../assets/bus';
 export default {
-  
+  data(){
+    return{
+      hei:0,
+    }
+  },
+  mounted(){
+     eventBus.$emit('getCoverHei',this.$refs.cover.offsetHeight);//兄弟组件间传值,传递顶部的高度
+  }
 }
 </script>
 

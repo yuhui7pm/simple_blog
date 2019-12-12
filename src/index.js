@@ -6,11 +6,8 @@ import router from './router/index.js'
 // import './assets/styles/test.css';
 // import './assets/styles/test.stylus.styl';
 
-
-
 const root = document.createElement('div');
 document.body.appendChild(root);
-
 //给绑定节点渲染一个vue组件
 new Vue({
   router,

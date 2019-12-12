@@ -1,13 +1,13 @@
 <template>
   <div>
     <div 
-      class="item-wrapper" 
       v-for="(list,index) of blogLists"
       :key="index"
+      class="item-wrapper"
     >
       <img class="item-left" :src="list.picUrl" alt="博客列表图片"/>
       <div class="item-right">
-        <p class="createTime">No.{{blogLists.length-index}} | {{list.createTime}}</p>
+        <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{list.createTime}}</p>
         <h2>{{list.title}}</h2>
         <p class="introduction">{{list.context}}</p>
       </div>
@@ -21,7 +21,9 @@ export default {
   name:'items',
   props:{
     blogsLen:Number,
-    blogLists:Array
+    blogLists:Array,
+    page:Number,
+    blogsIndex:Number
   },
   data(){
     return{
@@ -37,6 +39,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .item-wrapper:hover
+    cursor default
+    box-shadow #eee 0px 0px 8px 4px
   .item-wrapper
     width 864px
     height auto 
@@ -46,6 +51,7 @@ export default {
     margin 0 auto 20px
     overflow hidden
     box-sizing border-box
+    transition-duration 0.7s
     .item-left
       width 192px
       height 192px
@@ -72,8 +78,8 @@ export default {
         overflow hidden
         text-overflow ellipsis
         white-space no-wrap
-      h2:hover
-        cursor pointer
+      // h2:hover
+      //   cursor pointer
       .introduction
         margin-bottom 20px
         font-size: 14px;
