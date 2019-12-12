@@ -1,11 +1,17 @@
 // vue组件的一个出口文件
+import 'lib-flexible';
 import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js'
 
-// import './assets/styles/test.css';
-// import './assets/styles/test.stylus.styl';
 
+// 插入 meta 标签
+var oMeta = document.createElement('meta');
+oMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0';
+oMeta.name = 'viewport';
+document.documentElement.appendChild(oMeta);
+
+// 将组件插到html文档中
 const root = document.createElement('div');
 document.body.appendChild(root);
 //给绑定节点渲染一个vue组件

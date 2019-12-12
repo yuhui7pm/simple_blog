@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <div 
+  <ol>
+    <router-link
+      tag="li"
       v-for="(list,index) of blogLists"
       :key="index"
       class="item-wrapper"
+      :to="{path:'/detail',query:{id:list.id}}"
     >
-      <img class="item-left" :src="list.picUrl" alt="博客列表图片"/>
-      <div class="item-right">
-        <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{list.createTime}}</p>
-        <h2>{{list.title}}</h2>
-        <p class="introduction">{{list.context}}</p>
-      </div>
+    <img class="item-left" :src="list.picUrl" alt="博客列表图片"/>
+    <div class="item-right">
+      <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{list.createTime}}</p>
+      <h2>{{list.title}}</h2>
+      <p class="introduction">{{list.context}}</p>
     </div>
-  </div>
+    </router-link>
+  </ol>
 </template>
 
 <script>
@@ -41,9 +43,9 @@ export default {
 <style lang="stylus" scoped>
   .item-wrapper:hover
     cursor default
-    box-shadow #eee 0px 0px 8px 4px
+    box-shadow #eee 0px 0px 10px 8px
   .item-wrapper
-    width 864px
+    width 864px /*no*/
     height auto 
     background white
     border-radius 8px
@@ -51,10 +53,10 @@ export default {
     margin 0 auto 20px
     overflow hidden
     box-sizing border-box
-    transition-duration 0.7s
+    transition-duration 0.5s
     .item-left
-      width 192px
-      height 192px
+      width 192px /*no*/
+      height 192px /*no*/
       float left
       border-radius 4px
     .item-right
@@ -88,6 +90,7 @@ export default {
   @media screen and (max-width: 768px) 
     .item-wrapper
       padding 20px
+      width 100%
       .item-left
         float none
         width 0

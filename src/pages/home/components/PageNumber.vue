@@ -54,6 +54,7 @@ export default {
       height 100%
       line-height 42px
       color  #aaa
+      font-size 14px
       font-weight bold
       border-radius 50%
       transition-duration 0.5s; //停留时间显示

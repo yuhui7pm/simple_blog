@@ -1,9 +1,11 @@
 // 总的app组件
 <template>
   <div>
-    <keep-alive>
+    <!-- 用来对组件进行缓存，从而节省性能 -->
+    <!-- <keep-alive>  -->
+      <!-- router-view 当做是一个容器，它渲染的组件是你使用 vue-router 指定的。比如： -->
       <router-view/><!--承载路由组件-->
-    </keep-alive>
+    <!-- </keep-alive> -->
   </div>
 </template>
 

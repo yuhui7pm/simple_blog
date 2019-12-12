@@ -1,11 +1,13 @@
 <template>
   <div class="cover" ref="cover">
-    <header>
-      <div class="header-wrapper">
-        <img src="../../../assets/icons/coffee.svg" alt="博客icon"/>
-        <p>Xlink Blog</p>
-      </div>
-    </header>
+    <router-link to='/'>
+      <header>
+        <div class="header-wrapper">
+          <img src="../../../assets/icons/coffee.svg" alt="博客icon"/>
+          <p>Xlink Blog</p>
+        </div>
+      </header>
+    </router-link>
     <div class="cover-pic">
       <img src="../../../assets/images/header_illustration.png" alt="人物图片">
     </div>
@@ -40,7 +42,7 @@ export default {
       box-sizing border-box
       .header-wrapper
         height 100%
-        width 238px 
+        min-width 238px 
         overflow hidden
         img 
           width 40px
