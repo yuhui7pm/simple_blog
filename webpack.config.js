@@ -84,6 +84,7 @@ if(isDev){
     },
     open:true,//自动打开页面
     // historyFallback:{
+    //   index: '/index.html'
     // },
     hot:true,//热加载，只渲染改变的数据
   };

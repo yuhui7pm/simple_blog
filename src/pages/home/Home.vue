@@ -1,5 +1,6 @@
 <template>
   <div class="home-wrapper">
+    <Header/>
     <Cover class="cover-pic"/>
     <Item 
       class="blog-lists"
@@ -18,13 +19,15 @@
 
 <script>
 import axios from 'axios'; 
-import Cover from './components/Cover.vue'
+import Header from '../header/BlogHeader.vue';
+import Cover from './components/Cover.vue';
 import Item from './components/Item.vue'
 import PagePagination from './components/PageNumber.vue'
 
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
+    Header,
     Cover,
     Item,
     PagePagination

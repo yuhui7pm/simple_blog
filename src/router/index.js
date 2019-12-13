@@ -8,7 +8,7 @@ import NotFound from '../pages/notFound/NotFound.vue'
 Vue.use(Router);
 export default new Router({
   //vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
-  mode:"history",//必须放在routers前面
+  // mode:"history",//必须放在routers前面
   routes:[{
     path:'/',
     name:'Home',

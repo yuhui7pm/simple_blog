@@ -3,7 +3,7 @@
     <router-link to='/'>
       <header>
         <div class="header-wrapper">
-          <img src="../../../assets/icons/coffee.svg" alt="博客icon"/>
+          <img src="../../assets/icons/coffee.svg" alt="博客icon"/>
           <p>Xlink Blog</p>
         </div>
       </header>
@@ -13,6 +13,10 @@
 
 <script>
 export default {
+  name:'header',
+  data(){
+    return{}
+  }
 }
 </script>
 
@@ -32,7 +36,7 @@ export default {
         margin-right 20px
         vertical-align top //不加这个的话，对不齐顶部
       p
-        font-size 1.8em
+        font-size 30px
         font-family Georgia, serif
         // font-style italic
         font-weight 500

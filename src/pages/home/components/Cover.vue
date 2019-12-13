@@ -1,13 +1,5 @@
 <template>
   <div class="cover" ref="cover">
-    <router-link to='/'>
-      <header>
-        <div class="header-wrapper">
-          <img src="../../../assets/icons/coffee.svg" alt="博客icon"/>
-          <p>Xlink Blog</p>
-        </div>
-      </header>
-    </router-link>
     <div class="cover-pic">
       <img src="../../../assets/images/header_illustration.png" alt="人物图片">
     </div>
@@ -35,29 +27,6 @@ export default {
 <style lang="stylus" scoped>
   .cover
     margin-bottom 40px
-    header
-      width 100%
-      height 80px
-      padding-left 40px
-      box-sizing border-box
-      .header-wrapper
-        height 100%
-        min-width 238px 
-        overflow hidden
-        img 
-          width 40px
-          height 75px
-          margin-right 20px
-          vertical-align top //不加这个的话，对不齐顶部
-        p
-          font-size 1.8em
-          font-family Georgia, serif
-          // font-style italic
-          font-weight 500
-          color #555
-          line-height 80px  
-          letter-spacing:2px
-          display inline-block
     .cover-pic
       text-align center
       background url('../../../assets/images/bg_dot.png') repeat
@@ -76,13 +45,8 @@ export default {
         margin 0 15px
       img:hover
         cursor pointer
-    //小于屏幕宽度时，图片消失
-    @media screen and (max-width: 768px) 
-      header
-        padding-left 0
-        .header-wrapper
-          margin 0 auto
-          text-align center
-      .cover-pic
-        display none
+  //小于屏幕宽度时，图片消失
+  @media screen and (max-width: 768px) 
+    .cover-pic
+      display none
 </style>
