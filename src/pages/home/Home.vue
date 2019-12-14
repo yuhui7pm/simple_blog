@@ -1,5 +1,6 @@
 <template>
   <div class="home-wrapper">
+    <SideBar></SideBar>
     <Header/>
     <Cover class="cover-pic"/>
     <Item 
@@ -23,10 +24,11 @@ import Header from '../header/BlogHeader.vue';
 import Cover from './components/Cover.vue';
 import Item from './components/Item.vue'
 import PagePagination from './components/PageNumber.vue'
-
+import SideBar from '../sideBar/SideBar.vue'
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
+    SideBar,
     Header,
     Cover,
     Item,
