@@ -4,7 +4,8 @@
     <div class="single-episode-wrapper">
       <Title></Title>
       <Context></Context>
-      <WriteComment></WriteComment>
+      <WriteComment v-show="insertStatus"></WriteComment>
+      <CommentLists @removeReply="removeWrite"></CommentLists>
     </div>
   </div>
 </template>
@@ -15,18 +16,21 @@ import Header from '../header/BlogHeader.vue';
 import Title from './components/Title.vue';
 import Context from './components/Context.vue';
 import WriteComment from './components/comments/WriteComment.vue';
+import CommentLists from './components/comments/CommentLists.vue';
 export default {
   name: 'Detail', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
     Header,
     Title,
     Context,
-    WriteComment
+    WriteComment,
+    CommentLists
   },
   data(){
     return{
       blogsLists:[],
       blogId:0,
+      insertStatus:true,//判断用户有没有点击回复评论，
     }
   },
   methods:{
@@ -40,6 +44,10 @@ export default {
           }
       })
     },
+    //不让写评论的方框显示
+    removeWrite(sta){
+      this.insertStatus = sta;
+    }
   },
   mounted(){
     this.blogId= this.$route.query.id;

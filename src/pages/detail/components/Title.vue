@@ -61,6 +61,7 @@ export default {
       audio
         height 54px
         width 100%
+        outline none
   @media screen and (max-width: 768px) 
     .blogTitle
       text-align center 

@@ -8,7 +8,7 @@
    </div>
     <textarea placeholder="在这里输入你的评论" v-model="str"></textarea>
     <div class="but-wrapper">
-      <button>提交</button>
+      <button>发表</button>
       <Shaky></Shaky>
     </div>
   </div>
@@ -41,9 +41,7 @@ export default {
     font-size 16px
     font-family "Arial, Helvetica, sans-serif"
   .write-wrapper
-    padding-top 40px
     box-sizing border-box
-    border-top 1px solid #dddddd
   h2
     padding 15px 0px
     font-size 25px
