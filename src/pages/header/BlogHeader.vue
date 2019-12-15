@@ -48,7 +48,12 @@ export default {
   @media screen and (max-width: 768px) 
     header
       padding-left 0
+      height 80px
       .header-wrapper
         margin 0 auto
         text-align center
+      img
+        width 30px !important
+      p
+        font-size 26px !important
 </style>

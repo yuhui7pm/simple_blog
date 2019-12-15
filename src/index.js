@@ -1,5 +1,6 @@
 // vue组件的一个出口文件
 import 'lib-flexible';
+import 'babel-polyfill';
 import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js'
@@ -10,6 +11,11 @@ var oMeta = document.createElement('meta');
 oMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0';
 oMeta.name = 'viewport';
 document.documentElement.appendChild(oMeta);
+
+//插入title属性
+var tit = document.createElement('title');
+tit.innerHTML = "Xlink Blog";
+document.documentElement.appendChild(tit);
 
 // 将组件插到html文档中
 const root = document.createElement('div');

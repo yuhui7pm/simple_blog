@@ -73,6 +73,10 @@ export default {
     border 1px solid #ccc
     box-sizing border-box
     color #ccc
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar /* Chrome Safari */
+      display none
   textarea::placeholder
     color #ccc
   .but-wrapper
@@ -89,12 +93,20 @@ export default {
     .write-wrapper
       margin-left 10px
       margin-right 10px
-      .context 
-        width 100% !important
       .input-wrapper
         display block
         height auto
         input
           width 100% !important
           margin-left 0
+          padding 5px
+      textarea
+        height 150px
+        padding 5px
+      .but-wrapper
+        margin-top 10px
+        button
+          height 24px
+          line-height 24px
+          font-size 16px
 </style>

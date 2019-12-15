@@ -1,6 +1,6 @@
 <template>
-  <div class="home-wrapper">
-    <SideBar></SideBar>
+  <div class="home-wrapper" @mousemove="move($event)">
+    <SideBar :class="['sidebar',sideBarDisplay==true?'toggleSideBar':'']" ref="sideBar"></SideBar>
     <Header/>
     <Cover class="cover-pic"/>
     <Item 
@@ -42,6 +42,8 @@ export default {
       blogsIndex:6,//每一页最多包含的博客数目
       maxPage:0,//博客最大页码数
       pageDefault:1,//默认博客页码
+      sideBarDisplay:false,//sideBar的显示与隐藏
+      timer:null,//用于节流函数
     }
   },
   methods:{
@@ -64,6 +66,40 @@ export default {
         this.page=pages;
         this.pageDefault = pages;
       }
+    },
+    //节流函数
+    throttle(fn, delay, atLeast) {
+        var timeout = null,
+            startTime = Date.now();
+
+        return function (event) {
+            var endTime = Date.now();
+            clearTimeout(timeout);
+
+            if(endTime - startTime >= atLeast) {
+                fn.call(null, event);
+                startTime = endTime;
+            } else {
+                timeout = setTimeout(function() {
+                    fn.call(null, event);
+                }, delay);
+            }
+        };
+    },
+    //让侧边栏显示出来
+    move(event){
+      if(this.timer){
+        clearTimeout(this.timer)
+      }
+      this.timer=setTimeout(()=>{
+        let x = event.clientX // 获取x 坐标
+        let scrolltop = document.body.scrollTop||document.documentElement.scrollTop;
+        if(x<290&&scrolltop>400){
+          this.sideBarDisplay = true;
+        }else{
+          this.sideBarDisplay = false;
+        }
+      },30)
     }
   },
   mounted(){
@@ -81,4 +117,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.sidebar
+  opacity 0
+  transition-duration 1s
+.toggleSideBar
+  transition-duration 1s
+  &:hover
+    opacity 1
 </style>

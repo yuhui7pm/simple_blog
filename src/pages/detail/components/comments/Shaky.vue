@@ -88,14 +88,16 @@ export default {
       display inline-block
   .emoji-wrapper
     width 400px 
-    background #fbfbfb
-    opacity 0.8
+    opacity 1
     border 1px solid #ddd
     box-sizing border-box
     padding 10px
     margin-top -2px
     border-radius 5px
     border-top-left-radius 0px
+    position absolute
+    z-index 10
+    background #f7f7f7
     .shakyInner
       font-size 14px
       background #f1f1f1 
@@ -108,4 +110,16 @@ export default {
         box-shadow #ddd 0 2px 4px 0px
     .shakyInner:last-child
       margin-bottom 10px
+@media screen and (max-width: 768px) 
+  .shaky-wrapper
+    height 24px
+    line-height 24px
+    width 80px
+    font-size 16px
+    .shakyInner
+      font-size 12px !important
+      padding 5px !important 
+  .emoji-wrapper
+    width calc(100% - 20px) !important
+    padding 5px !important
 </style>

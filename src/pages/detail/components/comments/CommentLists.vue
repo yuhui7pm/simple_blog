@@ -60,6 +60,8 @@ export default {
       border-bottom 1px solid #ddd
       padding-bottom 10px
       overflow hidden
+      &:last-child
+        border-bottom none
       .add-write
         width calc(100% - 90px)
         float right
@@ -67,6 +69,11 @@ export default {
         width calc(100% - 90px)
         float right
   @media screen and (max-width: 768px) 
-    .context 
-      width 100% !important
+    .comments-wrapper 
+      margin-left 10px
+      margin-right 10px
+      .add-write
+        width calc(100% - 20px) !important
+      .second-comment
+        width calc(100% - 50px) !important
 </style>

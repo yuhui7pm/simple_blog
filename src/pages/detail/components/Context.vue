@@ -36,25 +36,29 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.wrapper
-  margin-bottom 50px
-  padding-bottom 20px
-  border-bottom 1px solid #ddd
-  .context-wrapper
-    width 100%
-    min-height 30px
-    background white
-    border-radius 6px
-    color #3d3634
-    .context
-      width: 640px;
-      padding: 60px 40px;
-      margin 40px auto
-      font-size: 16px;
-      line-height: 28px;
-      margin-bottom 70px
-      box-sizing border-box
+  .wrapper
+    margin-bottom 50px
+    padding-bottom 20px
+    border-bottom 1px solid #ddd
+    .context-wrapper
+      width 100%
+      min-height 30px
+      background white
+      border-radius 6px
+      color #3d3634
+      .context
+        width: 640px;
+        padding: 60px 40px;
+        margin 40px auto
+        font-size: 16px;
+        line-height: 28px;
+        margin-bottom 70px
+        box-sizing border-box
   @media screen and (max-width: 768px) 
-    .context 
-      width 100% !important
+    .wrapper
+      margin-bottom 20px !important
+      .context 
+        width 100% !important
+        margin 20px auto !important
+        padding 20px !important
 </style>

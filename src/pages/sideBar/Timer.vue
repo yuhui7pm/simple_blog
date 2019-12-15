@@ -49,7 +49,7 @@
 .counter
   position absolute
   font-size 16px
-  color #888
+  color #666
   width 100%
   bottom 120px
   left 50%

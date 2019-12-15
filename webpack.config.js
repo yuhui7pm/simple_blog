@@ -11,7 +11,10 @@ const config = {
   // 编译为类浏览器环境里可用（默认)
   target:"web",
   //入口文件
-  entry:path.join(__dirname,'src/index.js'),
+  // entry:{
+  //   app:['babel-polyfill',path.join(__dirname,'./src/index.js')],//兼容IE，解决空白页问题
+  // },
+  entry:path.join(__dirname,'./src/index.js'),
   //出口文件
   output:{ 
     filename:'bundle.js',
@@ -24,7 +27,9 @@ const config = {
       }
     }),
     new VueLoaderPlugin(), // make sure to include the plugin for the magic
-    new HTMLPlugin(),
+    new HTMLPlugin({
+      title:'Xlink Blog'
+    }),
   ],
   module:{
     rules:[{

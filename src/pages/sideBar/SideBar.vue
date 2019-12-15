@@ -2,7 +2,7 @@
   <div class="sideWrapper">
     <img class="head-icon" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1333857903,826749854&fm=11&gp=0.jpg" alt="博主头像"/>
     <h2>Mr Yu</h2>
-    <input placeholder="站内搜索~" autofocus="false"/>
+    <input placeholder="站内搜索~" disable="disable"/>
     <List></List>
     <Timer></Timer>
   </div>
@@ -55,6 +55,9 @@ export default {
       font-size 18px
       position relative
       text-align center
+      color #666
+      &::placeholder
+        color #666
       // background url('../../assets/icons/searchBut.svg') no-repeat;
       // background-size 25px 25px
       // background-position 10px 50%

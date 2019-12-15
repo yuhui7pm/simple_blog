@@ -66,4 +66,18 @@ export default {
       font-size 18px
       line-height 24px
       font-family Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-serif
+@media screen and (max-width: 768px) 
+  .comment
+    img   
+      height 40px
+      width 40px
+      border-radius 50%
+      margin-right 10px
+    .comment-right
+      margin 0px 0
+      flex 1
+      .context
+        margin-top 5px
+        color #888
+        font-size 16px
 </style>

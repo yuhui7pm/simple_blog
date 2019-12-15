@@ -4,7 +4,7 @@
     <div class="right-wrapper">
       <div class="title-tag">NO.68|35MIN</div>
       <h1>41种蓝色</h1>
-      <audio controls>
+      <audio controls loop="loop">
         <source src="https://dts.podtrac.com/redirect.mp3/cdn.simplecast.com/audio/83b511/83b511d3-70d2-4bb9-9734-ee83d74bce44/37b2e9b3-758f-4d75-9925-92fda6642a6b/552830be_tc.mp3" type="audio/mpeg">
       </audio>
     </div>
@@ -62,19 +62,21 @@ export default {
         height 54px
         width 100%
         outline none
+        background-color #f7f7f7
   @media screen and (max-width: 768px) 
     .blogTitle
       text-align center 
       .pic-left
         border-radius 5px;
-        width 240px
-        height 240px
+        width 200px
+        height 200px
         float none
       .right-wrapper
         width 100%
         margin-left 0
         .title-tag
-          margin-bottom 10px
+          margin-bottom 0px
         h1
-          margin-bottom 20px
+          margin-bottom 0px
+          font-size 24px
 </style>

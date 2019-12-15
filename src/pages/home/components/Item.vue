@@ -90,6 +90,7 @@ export default {
   @media screen and (max-width: 768px) 
     .item-wrapper
       padding 20px
+      padding-bottom 0
       width 100%
       .item-left
         float none
@@ -100,4 +101,9 @@ export default {
       .item-right
         float none
         width 100% !important
+        .createTime
+          margin-bottom 10px
+        h2 
+          margin-bottom 15px
+          font-size 20px
 </style>

@@ -22,13 +22,13 @@ export default {
     height 18px
     font-size 12px
     line-height 18px
-    border 1px solid #bbb
+    border 1px solid #25a4bb
     border-radius 10px
     margin-right 5px
     margin-bottom 10px 
-    color #bbb
+    color #25a4bb
     &:hover
-      border 1px solid #666
-      color #666
+      border 1px solid red
+      color red
       cursor pointer
 </style>

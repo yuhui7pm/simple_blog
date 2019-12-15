@@ -40,7 +40,6 @@ export default {
   methods:{
     displayList(flag){
       this.displayStatus = flag;
-      this.$emit('changeOverflow',flag);
     }
   }
 }
@@ -61,6 +60,8 @@ export default {
     overflow-y scroll
     box-sizing border-box
     transition-duration 1s
-  .tag-wrapper::-webkit-scrollbar
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  .tag-wrapper::-webkit-scrollbar /* Chrome Safari */
     display none
 </style>
