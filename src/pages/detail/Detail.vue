@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 21:05:27
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-01-01 12:10:03
+ -->
 <template>
   <div>
     <Header></Header>
@@ -35,14 +43,14 @@ export default {
   },
   methods:{
     getBlogItem(){
-      axios.get('../../../static/mock/lists.json')
-        .then(res=>{
-          res = res.data;
-          if(res.ret&&res.data){
-            const data = res.data;
-            this.blogsLists = data.blogLists[0];     //湖片区博客列表数据
-          }
-      })
+      // axios.get('../../../static/mock/lists.json')
+      //   .then(res=>{
+      //     res = res.data;
+      //     if(res.ret&&res.data){
+      //       const data = res.data;
+      //       this.blogsLists = data.blogLists[0];     //湖片区博客列表数据
+      //     }
+      // })
     },
     //不让写评论的方框显示
     removeWrite(sta){

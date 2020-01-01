@@ -1,7 +1,15 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 16:47:04
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 18:25:43
+ -->
 <template>
-  <div class="classify-wrapper" @mouseenter="displayList(true)" @mouseleave="displayList(false)">
-    <h3>分类</h3>
-    <div class="tag-wrapper" :style="{opacity:displayStatus?1:0}">
+  <div class="classify-wrapper">
+    <h3 @click="displayList()">分类</h3>
+    <div class="tag-wrapper" :style="{opacity:classifyDisplay?1:0}">
       <Tag>生活</Tag>
       <Tag>科技</Tag>
       <Tag>css</Tag>
@@ -31,15 +39,23 @@ export default {
       displayStatus:false
     }
   },
+  props:{
+    classifyDisplay:Boolean,
+  },
   components:{
     Tag,
   },
-  mounted(){
-    // console.log(1111111111,this.displayStatus);
+  updated(){
+    if(this.classifyDisplay==true){
+      this.displayStatus = true;
+    }else{
+      this.displayStatus = false;
+    }
   },
   methods:{
-    displayList(flag){
-      this.displayStatus = flag;
+    displayList(){
+      this.displayStatus = !this.displayStatus;
+      this.$emit('toBottom',this.displayStatus?'classifyFlag':'');
     }
   }
 }
@@ -53,7 +69,6 @@ export default {
     height 50px
     line-height 50px
   .tag-wrapper
-    // background white
     text-align left
     padding 10px
     max-height 100px

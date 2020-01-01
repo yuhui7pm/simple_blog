@@ -1,10 +1,18 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 14:27:13
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 18:52:48
+ -->
 <template>
-  <div class="sideWrapper">
+  <div class="sideWrapper" @click.native="list=false">
     <img class="head-icon" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1333857903,826749854&fm=11&gp=0.jpg" alt="博主头像"/>
     <h2>Mr Yu</h2>
     <input placeholder="站内搜索~" disable="disable"/>
     <List></List>
-    <Timer></Timer>
+    <Timer class="timer"></Timer>
   </div>
 </template>
 
@@ -14,7 +22,9 @@ import Timer from './Timer.vue'
 export default {
   name:'SideBar',
   data(){
-    return{}
+    return{
+      list:false,
+    }
   },
   components:{
     List,
@@ -25,7 +35,7 @@ export default {
 
 <style lang="stylus" scoped>
   .sideWrapper
-    width 280px
+    width 350px
     height 100%
     background-color #CCFFCC
     position fixed 
@@ -63,7 +73,15 @@ export default {
       // background-position 10px 50%
       // background-position 50% 50%
       margin-bottom 50px
-  @media screen and (max-width: 768px) 
+    .timer 
+      font-size 16px
+      color #666
+      width 350px  
+      position fixed
+      top 700px
+      left 0
+      text-align center
+  @media screen and (max-width: 950px) 
     .sideWrapper  
       display none
 </style>

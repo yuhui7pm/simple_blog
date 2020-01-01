@@ -1,3 +1,4 @@
+// import 'babel-polyfill';
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HTMLPlugin = require('html-webpack-plugin');
@@ -10,11 +11,14 @@ let isDev = process.env.NODE_ENV==="development"; //判断是否为开发模式
 const config = {
   // 编译为类浏览器环境里可用（默认)
   target:"web",
+  context:path.resolve(__dirname),
   //入口文件
   // entry:{
   //   app:['babel-polyfill',path.join(__dirname,'./src/index.js')],//兼容IE，解决空白页问题
   // },
-  entry:path.join(__dirname,'./src/index.js'),
+  entry:{
+    app:['babel-polyfill','./src/index.js']
+  },
   //出口文件
   output:{ 
     filename:'bundle.js',

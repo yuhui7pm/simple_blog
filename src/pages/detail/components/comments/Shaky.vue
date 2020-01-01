@@ -31,15 +31,15 @@ export default {
   methods:{
     //获取表情包列表数据
     getEmojiItem(){
-      axios.get('../../../../../static/mock/emoji.json')
-        .then(res=>{
-          res = res.data;
-          if(res.ret&&res.data){
-            const data = res.data;
-            this.emojiLists = data.emojiLists; 
-            this.isShow = true;
-          }
-      })
+      // axios.get('../../../../../static/mock/emoji.json')
+      //   .then(res=>{
+      //     res = res.data;
+      //     if(res.ret&&res.data){
+      //       const data = res.data;
+      //       this.emojiLists = data.emojiLists; 
+      //       this.isShow = true;
+      //     }
+      // })
     },
     //监听表情栏点击事件
     emojiDisplay(e){

@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 15:47:33
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 17:21:59
+ -->
 <template>
   <div class="counter">{{nowTime}}</div>
 </template>
@@ -46,13 +54,4 @@
 </script>
 
 <style lang="stylus" scoped>
-.counter
-  position absolute
-  font-size 16px
-  color #666
-  width 100%
-  bottom 120px
-  left 50%
-  text-align center
-  transform translateX(-50%)
 </style>

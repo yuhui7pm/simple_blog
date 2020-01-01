@@ -1,7 +1,15 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 18:11:07
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 18:27:28
+ -->
 <template>
-  <div class="msgWrapper" @mouseenter="showSta=true;hideWrapper(showSta)" @mouseleave="showSta=false;hideWrapper(showSta)">
-    <h3>留言反馈</h3>
-    <div class="text-wrapper" :style="{opacity:showSta?1:0}">
+  <div class="msgWrapper">
+    <h3 @click="hideWrapper();">留言反馈</h3>
+    <div class="text-wrapper" :style="{opacity:messageDisplay?1:0}">
       <textarea v-model="str"></textarea>
       <input value="提交反馈" type="button" @focus="postStatus=true;str=''" @blur="postStatus=false"/>
     </div>
@@ -20,12 +28,23 @@ export default {
       hideMsgBottom:false
     }
   },
+  props:{
+    messageDisplay:Boolean
+  },
+  updated(){
+    if(this.messageDisplay==true){
+      this.showSta = true;
+    }else{
+      this.showSta = false;
+    }
+  },
   components:{
   },
   methods:{
-    hideWrapper(showSta){
-      // this.$emit('hideIt','messageHide'+showSta);
-    }
+    hideWrapper(){
+      this.showSta=!this.showSta;
+      this.$emit('toBottom',this.showSta?'messageFlag':'');
+    },
   }
 }
 </script>
@@ -41,16 +60,6 @@ export default {
       line-height 50px
     .text-wrapper
       transition-duration 1s
-      // animation displayInput 1s 1 forwards
-      // display block !important
-      // @keyframes displayInput{
-      //   0%{
-      //     opacity 0 
-      //   }
-      //   100%{
-      //     opacity 1 
-      //   }
-      // }
     textarea 
       margin 5px 7px 0px
       padding 3px

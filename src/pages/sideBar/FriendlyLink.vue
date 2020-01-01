@@ -1,7 +1,15 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 21:17:12
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 18:34:12
+ -->
 <template>
-  <div class="friendWrapper" @mouseenter="friendShow=true" @mouseleave="friendShow=false">
-    <h3>友情链接</h3>
-    <div class="friend-text-wrapper" :style="{opacity:friendShow?1:0}">
+  <div class="friendWrapper">
+    <h3 @click="hideWrapper()">友情链接</h3>
+    <div class="friend-text-wrapper" :style="{opacity:friendLinkDisplay?1:0}">
       <a>xx的个人博客</a>
       <a>xx的个人博客</a>
       <a>xx的个人博客</a>
@@ -31,6 +39,22 @@ export default {
   },
   components:{
   },
+  props:{
+    friendLinkDisplay:Boolean
+  },
+  updated(){
+    if(this.friendLinkDisplay==true){
+      this.friendShow = true;
+    }else{
+      this.friendShow = false;
+    }
+  },
+  methods:{
+    hideWrapper(){
+      this.friendShow=!this.friendShow
+      this.$emit('toBottom',this.friendShow?'friendLinkFlag':'');
+    }
+  }
 }
 </script>
 

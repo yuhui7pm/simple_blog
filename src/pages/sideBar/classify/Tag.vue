@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 16:53:33
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-01-01 18:32:36
+ -->
 <template>
   <div class="Tag">
     <slot></slot>
@@ -27,8 +35,8 @@ export default {
     margin-right 5px
     margin-bottom 10px 
     color #25a4bb
-    &:hover
-      border 1px solid red
-      color red
-      cursor pointer
+  .Tag:hover
+    border 1px solid red
+    color red
+    cursor pointer
 </style>

@@ -1,7 +1,15 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-14 21:00:12
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 18:34:01
+ -->
 <template>
-  <div class="aboutWrapper" @mouseenter="showSt=true" @mouseleave="showSt=false">
-    <h3>关于博客</h3>
-    <div :style="{opacity:showSt?1:0}" class="about-text-wrapper">
+  <div class="aboutWrapper">
+    <h3 @click="aboutHideWrapper()">关于博客</h3>
+    <div :style="{opacity:aboutDisplay?1:0}" class="about-text-wrapper">
       <p>98年，性别♂</p>
       <p>记录生活趣事，结交更多有趣的人</p>
     </div>  
@@ -16,8 +24,24 @@ export default {
       showSt:false
     }
   },
+  props:{
+    aboutDisplay:Boolean
+  },
+  updated(){
+    if(this.aboutDisplay==true){
+      this.showSt = true;
+    }else{
+      this.showSt = false;
+    }
+  },
   components:{
   },
+  methods:{
+    aboutHideWrapper(){
+      this.showSt = !this.showSt;
+      this.$emit('toBottom',this.showSt?'aboutFlag':'');
+    }
+  }
 }
 </script>
 

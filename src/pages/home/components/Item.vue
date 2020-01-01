@@ -3,15 +3,15 @@
     <router-link
       tag="li"
       v-for="(list,index) of blogLists"
-      :key="index"
+      :key="list.id"
       class="item-wrapper"
       :to="{path:'/detail',query:{id:list.id}}"
     >
-    <img class="item-left" :src="list.picUrl" alt="博客列表图片"/>
+    <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
     <div class="item-right">
-      <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{list.createTime}}</p>
-      <h2>{{list.title}}</h2>
-      <p class="introduction">{{list.context}}</p>
+      <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{timestampToTime(list.createtime)}}</p>
+      <h2 class="article-header">{{list.title}}</h2>
+      <p class="introduction">{{list.introduction}}</p>
     </div>
     </router-link>
   </ol>
@@ -33,7 +33,16 @@ export default {
     }
   },
   methods:{
-
+    timestampToTime(timestamp) {
+      let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear();
+      let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
+      let D = date.getDate();
+      let h = date.getHours() +':';
+      let m = date.getMinutes() +':';
+      let s = date.getSeconds();
+      return (Y + '-' + M + '-' + D);//时分秒可以根据自己的需求加上
+    }
   },
   mounted(){
   }
@@ -43,9 +52,9 @@ export default {
 <style lang="stylus" scoped>
   .item-wrapper:hover
     cursor default
-    box-shadow #eee 0px 0px 10px 8px
+    box-shadow #ddd 0px 0px 10px 8px
   .item-wrapper
-    width 864px /*no*/
+    width 900px /*no*/
     height auto 
     background white
     border-radius 8px
@@ -54,6 +63,8 @@ export default {
     overflow hidden
     box-sizing border-box
     transition-duration 0.5s
+    &:hover
+      cursor pointer
     .item-left
       width 192px /*no*/
       height 192px /*no*/
@@ -71,17 +82,17 @@ export default {
         margin-bottom 16px
         font-family IBMPlexSans
         color gray
-      h2
+      .article-header
+        display block
         color #3D3634
         font-size 24px
         margin-bottom 30px
-        width 100%
+        width auto
+        max-width 100%
         height 24px
         overflow hidden
         text-overflow ellipsis
         white-space no-wrap
-      // h2:hover
-      //   cursor pointer
       .introduction
         margin-bottom 20px
         font-size: 14px;

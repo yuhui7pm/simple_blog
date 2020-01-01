@@ -1,20 +1,22 @@
 <template>
   <div class="home-wrapper" @mousemove="move($event)">
-    <SideBar :class="['sidebar',sideBarDisplay==true?'toggleSideBar':'']" ref="sideBar"></SideBar>
+    <SideBar :class="[sideBarDisplay?'toggleSideBar':'sidebar']" ref="sideBar"></SideBar>
     <Header/>
     <Cover class="cover-pic"/>
-    <Item 
-      class="blog-lists"
-      :blogsLen="blogsNum"
-      :blogLists="blogsListsFilter"
-      :page="page"
-      :blogsIndex="blogsIndex"
-    ></Item>
-    <PagePagination
-      :maxPage="maxPage"
-      :pageDefault="pageDefault"
-      @updatePage="change"
-    ></PagePagination>
+    <div :class="sideBarDisplay?'blog-pagination-right':'blog-pagination-left'">
+      <Item 
+        class="blog-lists"
+        :blogsLen="blogsNum"
+        :blogLists="blogsListsFilter"
+        :page="page"
+        :blogsIndex="blogsIndex"
+      ></Item>
+      <PagePagination
+        :maxPage="maxPage"
+        :pageDefault="pageDefault"
+        @updatePage="change"
+      ></PagePagination>
+    </div>
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import Cover from './components/Cover.vue';
 import Item from './components/Item.vue'
 import PagePagination from './components/PageNumber.vue'
 import SideBar from '../sideBar/SideBar.vue'
+// import SidebarButton from './components/SidebarButton.vue'
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -32,7 +35,8 @@ export default {
     Header,
     Cover,
     Item,
-    PagePagination
+    PagePagination,
+    // SidebarButton
   },
   data(){
     return{
@@ -49,13 +53,13 @@ export default {
   methods:{
     //首页挂载获取博客数据
     getBlogItem(){
-      axios.get('../../../static/mock/lists.json')
+      axios.get('/api/blog/lists')
         .then(res=>{
           res = res.data;
-          if(res.ret&&res.data){
+          if(res.data){
             const data = res.data;
-            this.blogsNum = data.blogLists.length;//获取博客列表数据的总长度
-            this.blogsLists = data.blogLists;     //湖片区博客列表数据
+            this.blogsNum = data.length;//获取博客列表数据的总长度
+            this.blogsLists = data;     //湖片区博客列表数据
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
           }
       })
@@ -91,15 +95,22 @@ export default {
       if(this.timer){
         clearTimeout(this.timer)
       }
-      this.timer=setTimeout(()=>{
-        let x = event.clientX // 获取x 坐标
-        let scrolltop = document.body.scrollTop||document.documentElement.scrollTop;
-        if(x<290&&scrolltop>400){
-          this.sideBarDisplay = true;
-        }else{
-          this.sideBarDisplay = false;
-        }
-      },30)
+      // this.timer=setTimeout(()=>{
+      //   let x = event.clientX // 获取x 坐标
+      //   let scrolltop = document.body.scrollTop||document.documentElement.scrollTop;
+      //   if(x<250&&scrolltop>400){
+      //     this.sideBarDisplay = true;
+      //   }else{
+      //     this.sideBarDisplay = false;
+      //   }
+      // },50)
+      let x = event.clientX // 获取x 坐标
+      let scrolltop = document.body.scrollTop||document.documentElement.scrollTop;
+      if(x<350&&scrolltop>400){
+        this.sideBarDisplay = true;
+      }else{
+        this.sideBarDisplay = false;
+      }
     }
   },
   mounted(){
@@ -117,11 +128,23 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.sidebar
-  opacity 0
-  transition-duration 1s
-.toggleSideBar
-  transition-duration 1s
-  &:hover
+@media screen and (min-width: 950px) 
+  .sidebar
+    opacity 0
+    transition-duration 0.8s
+    z-index 1000
+    transform translateX(-150px)
+  .toggleSideBar
     opacity 1
+    transition-duration 0.8s
+    z-index 1000
+    transform translateX(0px)
+  .blog-pagination-right
+    transform translateX(350px)
+    width calc(100% - 350px)
+    transition-duration 0.8s
+  .blog-pagination-left
+    transform translateX(0px)
+    width 100%
+    transition-duration 0.8s
 </style>

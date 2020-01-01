@@ -1,8 +1,10 @@
+import 'babel-polyfill';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../pages/home/Home.vue';
 import Detail from '../pages/detail/Detail.vue';
 import NotFound from '../pages/notFound/NotFound.vue'
+
 
 //通过全局方法 Vue.use() 使用插件。
 Vue.use(Router);
