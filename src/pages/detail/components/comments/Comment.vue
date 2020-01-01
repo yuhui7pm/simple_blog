@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-13 21:17:40
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 22:26:00
+ -->
 <template>
   <div class="comment-wrapper">
     <div class="comment" @mouseover="hoverStatus=true" @mouseout="hoverStatus=false">
@@ -38,9 +46,9 @@ export default {
   img   
     height 60px
     width 60px
-    border-radius 50%
+    // border-radius 50%
     margin-right 30px
-    transition-duration 1s
+    // transition-duration 1s
   .rotateImg
       transform: rotate(360deg);
   .comment-right
@@ -55,14 +63,14 @@ export default {
         display inline-block
         margin-right 20px
         height 100%
-        color #888
+        color #666
       .time
         height 100%
         display inline-block
-        color #888
+        color #666
     .context
       margin-top 10px
-      color #888
+      color #666
       font-size 18px
       line-height 24px
       font-family Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-serif
@@ -78,6 +86,6 @@ export default {
       flex 1
       .context
         margin-top 5px
-        color #888
+        color #666
         font-size 16px
 </style>

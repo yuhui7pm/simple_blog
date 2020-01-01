@@ -42,10 +42,14 @@ export default {
     font-family "Arial, Helvetica, sans-serif"
   .write-wrapper
     box-sizing border-box
+    background white
+    padding 20px 50px 0
+    border-top-left-radius 6px
+    border-top-right-radius 6px
   h2
     padding 15px 0px
     font-size 25px
-    color #ccc
+    color #5fbf5e
     box-sizing border-box
   .input-wrapper
     width 100%
@@ -56,12 +60,12 @@ export default {
       padding 15px
       flex 1
       margin-left 10px
-      border 1px solid #ccc
+      border 1px solid #5fbf5e
       margin-bottom 10px
       box-sizing border-box
-      color #ccc
+      color #666
     input::placeholder
-      color #ccc
+      color #666
     input:first-child
       margin-left 0px
   textarea
@@ -70,15 +74,15 @@ export default {
     padding 15px
     box-sizing border-box
     resize none
-    border 1px solid #ccc
+    border 1px solid #5fbf5e
     box-sizing border-box
-    color #ccc
+    color #666
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
     &::-webkit-scrollbar /* Chrome Safari */
       display none
   textarea::placeholder
-    color #ccc
+    color #666
   .but-wrapper
     margin-top 20px
     overflow hidden

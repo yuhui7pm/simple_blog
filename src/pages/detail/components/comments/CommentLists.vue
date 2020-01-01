@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-13 21:00:47
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 22:25:28
+ -->
 <template>
   <div class="comments-wrapper">
     <h2>已有13条评论</h2>
@@ -51,14 +59,17 @@ export default {
 
 <style lang="stylus" scoped>
   .comments-wrapper
-    margin-top 50px
+    padding 50px
+    background white
+    border-bottom-left-radius 6px
+    border-bottom-right-radius 6px
     h2
-      color #ccc
+      color #5fbf5e
       font-size 25px
       margin-bottom 20px
     .comment-write
-      border-bottom 1px solid #ddd
-      padding-bottom 10px
+      border-bottom 1px dashed #ddd
+      padding 10px 0
       overflow hidden
       &:last-child
         border-bottom none

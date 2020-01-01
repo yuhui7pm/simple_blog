@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-13 16:12:24
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-01-01 22:33:33
+ -->
 <template>
   <div class="wrapper">
     <div class="context-wrapper">
@@ -37,9 +45,9 @@ export default {
 
 <style lang="stylus" scoped>
   .wrapper
-    margin-bottom 50px
-    padding-bottom 20px
-    border-bottom 1px solid #ddd
+    // margin-bottom 50px
+    // padding-bottom 20px
+    // border-bottom 1px solid #ddd
     .context-wrapper
       width 100%
       min-height 30px
@@ -52,7 +60,7 @@ export default {
         margin 40px auto
         font-size: 16px;
         line-height: 28px;
-        margin-bottom 70px
+        margin-bottom 30px
         box-sizing border-box
   @media screen and (max-width: 768px) 
     .wrapper
