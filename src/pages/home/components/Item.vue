@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 首页博客的列表项组件
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-05 22:23:27
+ -->
 <template>
   <ol>
     <router-link

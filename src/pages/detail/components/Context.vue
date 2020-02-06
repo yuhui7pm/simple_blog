@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 博客详情页正文组件
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-01-01 22:33:33
+ * @LastEditTime : 2020-02-06 14:20:34
  -->
 <template>
   <div class="wrapper">
@@ -45,9 +45,6 @@ export default {
 
 <style lang="stylus" scoped>
   .wrapper
-    // margin-bottom 50px
-    // padding-bottom 20px
-    // border-bottom 1px solid #ddd
     .context-wrapper
       width 100%
       min-height 30px
@@ -67,6 +64,7 @@ export default {
       margin-bottom 20px !important
       .context 
         width 100% !important
-        margin 20px auto !important
+        margin 15px auto !important
         padding 20px !important
+        line-height 24px !important
 </style>

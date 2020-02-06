@@ -1,4 +1,12 @@
-import 'babel-polyfill';
+/*
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-06 16:53:08
+ */
+// import 'babel-polyfill';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../pages/home/Home.vue';
@@ -8,6 +16,7 @@ import NotFound from '../pages/notFound/NotFound.vue'
 
 //通过全局方法 Vue.use() 使用插件。
 Vue.use(Router);
+
 export default new Router({
   //vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
   // mode:"history",//必须放在routers前面

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-01-01 12:34:39
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-01-01 12:54:50
+ * @LastEditTime : 2020-02-05 22:26:01
  -->
 <template>
   <div class="button-wrapper">
@@ -20,7 +20,6 @@ export default {
   },
   data(){
     return{
-
     }
   },
   methods:{

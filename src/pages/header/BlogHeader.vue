@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 21:52:04
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-06 14:16:16
+ -->
 <template>
   <div>
     <router-link to='/'>
@@ -48,12 +56,15 @@ export default {
   @media screen and (max-width: 768px) 
     header
       padding-left 0
-      height 80px
+      height 60px
+      p
+        line-height 60px !important
       .header-wrapper
         margin 0 auto
         text-align center
       img
         width 30px !important
+        height 60px !important
       p
         font-size 26px !important
 </style>

@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 博客详情页
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
- * @LastEditors: yuhui
- * @LastEditTime: 2020-01-01 12:10:03
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-06 17:38:21
  -->
 <template>
   <div>
@@ -12,8 +12,8 @@
     <div class="single-episode-wrapper">
       <Title></Title>
       <Context></Context>
-      <WriteComment v-show="insertStatus"></WriteComment>
-      <CommentLists @removeReply="removeWrite"></CommentLists>
+      <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
+      <CommentLists class="commentList" @removeReply="removeWrite" :blogsLists='blogsLists' :blogId='blogId'></CommentLists>
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ import Title from './components/Title.vue';
 import Context from './components/Context.vue';
 import WriteComment from './components/comments/WriteComment.vue';
 import CommentLists from './components/comments/CommentLists.vue';
+import { eventBus } from '@/assets/bus';
 export default {
   name: 'Detail', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -42,34 +43,64 @@ export default {
     }
   },
   methods:{
+    /**
+     * @description: 得到所有评论数据
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     getBlogItem(){
-      // axios.get('../../../static/mock/lists.json')
-      //   .then(res=>{
-      //     res = res.data;
-      //     if(res.ret&&res.data){
-      //       const data = res.data;
-      //       this.blogsLists = data.blogLists[0];     //湖片区博客列表数据
-      //     }
-      // })
+      this.blogsLists = [];//置空
+      axios.get("/api/blog/getComments",{
+        params:{
+          blogId:this.blogId
+        }
+      }).then(res=>{
+          if(res.status==200&&res.statusText==='OK'){
+            res = res.data;
+            const data = res.data;
+            this.blogsLists = data.reverse();     //博客列表数据
+          }
+      })
     },
-    //不让写评论的方框显示
+    
+    /**
+     * @description: 移除写评论的输入框
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */    
     removeWrite(sta){
       this.insertStatus = sta;
     }
   },
   mounted(){
-    this.blogId= this.$route.query.id;
+    this.insertStatus = true;
+    this.blogId= parseInt(this.$route.query.id);
     if(this.blogId>0){
-      this.getBlogItem();//页面挂载的时候就获取博客列表数据
+      this.getBlogItem();//页面挂载的时候就获取评论列表数据
     }
-  }
+
+    eventBus.$on('addNewComment',(obj)=>{
+      let arrOld = this.blogsLists.reverse();
+      this.blogsLists = [];
+      arrOld.push(obj);
+      this.blogsLists = arrOld.reverse();
+    })
+  },
+  // updated(){
+  //   this.blogId= parseInt(this.$route.query.id);
+  //   if(this.blogId>0){
+  //     this.getBlogItem();//页面挂载的时候就获取博客列表数据
+  //   }
+  // }
 }
 </script>
 
 <style lang="stylus" scoped>
   .single-episode-wrapper
     width 980px
-    margin 60px auto
+    margin 60px auto 140px
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     header

@@ -1,6 +1,14 @@
+<!--
+ * @Descripttion: 详情页的博客title显示
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-13 15:31:36
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-06 14:21:10
+ -->
 <template>
   <div class="blogTitle">
-    <img src="https://media.simplecast.com/episode/image/291977/thumb_1555299712-artwork.jpg" class="pic-left" alt="封面图片"/>
+    <img src="../../../assets/images/meinv.jpg" class="pic-left" alt="封面图片"/>
     <div class="right-wrapper">
       <div class="title-tag">NO.68|35MIN</div>
       <h1>41种蓝色</h1>
@@ -68,9 +76,10 @@ export default {
       text-align center 
       .pic-left
         border-radius 5px;
-        width 200px
-        height 200px
+        width 180px
+        height 180px
         float none
+        margin-bottom 15px 
       .right-wrapper
         width 100%
         margin-left 0
@@ -79,4 +88,7 @@ export default {
         h1
           margin-bottom 0px
           font-size 24px
+  @media screen and (max-width: 375px) 
+    audio 
+      display none
 </style>

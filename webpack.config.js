@@ -3,6 +3,12 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+// require('babel-polyfill');
+
+// 在resolves中起alias，打包时，显示resolve is not defined
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
 
 //process.env包含着关于系统环境的信息。但是process.env中并不存在NODE_ENV这个东西。
 //NODE_ENV是用户一个自定义的变量，在webpack中它的用途是判断生产环境或开发环境的依据的。
@@ -17,13 +23,15 @@ const config = {
   //   app:['babel-polyfill',path.join(__dirname,'./src/index.js')],//兼容IE，解决空白页问题
   // },
   entry:{
-    app:['babel-polyfill','./src/index.js']
+    app:['babel-polyfill',path.join(__dirname,'src/index.js')]
   },
   //出口文件
   output:{ 
     filename:'bundle.js',
     path:path.join(__dirname,'dist')
   },
+  // 启用sourceMap追踪错误
+  devtool: 'inline-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -35,6 +43,12 @@ const config = {
       title:'Xlink Blog'
     }),
   ],
+  resolve:{
+    extensions:['.js','.vue','.json'],
+    alias:{
+      '@':resolve('src')
+    }
+  },
   module:{
     rules:[{
       test: /\.vue$/,
@@ -72,6 +86,14 @@ const config = {
       options:{
         limit:10000,
         name:'fonts/[name].[hash:7].[ext]'
+      }
+    },{
+      test:/\.js$/,
+      loader:'babel-loader',
+      exclude:__dirname+'node_modules',
+      include:[__dirname+'src',__dirname+'dist',__dirname+'static'],
+      options: {
+          presets: ['env']
       }
     }]
   }

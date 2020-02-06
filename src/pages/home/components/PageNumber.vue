@@ -1,5 +1,13 @@
+<!--
+ * @Descripttion: 首页底部页码导航栏组件
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-05 22:25:45
+ -->
 <template>
-  <ol class="page-pagination">
+  <ol class="page-pagination" v-if="maxPage>1">
     <li
       v-for="value of maxPage"
       :key="value"
@@ -25,6 +33,12 @@ export default {
     pageDefault:Number
   },
   methods:{
+    /**
+     * @description: 点击页码，更新页面博客列表项数据，并跳转到顶部
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     changePage(val){
       if(val!==this.pageDefault){
         this.$emit("updatePage",val);

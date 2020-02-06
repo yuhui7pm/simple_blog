@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 首页顶部背景图
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors  : yuhui
+ * @LastEditTime : 2020-02-05 22:22:45
+ -->
 <template>
   <div class="cover" ref="cover">
     <div class="cover-pic">
