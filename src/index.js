@@ -4,17 +4,16 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 17:02:43
+ * @LastEditTime : 2020-02-09 21:59:12
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
-import 'babel-polyfill';
+import "@babel/polyfill";
 import promise from 'es6-promise';
 promise.polyfill();
 import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js'
-import fastClick from 'fastclick'
 
 // 插入 meta 标签
 // var oMeta = document.createElement('meta');
@@ -43,7 +42,7 @@ document.body.appendChild(root);
 
 //给绑定节点渲染一个vue组件
 new Vue({
-  router,
+  router:router,
   render:(h)=>h(App)
 }).$mount(root);
 

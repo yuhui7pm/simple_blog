@@ -23,7 +23,7 @@ const config = {
   //   app:['babel-polyfill',path.join(__dirname,'./src/index.js')],//兼容IE，解决空白页问题
   // },
   entry:{
-    app:['babel-polyfill',path.join(__dirname,'src/index.js')]
+    'main':['babel-polyfill',path.join(__dirname,'src/index.js')]
   },
   //出口文件
   output:{ 
@@ -75,9 +75,10 @@ const config = {
     },{
       test:/\.(gif|jpg|png|svg|jpeg)$/,
       loader:'url-loader',//url-loader可以设置图片大小限制，当图片超过限制时，其表现行为等同于file-loader
+      exclude: /node_modules/,    // 忽略第三方的任何代码
       options:{
-        limit:1024,  //小于10kB的图片进行base64编码
-        name:'[name]---yu.[ext]',
+        limit:8192,  //小于10kB的图片进行base64编码
+        name:'images/[name].[hash:7].[ext]',
         esModule: false,//解决img属性src="[object Module]"
       }
     },{
@@ -87,13 +88,17 @@ const config = {
         limit:10000,
         name:'fonts/[name].[hash:7].[ext]'
       }
-    },{
-      test:/\.js$/,
-      loader:'babel-loader',
-      exclude:__dirname+'node_modules',
-      include:[__dirname+'src',__dirname+'dist',__dirname+'static'],
+    },{			
+      // 这样可以处理ES6语法为ES5语法，但是这时候ES6中的一些新增的Promise或WeakMap，静态方法，如Array.from或Object.assign等等。不会被转义	
+      test: /\.js$/,
+      exclude: /node_modules/,//排除node里面的js文件处理
+      include:[
+        __dirname+'src',
+        __dirname+'node_modules/axios'
+      ],
+      loader: 'babel-loader',
       options: {
-          presets: ['env']
+        presets: ["@babel/preset-env"]
       }
     }]
   }
