@@ -4,11 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-09 21:59:12
+ * @LastEditTime : 2020-02-10 00:16:10
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
-import "@babel/polyfill";
+import "babel-polyfill";
 import promise from 'es6-promise';
 promise.polyfill();
 import Vue from 'vue';

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 13:29:30
+ * @LastEditTime : 2020-02-09 23:06:27
  -->
 <template>
   <div class="write-wrapper">
@@ -75,48 +75,53 @@ export default {
       let nameComment = this.nullAlert(username,commentContext);
       let createTime = Date.now();
 
-      // 提交评论信息
-      if(nameComment&&this.websiteFlag&&this.commentFlag){
-        axios.post('/api/writeComment',{
-          username,
-          email,
-          website,
-          commentContext,
-          createTime,
-          iconUrl:this.randomPic(),
-          blogId:this.blogId,
-        },{
-            headers: {
-              'Access-Control-Allow-Origin':'*',  //解决cors头问题
-              'Access-Control-Allow-Credentials':'true', //解决session问题
-              'Content-Type': 'application/json'
-          },
-        }).then(res=>{
-          if(res){
-            eventBus.$emit('addNewComment',{
+      // 线上环境提交评论信息
+            //开发环境用测试数据
+      if(process.env.NODE_ENV!=="development"){
+        if(nameComment&&this.websiteFlag&&this.commentFlag){
+            axios.post('/api/writeComment',{
               username,
               email,
               website,
-              comments:commentContext,
-              createtime:createTime,
-              iconurl:this.picName,
+              commentContext,
+              createTime,
+              iconUrl:this.randomPic(),
               blogId:this.blogId,
-              likestar:0
-            })
-            this.$emit('closeComment');
-            
-            //清空输入框
-            this.$refs.username.value = '';
-            this.$refs.email.value = '';
-            this.$refs.website.value = '';
-            this.$refs.commentContext.value = '';
-            this.replyWho = '';
+            },{
+                headers: {
+                  'Access-Control-Allow-Origin':'*',  //解决cors头问题
+                  'Access-Control-Allow-Credentials':'true', //解决session问题
+                  'Content-Type': 'application/json'
+              },
+            }).then(res=>{
+              if(res){
+                eventBus.$emit('addNewComment',{
+                  username,
+                  email,
+                  website,
+                  comments:commentContext,
+                  createtime:createTime,
+                  iconurl:this.picName,
+                  blogId:this.blogId,
+                  likestar:0
+                })
+                this.$emit('closeComment');
+                
+                //清空输入框
+                this.$refs.username.value = '';
+                this.$refs.email.value = '';
+                this.$refs.website.value = '';
+                this.$refs.commentContext.value = '';
+                this.replyWho = '';
 
-            //可删除标志位保存到缓存中
-            this.deleteCommentFlag(this.blogId,createTime);
-          }
-        })
-      }      
+                //可删除标志位保存到缓存中
+                this.deleteCommentFlag(this.blogId,createTime);
+              }
+            })
+          }   
+      }   else{
+        console.log('已经提交评论');
+      }
     },
     
     /**

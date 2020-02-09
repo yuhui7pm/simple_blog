@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 13:49:03
+ * @LastEditTime : 2020-02-09 22:57:53
  -->
 <template>
   <div class="comments-wrapper">
@@ -12,7 +12,7 @@
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
-      <div class="comment-write" v-for="(item,index) in blogsLists" :key="index">
+      <div class="comment-write" v-for="(item,index) in commentsLists" :key="index">
         <div style="transition-duration:0.5s;" :class='"deleteWrapper"+index'>
           <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt"></Comment>
           <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId'></WriteComment>
@@ -44,7 +44,7 @@ export default {
     }
   },
   props:{
-    blogsLists:Array,
+    commentsLists:Array,
     blogId:Number,
   },
   methods:{
@@ -63,7 +63,7 @@ export default {
       this.count = index;
 
       // 评论区域的显示与隐藏
-      for(let i=0;i<this.blogsLists.length;i++){
+      for(let i=0;i<this.commentsLists.length;i++){
         if(this.statusArr[i] === true){
           document.getElementsByClassName('addWrite'+i)[0].style.display = 'block';
           document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = '20px';
@@ -100,7 +100,7 @@ export default {
      * @author: yuhui
      */
     closeOther(){
-      for(let i=0;i<this.blogsLists.length-1;i++){
+      for(let i=0;i<this.commentsLists.length-1;i++){
         this.statusArr[i] === false;
         document.getElementsByClassName("addWrite"+i)[0].style.display = 'none';
       }

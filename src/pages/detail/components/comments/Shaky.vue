@@ -18,7 +18,7 @@
 
 <script>
 
-import { eventBus } from '../../../../assets/bus';
+import { eventBus } from '@/assets/bus';
 let EmojiUrl = require('../../../../../static/mock/emoji.json');
 export default {
   name:'shaky',

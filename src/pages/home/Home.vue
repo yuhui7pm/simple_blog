@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-05 22:19:54
+ * @LastEditTime : 2020-02-09 22:27:36
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -36,9 +36,6 @@ import Cover from './components/Cover.vue';
 import Item from './components/Item.vue'
 import PagePagination from './components/PageNumber.vue'
 import SideBar from '../sideBar/SideBar.vue'
-// import SidebarButton from './components/SidebarButton.vue'
-let blogCommentLists = require('../../../static/mock/lists');
-
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -64,22 +61,32 @@ export default {
   methods:{
     
     /**
-     * @description: 首页获取博客列表数据
+     * @description: 首页获取博客列表数据，区分开发环境和线上环境
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
     getBlogItem(){
-      axios.get('/api/blog/lists')
-        .then(res=>{
-          res = res.data;
-          if(res.data){
-            const data = res.data;
-            this.blogsNum = data.length;//获取博客列表数据的总长度
-            this.blogsLists = data;     //湖片区博客列表数据
-            this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-          }
-      })
+      //开发环境用测试数据
+      if(process.env.NODE_ENV=="development"){
+        const data = require('../../../static/mock/lists').data.blogLists;
+        this.blogsNum = data.length;//获取博客列表数据的总长度
+        this.blogsLists = data;     //湖片区博客列表数据
+        this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+        console.log('测试数据');
+      }else{
+        axios.get('/api/blog/lists')
+          .then(res=>{
+            res = res.data;
+            if(res.data){
+              const data = res.data;
+              this.blogsNum = data.length;//获取博客列表数据的总长度
+              this.blogsLists = data;     //湖片区博客列表数据
+              this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+            }
+            console.log(this.blogsLists);
+        })
+      }
     },
  
     /**

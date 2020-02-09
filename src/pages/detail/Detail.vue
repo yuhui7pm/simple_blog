@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 17:38:21
+ * @LastEditTime : 2020-02-09 22:57:06
  -->
 <template>
   <div>
@@ -13,7 +13,7 @@
       <Title></Title>
       <Context></Context>
       <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
-      <CommentLists class="commentList" @removeReply="removeWrite" :blogsLists='blogsLists' :blogId='blogId'></CommentLists>
+      <CommentLists class="commentList" @removeReply="removeWrite" :commentsLists='commentsLists' :blogId='blogId'></CommentLists>
     </div>
   </div>
 </template>
@@ -37,31 +37,37 @@ export default {
   },
   data(){
     return{
-      blogsLists:[],
+      commentsLists:[],
       blogId:0,
       insertStatus:true,//判断用户有没有点击回复评论，
     }
   },
   methods:{
     /**
-     * @description: 得到所有评论数据
+     * @description: 得到所有评论数据,开发环境与线上环境
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
     getBlogItem(){
-      this.blogsLists = [];//置空
-      axios.get("/api/blog/getComments",{
-        params:{
-          blogId:this.blogId
-        }
-      }).then(res=>{
-          if(res.status==200&&res.statusText==='OK'){
-            res = res.data;
-            const data = res.data;
-            this.blogsLists = data.reverse();     //博客列表数据
+      //开发环境用测试数据
+      if(process.env.NODE_ENV==="development"){
+        const data = require('../../../static/mock/comments.json').data;
+        this.commentsLists = data.reverse();     //博客列表数据
+      }else{
+        this.commentsLists = [];//置空
+        axios.get("/api/blog/getComments",{
+          params:{
+            blogId:this.blogId
           }
-      })
+        }).then(res=>{
+            if(res.status==200&&res.statusText==='OK'){
+              res = res.data;
+              const data = res.data;
+              this.commentsLists = data.reverse();     //博客列表数据
+            }
+        })
+      }
     },
     
     /**
@@ -82,10 +88,10 @@ export default {
     }
 
     eventBus.$on('addNewComment',(obj)=>{
-      let arrOld = this.blogsLists.reverse();
-      this.blogsLists = [];
+      let arrOld = this.commentsLists.reverse();
+      this.commentsLists = [];
       arrOld.push(obj);
-      this.blogsLists = arrOld.reverse();
+      this.commentsLists = arrOld.reverse();
     })
   },
   // updated(){

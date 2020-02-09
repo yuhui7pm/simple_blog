@@ -4,12 +4,12 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 14:13:38
+ * @LastEditTime : 2020-02-09 23:01:29
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
     <div class="comment">
-      <img class='user-icon' :src="item.iconurl!==null?userIconUrl(item.iconurl):iconUrl" alt="用户头像">
+      <img class='user-icon' :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl" alt="用户头像">
       <div class="comment-right">
         <div style="float:left;">
           <div class="top-wrapper">
@@ -108,24 +108,27 @@ export default {
      * @author: yuhui
      */
     deleteComments(name,time){
-      axios.post('/api/deleteComment',{
-          username: name,
-          createtime: time
-        },{
-        headers: {
-            'Access-Control-Allow-Origin':'*',  //解决cors头问题
-            'Access-Control-Allow-Credentials':'true', //解决session问题
-            'Content-Type': 'application/json'
-        },
-        withCredentials : true
-      }).then(res=>{
-        if(res){
-          this.$refs.commentItem.style.display = 'none';
+      //非测试环境数据
+      if(process.env.NODE_ENV!=="development"){
+        axios.post('/api/deleteComment',{
+            username: name,
+            createtime: time
+          },{
+          headers: {
+              'Access-Control-Allow-Origin':'*',  //解决cors头问题
+              'Access-Control-Allow-Credentials':'true', //解决session问题
+              'Content-Type': 'application/json'
+          },
+          withCredentials : true
+        }).then(res=>{
+          if(res){
+            this.$refs.commentItem.style.display = 'none';
 
-          let likeKey = 'blogId_' + this.blogId + '_time_' + time;
-          storage.remove(likeKey);
-        }
-      })
+            let likeKey = 'blogId_' + this.blogId + '_time_' + time;
+            storage.remove(likeKey);
+          }
+        })
+      }
     },
 
     /**
