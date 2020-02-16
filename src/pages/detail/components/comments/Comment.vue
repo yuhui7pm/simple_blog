@@ -3,7 +3,7 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
- * @LastEditors  : yuhui
+ * @LastEditors: yuhui
  * @LastEditTime : 2020-02-09 23:01:29
  -->
 <template>
@@ -109,7 +109,27 @@ export default {
      */
     deleteComments(name,time){
       //非测试环境数据
-      if(process.env.NODE_ENV!=="development"){
+      // if(process.env.NODE_ENV!=="development"){
+      //   axios.post('/api/deleteComment',{
+      //       username: name,
+      //       createtime: time
+      //     },{
+      //     headers: {
+      //         'Access-Control-Allow-Origin':'*',  //解决cors头问题
+      //         'Access-Control-Allow-Credentials':'true', //解决session问题
+      //         'Content-Type': 'application/json'
+      //     },
+      //     withCredentials : true
+      //   }).then(res=>{
+      //     if(res){
+      //       this.$refs.commentItem.style.display = 'none';
+
+      //       let likeKey = 'blogId_' + this.blogId + '_time_' + time;
+      //       storage.remove(likeKey);
+      //     }
+      //   })
+      // }
+
         axios.post('/api/deleteComment',{
             username: name,
             createtime: time
@@ -128,7 +148,6 @@ export default {
             storage.remove(likeKey);
           }
         })
-      }
     },
 
     /**
@@ -212,10 +231,10 @@ export default {
     browserRedirect() {
       var sUserAgent = navigator.userAgent.toLowerCase();
       if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
-        console.log('移动端');//跳转移动端页面
+        // console.log('移动端');//跳转移动端页面
         this.smallScreenDeleteIconShow = true;
       } else {
-        console.log('PC端');//跳转pc端页面
+        // console.log('PC端');//跳转pc端页面
         this.smallScreenDeleteIconShow = false;
       }
     }

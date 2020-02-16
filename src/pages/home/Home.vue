@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-09 22:27:36
+ * @LastEditors: yuhui
+ * @LastEditTime : 2020-02-14 22:43:20
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -12,7 +12,7 @@
     <!-- <SideBar :class="[sideBarDisplay?'toggleSideBar':'sidebar']" ref="sideBar"></SideBar> -->
     <Header/>
     <Cover class="cover-pic"/>
-    <div :class="sideBarDisplay?'blog-pagination-right':'blog-pagination-left'">
+    <div :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
       <Item 
         class="blog-lists"
         :blogsLen="blogsNum"
@@ -68,25 +68,22 @@ export default {
      */
     getBlogItem(){
       //开发环境用测试数据
-      if(process.env.NODE_ENV=="development"){
-        const data = require('../../../static/mock/lists').data.blogLists;
-        this.blogsNum = data.length;//获取博客列表数据的总长度
-        this.blogsLists = data;     //湖片区博客列表数据
-        this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-        console.log('测试数据');
-      }else{
-        axios.get('/api/blog/lists')
-          .then(res=>{
-            res = res.data;
-            if(res.data){
-              const data = res.data;
-              this.blogsNum = data.length;//获取博客列表数据的总长度
-              this.blogsLists = data;     //湖片区博客列表数据
-              this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-            }
-            console.log(this.blogsLists);
-        })
-      }
+      // if(process.env.NODE_ENV=="development"){
+      //   const data = require('../../../static/mock/lists').data.blogLists;
+      //   this.blogsNum = data.length;//获取博客列表数据的总长度
+      //   this.blogsLists = data;     //湖片区博客列表数据
+      //   this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+      // }
+      axios.get('/api/blog/lists')
+        .then(res=>{
+          res = res.data;
+          if(res.data){
+            const data = res.data;
+            this.blogsNum = data.length;//获取博客列表数据的总长度
+            this.blogsLists = data;     //湖片区博客列表数据
+            this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+          }
+      })
     },
  
     /**
@@ -169,6 +166,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.blogItemWrapper
+    margin-top:30px;
 @media screen and (min-width: 950px) 
   .sidebar
     opacity 0
@@ -188,4 +187,6 @@ export default {
     transform translateX(0px)
     width 100%
     transition-duration 0.8s
+  .blogItemWrapper
+    margin-top:80px;
 </style>

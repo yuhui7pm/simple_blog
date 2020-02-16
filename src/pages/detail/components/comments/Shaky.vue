@@ -1,14 +1,15 @@
 <template>
   <div class="wrapper">
    <div class="shaky-wrapper">
-     <span class="shaky" @click="getEmojiItem">（○｀ 3′○）</span>
+     <span class="shaky" @click="getEmojiItem()">（○｀ 3′○）</span>
    </div>
    <div class="emoji-wrapper" v-show="isShow" ref="emojiWrapper">
       <span 
         class="shaky shakyInner"
         v-for="value of emojiLists"
         :key="value.id"
-        @click="writeEmoji(value.font)"
+        @click.stop="writeEmoji(value.font)"
+        @touchmove.prevent
       >
         {{value.font}}
       </span>
@@ -37,7 +38,7 @@ export default {
      * @return: 
      * @author: yuhui
      */
-    getEmojiItem(){
+    getEmojiItem(event){
       const data = EmojiUrl.data;
       this.emojiLists = data.emojiLists; 
       this.isShow = true;
@@ -50,10 +51,12 @@ export default {
      * @author: yuhui
      */
     emojiDisplay(e){
+      let _this = this;
+      // console.log(e.target.className,this.isShow);
       if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")&&this.isShow!==true){
         this.isShow=true;
       }else{
-        this.isShow=false;
+        _this.isShow=false;
       }
     },
     
@@ -65,16 +68,16 @@ export default {
      */
     writeEmoji(emoji){
       eventBus.$emit('writeEmoji', emoji)
-    }
+    },
   },
   mounted(){
     //点击颜色其它区域隐藏
     document.addEventListener('click', this.emojiDisplay,true);
-    document.addEventListener('touchstart', this.emojiDisplay,true);
+    // document.addEventListener('touchstart', this.emojiDisplay,true);
   },
   destroyed(){
     document.removeEventListener('click',this.emojiDisplay,true);
-    document.addEventListener('touchstart', this.emojiDisplay,true);
+    // document.removeEventListener('touchstart', this.emojiDisplay,true);
   }
 }
 </script>

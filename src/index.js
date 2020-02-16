@@ -3,7 +3,7 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
- * @LastEditors  : yuhui
+ * @LastEditors: yuhui
  * @LastEditTime : 2020-02-10 00:16:10
  */
 // vue组件的一个出口文件
@@ -13,7 +13,8 @@ import promise from 'es6-promise';
 promise.polyfill();
 import Vue from 'vue';
 import App from './app.vue';
-import router from './router/index.js'
+import router from './router/index.js';
+// import common from './assets/common.js'
 
 // 插入 meta 标签
 // var oMeta = document.createElement('meta');
@@ -46,6 +47,8 @@ new Vue({
   render:(h)=>h(App)
 }).$mount(root);
 
+//公共方法
+// Vue.prototype.common = common;
 
 // new Vue({
 //   el: '#app',

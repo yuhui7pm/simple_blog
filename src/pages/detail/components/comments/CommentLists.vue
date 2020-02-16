@@ -3,7 +3,7 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
- * @LastEditors  : yuhui
+ * @LastEditors: yuhui
  * @LastEditTime : 2020-02-09 22:57:53
  -->
 <template>
@@ -82,7 +82,7 @@ export default {
      */
     replyIt(ind,name){
       // 两次点击同一个评论，理应不出现@
-      console.log(this.replyName,'+++',name);
+      // console.log(this.replyName,'+++',name);
 
       if(this.replyName===name){
         this.replyName='';
@@ -138,6 +138,7 @@ export default {
       height 0
   @media screen and (max-width: 768px) 
     .comments-wrapper 
+      padding 20px 0
       margin-left 10px
       margin-right 10px
       .commentOne

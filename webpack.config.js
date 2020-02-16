@@ -1,9 +1,7 @@
-// import 'babel-polyfill';
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-// require('babel-polyfill');
 
 // 在resolves中起alias，打包时，显示resolve is not defined
 function resolve (dir) {
@@ -19,16 +17,13 @@ const config = {
   target:"web",
   context:path.resolve(__dirname),
   //入口文件
-  // entry:{
-  //   app:['babel-polyfill',path.join(__dirname,'./src/index.js')],//兼容IE，解决空白页问题
-  // },
   entry:{
-    'main':['babel-polyfill',path.join(__dirname,'src/index.js')]
+    'main':['babel-polyfill',path.join(__dirname,'src/index.js')],//兼容IE，解决空白页问题
   },
   //出口文件
   output:{ 
     filename:'bundle.js',
-    path:path.join(__dirname,'dist')
+    path:path.join(__dirname,'dist'),
   },
   // 启用sourceMap追踪错误
   devtool: 'inline-source-map',
@@ -116,6 +111,15 @@ if(isDev){
     //   index: '/index.html'
     // },
     hot:true,//热加载，只渲染改变的数据
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/api'
+        }
+      }
+    },
   };
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),//热加载插件,更新局部的修改

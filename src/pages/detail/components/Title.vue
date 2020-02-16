@@ -3,23 +3,24 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
- * @LastEditors  : yuhui
+ * @LastEditors: yuhui
  * @LastEditTime : 2020-02-06 14:21:10
  -->
 <template>
   <div class="blogTitle">
-    <img src="../../../assets/images/meinv.jpg" class="pic-left" alt="封面图片"/>
+    <img :src="blogContent.picurl" class="pic-left" alt="封面图片"/>
     <div class="right-wrapper">
-      <div class="title-tag">NO.68|35MIN</div>
-      <h1>41种蓝色</h1>
+      <div class="title-tag">{{`NO.${blogIndOrder} | ${timestampToTime(blogContent.createtime)}`}}</div>
+      <h1>{{blogContent.title}}</h1>
       <audio controls loop="loop">
-        <source src="https://dts.podtrac.com/redirect.mp3/cdn.simplecast.com/audio/83b511/83b511d3-70d2-4bb9-9734-ee83d74bce44/37b2e9b3-758f-4d75-9925-92fda6642a6b/552830be_tc.mp3" type="audio/mpeg">
+        <source :src="blogContent.musicurl" type="audio/mpeg">
       </audio>
     </div>
   </div>  
 </template>
 
 <script>
+
 export default {
   name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -28,10 +29,22 @@ export default {
     return{
     }
   },
-  methods:{
+  props:{
+    blogContent:Object,
+    blogIndOrder:Number
   },
-  mounted(){
-  }
+  methods:{
+    timestampToTime(timestamp) {
+      let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear();
+      let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
+      let D = date.getDate();
+      let h = date.getHours() +':';
+      let m = date.getMinutes() +':';
+      let s = date.getSeconds();
+      return (Y + '-' + M + '-' + D);//时分秒可以根据自己的需求加上
+    },
+  },
 }
 </script>
 

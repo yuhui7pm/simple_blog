@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-05 22:23:27
+ * @LastEditors: yuhui
+ * @LastEditTime : 2020-02-14 22:46:00
  -->
 <template>
   <ol>
@@ -13,9 +13,10 @@
       v-for="(list,index) of blogLists"
       :key="list.id"
       class="item-wrapper"
-      :to="{path:'/detail',query:{id:list.id}}"
+      :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     >
     <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
+    <!-- <img class="item-left" src="@/assets/images/meinv.jpg" alt="博客列表图片"/> -->
     <div class="item-right">
       <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{timestampToTime(list.createtime)}}</p>
       <h2 class="article-header">{{list.title}}</h2>
@@ -42,6 +43,7 @@ export default {
   },
   methods:{
     timestampToTime(timestamp) {
+      // console.log('timestamp:',timestamp);
       let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear();
       let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
@@ -60,27 +62,27 @@ export default {
 <style lang="stylus" scoped>
   .item-wrapper:hover
     cursor default
-    box-shadow #ddd 0px 0px 10px 8px
+    box-shadow #eee 0px 0px 7px 5px
   .item-wrapper
-    width 900px /*no*/
+    width 920px /*no*/
     height auto 
     background white
     border-radius 8px
-    padding 40px
-    margin 0 auto 20px
+    padding 45px
+    margin 0 auto 25px
     overflow hidden
     box-sizing border-box
     transition-duration 0.5s
     &:hover
       cursor pointer
     .item-left
-      width 192px /*no*/
-      height 192px /*no*/
+      width 200px /*no*/
+      height 200px /*no*/
       float left
       border-radius 4px
     .item-right
       float right
-      width 552px
+      width 580px
       .createTime
         font-size 12px
         line-height 16px
@@ -94,7 +96,7 @@ export default {
         display block
         color #3D3634
         font-size 24px
-        margin-bottom 30px
+        margin-bottom 20px
         width auto
         max-width 100%
         height 24px
@@ -103,7 +105,7 @@ export default {
         white-space no-wrap
       .introduction
         margin-bottom 20px
-        font-size: 14px;
+        font-size: 15px;
         line-height: 24px;
   //小于屏幕宽度时，博客列表左边的图片消失
   @media screen and (max-width: 768px) 
