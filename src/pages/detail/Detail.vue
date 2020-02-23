@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 12:39:25
+ * @LastEditTime: 2020-02-23 22:54:33
  -->
 <template>
   <div>
@@ -117,5 +117,5 @@ export default {
         text-align center
     .single-episode-wrapper
       width 100%
-      margin 10px auto
+      margin 0px auto
 </style>

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 14:10:23
+ * @LastEditTime: 2020-02-23 23:24:49
  -->
 <template>
   <div class="comments-wrapper">
@@ -200,12 +200,12 @@ export default {
       height 0
   @media screen and (max-width: 768px) 
     .comments-wrapper 
-      padding 20px 0
-      margin-left 10px
-      margin-right 10px
+      padding 0 0 10px
       .commentOne
         padding 8px 10px
   @media screen and (max-width: 375px) 
     .comments-wrapper
-      padding 0px 0 60px !important
+      padding 0 0 30px !important
+      .commentOne
+        padding 5px 15px 0
 </style>

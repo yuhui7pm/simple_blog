@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 21:52:04
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-06 14:16:16
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-02-23 23:52:35
  -->
 <template>
   <div>
@@ -57,6 +57,7 @@ export default {
     header
       padding-left 0
       height 60px
+      margin-top 20px
       p
         line-height 60px !important
       .header-wrapper

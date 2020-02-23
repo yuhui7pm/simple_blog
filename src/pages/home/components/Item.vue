@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 12:01:06
+ * @LastEditTime: 2020-02-24 00:00:33
  -->
 <template>
   <ol>
@@ -123,8 +123,15 @@ export default {
         float none
         width 100% !important
         .createTime
-          margin-bottom 10px
+          margin-bottom 5px
         h2 
-          margin-bottom 15px
-          font-size 20px
+          margin-bottom 8px
+          font-size 18px
+        .article-header
+          display block
+          color #3D3634
+          font-size 22px
+          margin-bottom 8px
+          height auto !important 
+          line-height 26px
 </style>

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 12:00:49
+ * @LastEditTime: 2020-02-23 23:52:47
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -192,4 +192,8 @@ export default {
     transition-duration 0.8s
   .blogItemWrapper
     margin-top:80px;
+@media screen and (max-width:768px)
+  .blogItemWrapper
+    margin-top:20px;
+    margin-bottom:0px !important;
 </style>

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 11:57:47
+ * @LastEditTime: 2020-02-23 23:40:15
  -->
 <template>
   <div class="blogTitle">
@@ -92,6 +92,7 @@ export default {
   @media screen and (max-width: 768px) 
     .blogTitle
       text-align center 
+      padding 20px 20px 0
       .pic-left
         border-radius 5px;
         width 180px
@@ -109,4 +110,10 @@ export default {
   @media screen and (max-width: 375px) 
     audio 
       display none
+    .blogTitle
+      .pic-left
+      .right-wrapper
+        h1
+          line-height: 30px !important;
+          font-size 22px
 </style>

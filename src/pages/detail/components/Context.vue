@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-22 22:38:42
+ * @LastEditTime: 2020-02-23 23:58:56
  -->
 <template>
   <div class="wrapper">
@@ -51,14 +51,29 @@ export default {
       &>>>p
         margin 15px 0
       &>>>img 
-        margin 20px 0 !important 
-        max-height 500px !important
-  @media screen and (max-width: 768px) 
-    .wrapper
-      margin-bottom 20px !important
+        margin 20px 0 
+        max-height 500px 
+@media screen and (max-width: 768px) 
+  .wrapper
+    .context-wrapper 
+      background white
       .context 
         width 100% !important
-        margin 15px auto !important
-        padding 20px !important
+        padding 20px 20px 20px !important
         line-height 24px !important
+        &>>>p
+          margin 15px 0
+        &>>>img 
+          margin 20px 0
+          max-height auto 
+          width 100%
+@media screen and (max-width: 360px) 
+  .wrapper
+    .context-wrapper 
+      .context 
+        padding: 5px 20px 20px !important;
+        &>>>p
+          margin 10px 0 !important
+        &>>>img 
+          margin 10px 0 !important 
 </style>

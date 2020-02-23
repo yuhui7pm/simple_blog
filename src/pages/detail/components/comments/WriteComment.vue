@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 14:12:20
+ * @LastEditTime: 2020-02-23 23:22:52
  -->
 <template>
   <div class="write-wrapper">
@@ -315,7 +315,7 @@ export default {
       cursor pointer
   @media screen and (max-width: 768px) 
     .write-wrapper
-      padding 20px 10px
+      padding 0px 20px
       .input-wrapper
         display block
         height auto

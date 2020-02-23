@@ -134,14 +134,15 @@ export default {
       font-size 12px !important
       padding 5px !important 
   .emoji-wrapper
-    width auto !important
+    width 350px !important
     padding 0px !important
     margin 0px 30px 0 0 !important
-  @media screen and (max-width: 375px) 
-    .emoji-wrapper
-      height 150px !important
-      margin 0px 20px 0 0 !important
-      overflow-y scroll
-      .shakyInner
-        font-size 10px
+@media screen and (max-width: 375px) 
+  .emoji-wrapper
+    width 320px !important
+    height 150px !important
+    padding 0px
+    overflow-y scroll
+    .shakyInner
+      font-size 10px
 </style>
