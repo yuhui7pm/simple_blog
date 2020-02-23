@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-14 22:43:20
+ * @LastEditTime: 2020-02-23 12:00:49
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -83,6 +83,8 @@ export default {
             this.blogsLists = data;     //湖片区博客列表数据
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
           }
+      }).catch(err => {
+          console.log('err:',err)
       })
     },
  
@@ -168,6 +170,7 @@ export default {
 <style lang="stylus" scoped>
 .blogItemWrapper
     margin-top:30px;
+    margin-bottom:90px;
 @media screen and (min-width: 950px) 
   .sidebar
     opacity 0

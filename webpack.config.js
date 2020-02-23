@@ -24,9 +24,16 @@ const config = {
   output:{ 
     filename:'bundle.js',
     path:path.join(__dirname,'dist'),
+    // publicPath: '/'
+    // output: {
+    //   // 表示在引入静态资源时，从根路径开始引入
+    //   publicPath: '/'
+    // },
+    // https://blog.csdn.net/httguangtt/article/details/84847582
   },
   // 启用sourceMap追踪错误
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -59,12 +66,13 @@ const config = {
       use:[
         'style-loader', //将js代码写到html里面去
         'css-loader',   //将vue里面的css代码写到js里面去
-        {
-          loader:'postcss-loader',
-          options:{
-            sourceMap:true,//使用前面stylus-loader生成的sourceMap
-          }
-        },
+        'postcss-loader',
+        // {
+        //   loader:'postcss-loader',
+        //   options:{
+        //     sourceMap:false,//使用前面stylus-loader生成的sourceMap
+        //   }
+        // },
         'stylus-loader',//使用模块化的方法去写css代码
       ]      
     },{
@@ -105,6 +113,9 @@ if(isDev){
     overlay:{
       errors:true,//有错误就显示在网页上
       warnings:false
+    },
+    historyApiFallback: {
+      index: '/index.html' //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
     },
     open:true,//自动打开页面
     // historyFallback:{

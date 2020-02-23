@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-06 16:55:43
+ * @LastEditTime: 2020-02-23 01:11:54
  -->
 <template>
   <div id="app">
@@ -26,10 +26,10 @@ export default {
   methods: {
   },
   mounted(){
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
+        // history.pushState(null, null, document.URL);
+        // window.addEventListener('popstate', function () {
+        //     history.pushState(null, null, document.URL);
+        // });
   }
 }
 </script>

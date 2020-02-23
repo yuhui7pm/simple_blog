@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-02-05 22:22:45
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-02-22 22:03:28
  -->
 <template>
   <div class="cover" ref="cover">
@@ -12,8 +12,8 @@
       <img src="../../../assets/images/header_illustration.png" alt="人物图片">
     </div>
     <div class="contact-me">
-      <a href="https://github.com/yuhui7pm"><img src="../../../assets/icons/github.svg" alt="通过github联系作者"/></a>
-      <a href="https://blog.csdn.net/qq_40511157"><img src="../../../assets/icons/csdn.svg" alt="通过csdn联系作者"/></a>
+      <a href="https://github.com/yuhui7pm" target="_blank"><img src="../../../assets/icons/github.svg" alt="通过github联系作者"/></a>
+      <a href="https://blog.csdn.net/qq_40511157" target="_blank"><img src="../../../assets/icons/csdn.svg" alt="通过csdn联系作者"/></a>
     </div>
   </div>
 </template>

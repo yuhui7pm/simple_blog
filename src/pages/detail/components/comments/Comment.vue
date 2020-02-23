@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-09 23:01:29
+ * @LastEditTime: 2020-02-23 10:00:53
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
@@ -147,7 +147,9 @@ export default {
             let likeKey = 'blogId_' + this.blogId + '_time_' + time;
             storage.remove(likeKey);
           }
-        })
+        }).catch(err => {
+          console.log('err:',err)
+      })
     },
 
     /**
@@ -200,6 +202,8 @@ export default {
         if(res){
           // console.log('点赞成功',res);
         }
+      }).catch(err => {
+          console.log('err:',err)
       })
     },
     

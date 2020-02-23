@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-09 23:06:27
+ * @LastEditTime: 2020-02-23 10:53:37
  -->
 <template>
   <div class="write-wrapper">
@@ -110,6 +110,7 @@ export default {
                 'Access-Control-Allow-Credentials':'true', //解决session问题
                 'Content-Type': 'application/json'
             },
+            withCredentials : true
           }).then(res=>{
             if(res){
               eventBus.$emit('addNewComment',{
@@ -134,6 +135,8 @@ export default {
               //可删除标志位保存到缓存中
               this.deleteCommentFlag(this.blogId,createTime);
             }
+          }).catch(err => {
+            console.log('err:',err)
           })
         }   
     },
@@ -247,7 +250,7 @@ export default {
   .write-wrapper
     box-sizing border-box
     background white
-    padding 50px 50px 0
+    padding 50px 100px 0
     border-top-left-radius 6px
     border-top-right-radius 6px
     .show-speech

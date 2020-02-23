@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-06 14:20:34
+ * @LastEditTime: 2020-02-22 22:38:42
  -->
 <template>
   <div class="wrapper">
@@ -35,21 +35,24 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .wrapper
-    .context-wrapper
-      width 100%
-      min-height 30px
-      background white
-      border-radius 6px
-      color #3d3634;
-      .context
-        width: 100%;
-        padding: 60px;
-        margin: 40px auto;
-        font-size: 16px;
-        line-height: 28px;
-        margin-bottom 30px
-        box-sizing border-box
+.wrapper
+  .context-wrapper
+    width 100%
+    min-height 30px
+    background white
+    border-radius 6px
+    color #3d3634;
+    .context
+      width: 100%;
+      padding: 20px 100px 10px;
+      font-size: 16px;
+      line-height: 30px;
+      box-sizing border-box
+      &>>>p
+        margin 15px 0
+      &>>>img 
+        margin 20px 0 !important 
+        max-height 500px !important
   @media screen and (max-width: 768px) 
     .wrapper
       margin-bottom 20px !important

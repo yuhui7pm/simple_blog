@@ -4,13 +4,13 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-09 22:57:06
+ * @LastEditTime: 2020-02-23 12:01:26
  -->
 <template>
   <div>
-    <Header></Header>
-    <div class="single-episode-wrapper">
-      <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder"></Title>
+    <!-- <Header></Header> -->
+    <div class="single-episode-wrapper" :key="blogId">
+      <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder" :key="blogId"></Title>
       <Context :blogContent="blogContent"></Context>
       <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
       <CommentLists class="commentList" @removeReply="removeWrite" :commentsLists='commentsLists' :blogId='blogId'></CommentLists>
@@ -63,7 +63,6 @@ export default {
             const data = res.data;
             this.blogContent = data[0];     //博客列表数据
           }
-          // console.log('this.blogContent:', this.blogContent);
       })
     },
 
@@ -111,12 +110,13 @@ export default {
     this.insertStatus = true;
     this.blogId= parseInt(this.$route.query.id);
     this.blogIndOrder= parseInt(this.$route.query.blogInd);
-    
     if(this.blogId>0){
       this.getBlogContent(); //博客内容
       this.getCommentsItem();//页面挂载的时候就获取评论列表数据
     }
     // console.log('this.blogId:',this.$route.query.id, this.blogId,this.$route.query.blogInd,this.blogIndOrder);
+    //当页面没有跳转到首页时，自己主动跳转
+    window.addEventListener("hashchange",this.jumpToHome, false);
   },
   mounted(){
     eventBus.$on('addNewComment',(obj)=>{
@@ -136,8 +136,8 @@ export default {
 
 <style lang="stylus" scoped>
   .single-episode-wrapper
-    width 980px
-    margin 60px auto 140px
+    width 1020px
+    margin 80px auto 140px
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     header

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-06 14:21:10
+ * @LastEditTime: 2020-02-23 11:57:47
  -->
 <template>
   <div class="blogTitle">
@@ -12,9 +12,10 @@
     <div class="right-wrapper">
       <div class="title-tag">{{`NO.${blogIndOrder} | ${timestampToTime(blogContent.createtime)}`}}</div>
       <h1>{{blogContent.title}}</h1>
-      <audio controls loop="loop">
+      <!-- <audio controls loop="loop" preload="auto">
         <source :src="blogContent.musicurl" type="audio/mpeg">
-      </audio>
+      </audio> -->
+      <audio :src="blogContent.musicurl" controls="controls" preload ref="audioMusic"></audio>
     </div>
   </div>  
 </template>
@@ -52,6 +53,9 @@ export default {
   .blogTitle 
     overflow hidden
     width 100%
+    background white
+    padding 100px 100px 0
+    box-sizing border-box
     .pic-left
       border-radius 5px;
       width 240px
@@ -84,6 +88,7 @@ export default {
         width 100%
         outline none
         background-color #f7f7f7
+        border-radius 27px
   @media screen and (max-width: 768px) 
     .blogTitle
       text-align center 

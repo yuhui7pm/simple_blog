@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-09 22:57:53
+ * @LastEditTime: 2020-02-23 10:01:08
  -->
 <template>
   <div class="comments-wrapper">
@@ -25,7 +25,6 @@
 <script>
 import WriteComment from './WriteComment.vue';
 import Comment from './Comment.vue';
-import axios from 'axios';
 import { eventBus } from '@/assets/bus';
 export default {
   name: 'CommetsList', //不能与下面组件名字重读，否则会堆栈溢出
@@ -126,7 +125,7 @@ export default {
         margin-left 50px
         margin-right 50px
     .commentOne
-      padding 15px 50px
+      padding 15px 100px
       box-sizing border-box
       transition-duration 0.2s
       &:hover
