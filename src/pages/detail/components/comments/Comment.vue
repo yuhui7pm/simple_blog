@@ -4,11 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 10:00:53
+ * @LastEditTime: 2020-02-23 13:50:57
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
-    <div class="comment">
+    <div class="comment" :key="item.createtime">
       <img class='user-icon' :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl" alt="用户头像">
       <div class="comment-right">
         <div style="float:left;">
@@ -20,7 +20,6 @@
         </div>
         <div class="comment-bar" style="float:right">
           <img 
-            :class="[heartChange?'changHeart':'']"
             @click.stop="changeHeart"
             :src="heartChange?heart_click:heart_unclick"
             alt="回复评论"
@@ -44,6 +43,7 @@ import qs from 'qs';
 import heart_click from '@/assets/icons/heart_click.svg';
 import heart_unclick from '@/assets/icons/heart_unclick.svg';
 import storage from 'good-storage';
+import { eventBus } from '@/assets/bus';
 export default {
   name: 'Comment', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -57,7 +57,8 @@ export default {
       heart_unclick,
       initLikeStatus:false,
       deleteIconShow:false,
-      smallScreenDeleteIconShow:false
+      smallScreenDeleteIconShow:false,
+      initStatus:false
     }
   },
   props:{
@@ -108,28 +109,6 @@ export default {
      * @author: yuhui
      */
     deleteComments(name,time){
-      //非测试环境数据
-      // if(process.env.NODE_ENV!=="development"){
-      //   axios.post('/api/deleteComment',{
-      //       username: name,
-      //       createtime: time
-      //     },{
-      //     headers: {
-      //         'Access-Control-Allow-Origin':'*',  //解决cors头问题
-      //         'Access-Control-Allow-Credentials':'true', //解决session问题
-      //         'Content-Type': 'application/json'
-      //     },
-      //     withCredentials : true
-      //   }).then(res=>{
-      //     if(res){
-      //       this.$refs.commentItem.style.display = 'none';
-
-      //       let likeKey = 'blogId_' + this.blogId + '_time_' + time;
-      //       storage.remove(likeKey);
-      //     }
-      //   })
-      // }
-
         axios.post('/api/deleteComment',{
             username: name,
             createtime: time
@@ -141,11 +120,16 @@ export default {
           },
           withCredentials : true
         }).then(res=>{
-          if(res){
+          if(res.status == 200){
             this.$refs.commentItem.style.display = 'none';
 
             let likeKey = 'blogId_' + this.blogId + '_time_' + time;
             storage.remove(likeKey);
+
+            eventBus.$emit('deleteCommentsLists',{
+              username: name,
+              createtime: time
+            })
           }
         }).catch(err => {
           console.log('err:',err)
@@ -178,6 +162,7 @@ export default {
       // 首先从缓存读取点赞数据，看有没有已经点赞了的
       let status = storage.get(likeKey); 
       let num = parseInt(this.$refs.praiseNum.innerText);
+
       if(status!==true){
         this.$refs.praiseNum.innerText = num + 1;
         storage.set(likeKey,true)
@@ -185,7 +170,7 @@ export default {
         this.$refs.praiseNum.innerText = num - 1;
         storage.set(likeKey,false);
       }
-
+      
       //向后端发送请求，保存数据
       axios.post('/api/clickLikeIcon',{
           username: this.item.username,
@@ -200,7 +185,12 @@ export default {
         withCredentials : true //跨域请求要想带上cookie
       }).then(res=>{
         if(res){
-          // console.log('点赞成功',res);
+          eventBus.$emit('changeCommentsLists',{
+            username: this.item.username,
+            createtime: this.item.createtime,
+            likeStatus:storage.get(likeKey),
+            likeNum:this.$refs.praiseNum.innerText
+          })
         }
       }).catch(err => {
           console.log('err:',err)
@@ -225,8 +215,8 @@ export default {
      */
     checkZan(){
       let likeKey = 'blogId_' + this.blogId + '_time_' + this.item.createtime;
-      let initStatus = storage.get(likeKey); 
-      if(initStatus===true){
+      this.initStatus = storage.get(likeKey); 
+      if(this.initStatus){
         this.heartChange = true; 
       }
       this.browserRedirect();
@@ -243,9 +233,13 @@ export default {
       }
     }
   },
+  activated(){
+    this.checkZan();
+  },
   mounted(){
     this.checkZan();
     this.deleteIcon();
+    // console.log('item:',this.item)
   }
 }
 </script>

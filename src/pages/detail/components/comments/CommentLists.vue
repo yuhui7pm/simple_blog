@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 10:01:08
+ * @LastEditTime: 2020-02-23 14:10:23
  -->
 <template>
   <div class="comments-wrapper">
@@ -12,9 +12,9 @@
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
-      <div class="comment-write" v-for="(item,index) in commentsLists" :key="index">
+      <div class="comment-write" v-for="(item,index) in commentsLists" :key="item.createtime">
         <div style="transition-duration:0.5s;" :class='"deleteWrapper"+index'>
-          <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt"></Comment>
+          <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt" :key="index"></Comment>
           <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId'></WriteComment>
         </div>
       </div>
@@ -26,6 +26,7 @@
 import WriteComment from './WriteComment.vue';
 import Comment from './Comment.vue';
 import { eventBus } from '@/assets/bus';
+import axios from 'axios';
 export default {
   name: 'CommetsList', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -40,10 +41,11 @@ export default {
       displayIcon:false,
       listNum:'',
       replyName:'',
+      commentsLists:[],
     }
   },
   props:{
-    commentsLists:Array,
+    // commentsLists:Array,
     blogId:Number,
   },
   methods:{
@@ -91,6 +93,26 @@ export default {
       eventBus.$emit('replyName',this.replyName); 
       this.insertReply(ind);
     },
+    /**
+     * @description: 得到所有评论数据,开发环境与线上环境
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
+    getCommentsItem(){
+      this.commentsLists = [];//置空
+      axios.get("/api/blog/getComments",{
+        params:{
+          blogId:this.blogId
+        }
+      }).then(res=>{
+          if(res.status==200&&res.statusText==='OK'){
+            res = res.data;
+            const data = res.data;
+            this.commentsLists = data.reverse();     //博客列表数据
+          }
+      })
+    },
     
     /**
      * @description: 关闭其他的评论输入框,置顶输入框
@@ -104,7 +126,48 @@ export default {
         document.getElementsByClassName("addWrite"+i)[0].style.display = 'none';
       }
       this.$emit('removeReply',true)
-    }
+    },
+    changeListsStatus(obj,list){
+      let newArr = list.map( function(value,index){
+        if(value.createtime==obj.createtime){
+          value.likestar = obj.likeNum
+        }
+        return value
+      })
+      return newArr
+    },
+    deleteLists(obj,list){
+      let deletedArr = list;
+      for(let i=0; i<list.length; i++) {
+    　　if (list[i].createtime==obj.createtime) {
+    　　　deletedArr.splice(i,1);
+    　　}
+      }
+      return deletedArr;
+    },
+  },
+  mounted(){
+    this.getCommentsItem();//页面挂载的时候就获取评论列表数据
+    eventBus.$on('changeCommentsLists',obj=>{
+      let arr = this.changeListsStatus(obj,this.commentsLists);
+      this.commentsLists = arr;
+    })
+    eventBus.$on('addNewComment',obj=>{
+      let arrOld = this.commentsLists.reverse();
+      this.commentsLists = [];
+      arrOld.push(obj);
+      this.commentsLists = arrOld.reverse();
+    })
+    eventBus.$on('deleteCommentsLists',obj=>{
+      let deletedArr = this.deleteLists(obj,this.commentsLists);
+      console.log('deletedArr:',deletedArr);
+      this.commentsLists = deletedArr;
+    })
+  },
+  beforeDestroy () {
+    eventBus.$off('addNewComment')
+    eventBus.$off('changeCommentsLists')
+    eventBus.$off('deleteCommentsLists')
   },
 }
 </script>

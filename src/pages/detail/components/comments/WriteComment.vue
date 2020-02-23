@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 10:53:37
+ * @LastEditTime: 2020-02-23 14:12:20
  -->
 <template>
   <div class="write-wrapper">
@@ -87,7 +87,6 @@ export default {
       const email = this.$refs.email.value;
       const website = this.$refs.website.value;
       const commentContext = this.$refs.commentContext.value;
-      // console.log('replyUser:',replyUser);
       if(this.replyWho.length>0){
         username+=' @'+replyUser.split('@')[0];
       }   
@@ -112,7 +111,7 @@ export default {
             },
             withCredentials : true
           }).then(res=>{
-            if(res){
+            if(res.status==200){
               eventBus.$emit('addNewComment',{
                 username,
                 email,

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 12:01:26
+ * @LastEditTime: 2020-02-23 12:39:25
  -->
 <template>
   <div>
@@ -13,7 +13,7 @@
       <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder" :key="blogId"></Title>
       <Context :blogContent="blogContent"></Context>
       <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
-      <CommentLists class="commentList" @removeReply="removeWrite" :commentsLists='commentsLists' :blogId='blogId'></CommentLists>
+      <CommentLists class="commentList" @removeReply="removeWrite" :blogId='blogId'></CommentLists>
     </div>
   </div>
 </template>
@@ -38,7 +38,6 @@ export default {
   },
   data(){
     return{
-      commentsLists:[],
       blogId:0,
       insertStatus:true,//判断用户有没有点击回复评论，
       blogContent:{},
@@ -65,28 +64,6 @@ export default {
           }
       })
     },
-
-    /**
-     * @description: 得到所有评论数据,开发环境与线上环境
-     * @param {type} 
-     * @return: 
-     * @author: yuhui
-     */
-    getCommentsItem(){
-      this.commentsLists = [];//置空
-      axios.get("/api/blog/getComments",{
-        params:{
-          blogId:this.blogId
-        }
-      }).then(res=>{
-          if(res.status==200&&res.statusText==='OK'){
-            res = res.data;
-            const data = res.data;
-            this.commentsLists = data.reverse();     //博客列表数据
-          }
-      })
-    },
-    
     /**
      * @description: 移除写评论的输入框
      * @param {type} 
@@ -112,19 +89,12 @@ export default {
     this.blogIndOrder= parseInt(this.$route.query.blogInd);
     if(this.blogId>0){
       this.getBlogContent(); //博客内容
-      this.getCommentsItem();//页面挂载的时候就获取评论列表数据
     }
     // console.log('this.blogId:',this.$route.query.id, this.blogId,this.$route.query.blogInd,this.blogIndOrder);
     //当页面没有跳转到首页时，自己主动跳转
     window.addEventListener("hashchange",this.jumpToHome, false);
   },
   mounted(){
-    eventBus.$on('addNewComment',(obj)=>{
-      let arrOld = this.commentsLists.reverse();
-      this.commentsLists = [];
-      arrOld.push(obj);
-      this.commentsLists = arrOld.reverse();
-    })
     //当页面没有跳转到首页时，自己主动跳转
     window.addEventListener("hashchange",this.jumpToHome, false);
   },
