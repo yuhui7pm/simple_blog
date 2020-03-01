@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 23:58:56
+ * @LastEditTime: 2020-03-01 10:06:36
  -->
 <template>
   <div class="wrapper">
@@ -53,6 +53,7 @@ export default {
       &>>>img 
         margin 20px 0 
         max-height 500px 
+        max-width 500px !important
 @media screen and (max-width: 768px) 
   .wrapper
     .context-wrapper 

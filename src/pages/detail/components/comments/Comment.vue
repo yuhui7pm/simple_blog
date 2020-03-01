@@ -4,14 +4,14 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 13:50:57
+ * @LastEditTime: 2020-03-01 10:32:30
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
     <div class="comment" :key="item.createtime">
       <img class='user-icon' :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl" alt="用户头像">
       <div class="comment-right">
-        <div style="float:left;">
+        <div class="comment_context" style="float:left;">
           <div class="top-wrapper">
             <div class="writer">{{item.username}}</div>
             <div class="time" style="">{{timestampToTime(item.createtime)}}</div>
@@ -278,6 +278,7 @@ export default {
       display table-cell
       vertical-align: top;
       height 25px
+      margin-top -2px
       img
         cursor pointer
         width 25px
@@ -300,7 +301,7 @@ export default {
       margin-top 10px
       color #666
       font-size 18px
-      max-width 700px
+      max-width 660px
       line-height 24px
       white-space normal
       font-family Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-serif
@@ -315,6 +316,10 @@ export default {
     .comment-right
       margin 0px 0
       flex 1
+      .comment_context
+        width:calc(100% - 90px)
+        .top-wrapper
+          width 320px
       .context
         margin-top 5px
         color #666
@@ -328,11 +333,11 @@ export default {
       height 50px !important
       margin-right 15px !important
     .comment-right
-      width 200px !important 
+      width 250px !important 
       &>div:first-child
         width 200px !important
       .context
-        width 200px !important
+        width 250px !important
         overflow: hidden;
         text-overflow: ellipsis;
     .top-wrapper
