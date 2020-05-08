@@ -101,7 +101,7 @@ export default {
       color #888
       display inline-block
   .emoji-wrapper
-    width 400px 
+    width 820px 
     opacity 1
     border 1px solid #AEDD81
     box-sizing border-box
@@ -134,8 +134,10 @@ export default {
       font-size 12px !important
       padding 5px !important 
   .emoji-wrapper
-    width 350px !important
+    width auto
     padding 0px !important
+    height 400px
+    overflow-y scroll
     margin 0px 30px 0 0 !important
 @media screen and (max-width: 375px) 
   .emoji-wrapper

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime : 2020-02-10 00:16:10
+ * @LastEditTime: 2020-03-14 00:57:04
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -16,26 +16,33 @@ import App from './app.vue';
 import router from './router/index.js';
 // import common from './assets/common.js'
 
-// 插入 meta 标签
-// var oMeta = document.createElement('meta');
-// oMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0';
-// oMeta.name = 'viewport';
-// document.documentElement.appendChild(oMeta);
+
+let head = document.getElementsByTagName('head')[0];
+
+// 插入 meta 标签：适配
+var oMeta = document.createElement('meta');
+oMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0';
+oMeta.name = 'viewport';
+head.appendChild(oMeta);
+
+// 插入 meta 标签：keywords
+var oMeta2 = document.createElement('meta');
+oMeta2.content = '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站';
+oMeta2.name = 'keywords';
+head.appendChild(oMeta2);
+
+// 插入 meta 标签：description
+var oMeta3 = document.createElement('meta');
+oMeta3.content = '这是一个个人博客分享平台，主要有日常说说，IT技术分享，个人课程录制分享等';
+oMeta3.name = 'description';
+head.appendChild(oMeta3);
 
 //兼容IE
-// var head = document.head || document.getElementsByTagName('head')[0];
-// var oMeta2 = document.createElement('meta');
-// oMeta2.content = "IE=edge,chrome=1";
-// oMeta2.httpEquiv = "X-UA-Compatible";
-// head.appendChild(oMeta2);
+var oMeta4 = document.createElement('meta');
+oMeta4.content = "IE=edge,chrome=1";
+oMeta4.httpEquiv = "X-UA-Compatible";
+head.appendChild(oMeta4);
 
-// Vue.config.productionTip = false
-// fastClick.attach(document.body)
-
-//插入title属性
-// var tit = document.createElement('title');
-// tit.innerHTML = "Xlink Blog";
-// document.documentElement.appendChild(tit);
 
 // 将组件插到html文档中
 const root = document.createElement('div');

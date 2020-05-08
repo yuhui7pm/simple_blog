@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-24 00:00:33
+ * @LastEditTime: 2020-05-08 20:16:27
  -->
 <template>
   <ol>
@@ -18,7 +18,7 @@
     <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
     <!-- <img class="item-left" src="@/assets/images/meinv.jpg" alt="博客列表图片"/> -->
     <div class="item-right">
-      <p class="createTime">No.{{blogsLen-((page-1)*blogsIndex+index)}} | {{timestampToTime(list.createtime)}}</p>
+      <p class="createTime">No.{{blogLists.length - index}} | {{timestampToTime(list.createtime)}}</p>
       <h2 class="article-header">{{list.title}}</h2>
       <p class="introduction">{{list.introduction}}</p>
     </div>
@@ -33,7 +33,6 @@ export default {
   props:{
     blogsLen:Number,
     blogLists:Array,
-    page:Number,
     blogsIndex:Number
   },
   data(){
@@ -62,7 +61,7 @@ export default {
 <style lang="stylus" scoped>
   .item-wrapper:hover
     cursor default
-    box-shadow #eee 0px 0px 7px 5px
+    box-shadow 0px 5px 15px rgba(0,0,0,0.3);
   .item-wrapper
     width 920px /*no*/
     height auto 
@@ -80,11 +79,12 @@ export default {
       height 200px /*no*/
       float left
       border-radius 4px
+      object-fit cover
     .item-right
       float right
       width 580px
       .createTime
-        font-size 12px
+        font-size 13px
         line-height 16px
         text-transform uppercase
         display inline-block

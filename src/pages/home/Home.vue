@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 23:52:47
+ * @LastEditTime: 2020-05-08 20:14:12
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -16,16 +16,16 @@
       <Item 
         class="blog-lists"
         :blogsLen="blogsNum"
-        :blogLists="blogsListsFilter"
-        :page="page"
+        :blogLists="blogsLists"
         :blogsIndex="blogsIndex"
       ></Item>
-      <PagePagination
+      <!-- <PagePagination
         :maxPage="maxPage"
         :pageDefault="pageDefault"
         @updatePage="change"
-      ></PagePagination>
+      ></PagePagination> -->
     </div>
+    <Bottom/>
   </div>
 </template>
 
@@ -33,9 +33,10 @@
 import axios from 'axios'; 
 import Header from '../header/BlogHeader.vue';
 import Cover from './components/Cover.vue';
-import Item from './components/Item.vue'
-import PagePagination from './components/PageNumber.vue'
-import SideBar from '../sideBar/SideBar.vue'
+import Item from './components/Item.vue';
+import PagePagination from './components/PageNumber.vue';
+import SideBar from '../sideBar/SideBar.vue';
+import Bottom from './components/Bottom.vue'
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -44,6 +45,7 @@ export default {
     Cover,
     Item,
     PagePagination,
+    Bottom
     // SidebarButton
   },
   data(){
@@ -158,11 +160,11 @@ export default {
      * @return: 每一页博客列表的数据
      * @author: yuhui
      */
-    blogsListsFilter:function(){
-     return this.blogsLists.filter((value,index)=>{
-        return ((this.page-1)*this.blogsIndex<=index)&&(this.page*this.blogsIndex>index)
-      })
-    }
+    // blogsListsFilter:function(){
+    //  return this.blogsLists.filter((value,index)=>{
+    //     return ((this.page-1)*this.blogsIndex<=index)&&(this.page*this.blogsIndex>index)
+    //   })
+    // }
   }
 }
 </script>
@@ -191,7 +193,7 @@ export default {
     width 100%
     transition-duration 0.8s
   .blogItemWrapper
-    margin-top:80px;
+    margin-top:60px;
 @media screen and (max-width:768px)
   .blogItemWrapper
     margin-top:20px;

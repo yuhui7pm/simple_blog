@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 23:22:52
+ * @LastEditTime: 2020-03-14 00:30:51
  -->
 <template>
   <div class="write-wrapper">
@@ -232,7 +232,7 @@ export default {
      * @author: yuhui
      */
     randomPic(){
-      let num = Math.ceil(Math.random()*11);
+      let num = Math.ceil(Math.random()*34);
       let name = num + '.jpg';
       this.picName = name;
       return name;

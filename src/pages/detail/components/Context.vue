@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-03-01 10:06:36
+ * @LastEditTime: 2020-03-14 00:51:59
  -->
 <template>
   <div class="wrapper">
@@ -48,8 +48,6 @@ export default {
       font-size: 16px;
       line-height: 30px;
       box-sizing border-box
-      &>>>p
-        margin 15px 0
       &>>>img 
         margin 20px 0 
         max-height 500px 
@@ -62,8 +60,6 @@ export default {
         width 100% !important
         padding 20px 20px 20px !important
         line-height 24px !important
-        &>>>p
-          margin 15px 0
         &>>>img 
           margin 20px 0
           max-height auto 
