@@ -4,11 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-08 18:49:53
+ * @LastEditTime: 2020-05-09 16:02:21
  -->
 <template>
   <div class="cover" ref="cover">
-    <div class="cover-pic">
+    <div :class="[flag?'fadein':'','cover-pic']">
       <img src="../../../assets/images/header_illustration.png" alt="人物图片">
     </div>
     <!-- <div class="contact-me">
@@ -24,10 +24,12 @@ export default {
   data(){
     return{
       hei:0,
+      flag:false
     }
   },
   mounted(){
-     eventBus.$emit('getCoverHei',this.$refs.cover.offsetHeight);//兄弟组件间传值,传递顶部的高度
+    this.flag = true;
+    eventBus.$emit('getCoverHei',this.$refs.cover.offsetHeight);//兄弟组件间传值,传递顶部的高度
   }
 }
 </script>
@@ -40,14 +42,14 @@ export default {
       background url('../../../assets/images/bg_dot.png') repeat
       background-size contain
       height 540px
+      opacity 0
       img
         width 1080px
         height 100%
-    // .contact-me
-    //   text-align center
-    //   img 
-    //     width 40px
-    //     height 40px
+    .fadein
+      opacity 1
+      transition opacity 4s ease
+
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     .cover-pic

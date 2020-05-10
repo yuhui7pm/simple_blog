@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-03-14 00:57:04
+ * @LastEditTime: 2020-05-09 16:45:33
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -14,6 +14,7 @@ promise.polyfill();
 import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js';
+import 'animate.css'; //wow动画库
 // import common from './assets/common.js'
 
 

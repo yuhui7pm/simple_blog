@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
  * @LastEditors: yuhui
- * @LastEditTime: 2020-03-14 00:52:25
+ * @LastEditTime: 2020-05-09 19:41:59
  -->
 <template>
   <div class="blogTitle">
@@ -61,7 +61,7 @@ export default {
       width 240px
       height 240px
       float left
-      margin-bottom 30px
+      margin-bottom 40px
       object-fit cover
     .right-wrapper
       width calc(100% - 240px -40px)

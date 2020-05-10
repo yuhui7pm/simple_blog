@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-03-14 00:51:59
+ * @LastEditTime: 2020-05-09 19:26:55
  -->
 <template>
   <div class="wrapper">
@@ -36,15 +36,19 @@ export default {
 
 <style lang="stylus" scoped>
 .wrapper
+  width 100%
+  background white
   .context-wrapper
-    width 100%
     min-height 30px
-    background white
-    border-radius 6px
+    // border-radius 6px
     color #3d3634;
+    margin 0 100px
+    border 1px dashed #ccc
+    border-left none 
+    border-right none
     .context
       width: 100%;
-      padding: 20px 100px 10px;
+      padding: 30px 0px;
       font-size: 16px;
       line-height: 30px;
       box-sizing border-box

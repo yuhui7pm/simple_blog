@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-08 20:14:12
+ * @LastEditTime: 2020-05-09 19:17:09
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -18,6 +18,7 @@
         :blogsLen="blogsNum"
         :blogLists="blogsLists"
         :blogsIndex="blogsIndex"
+        :blockIndex="blockIndex"
       ></Item>
       <!-- <PagePagination
         :maxPage="maxPage"
@@ -25,7 +26,7 @@
         @updatePage="change"
       ></PagePagination> -->
     </div>
-    <Bottom/>
+    <Bottom :toBottom="toBottom"/>
   </div>
 </template>
 
@@ -58,6 +59,10 @@ export default {
       pageDefault:1,//默认博客页码
       sideBarDisplay:false,//sideBar的显示与隐藏
       timer:null,//用于节流函数
+      scrollEvent:null, //监听事件
+      toBottom:false, //判断是否滚动到页面底部
+      toTopEvent:null, //判断距离页面顶部的监听事件
+      blockIndex:0, 
     }
   },
   methods:{
@@ -147,10 +152,86 @@ export default {
       }else{
         this.sideBarDisplay = false;
       }
+    },
+
+    //判断是否滚动到底部
+    judgeToBottom(){
+      let gap = this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
+      if (gap > - 80) {
+        this.toBottom = true;
+        window.removeEventListener("scroll",this.scrollEvent,true);
+
+        this.blockIndex = 1000; //假如一开始就是位于底部，给一个默认值，加载所有列表项
+        window.removeEventListener("scroll",this.toTopEvent,true);
+      }  
+    },
+
+    //判断距离顶部的高度，以此控制item块的淡入
+    judgeScrollHei(){
+      const coverHei = 700; //距离顶部图片的高度
+      const item = 351; //一个div块的高度加margin
+      let toCoverTop = this.getScrollTop() + this.getWindowHeight() - coverHei;
+
+      let itemIndex = Math.ceil(toCoverTop/item); //大概估算滑动到了第几个滑块那里
+      let index = itemIndex;
+      this.blockIndex = index;
+      console.log('index:===',index);
+    },
+
+    // 滚动条在Y轴上的滚动距离
+    getScrollTop() {　　
+        var scrollTop = 0,
+            bodyScrollTop = 0,
+            documentScrollTop = 0;　　
+        if (document.body) {　　　　
+            bodyScrollTop = document.body.scrollTop;　　
+        }　　
+        if (document.documentElement) {　　　　
+            documentScrollTop = document.documentElement.scrollTop;　　
+        }　　
+        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;　　
+        return scrollTop;
+    },
+
+    // 获取文档的总高度
+    getScrollHeight() {　　
+      var scrollHeight = 0,
+          bodyScrollHeight = 0,
+          documentScrollHeight = 0;　　
+      if (document.body) {　　　　
+          bodyScrollHeight = document.body.scrollHeight;　　
+      }　　
+      if (document.documentElement) {　　　　
+          documentScrollHeight = document.documentElement.scrollHeight;　　
+      }　　
+      scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;　　
+      return scrollHeight;
+    },
+
+    // 获取浏览器视口的高度
+    getWindowHeight() {　　
+      var windowHeight = 0;　　
+      if (document.compatMode == "CSS1Compat") {　　　　
+          windowHeight = document.documentElement.clientHeight;　　
+      } else {　　　　
+          windowHeight = document.body.clientHeight;　　
+      }　　
+      return windowHeight;
     }
   },
   mounted(){
     this.getBlogItem();//页面挂载的时候就获取博客列表数据
+
+    this.scrollEvent = this.judgeToBottom
+    window.addEventListener('scroll',this.scrollEvent,true);
+
+    this.toTopEvent = this.judgeScrollHei;
+    window.addEventListener('scroll',this.toTopEvent,true);
+  },
+
+  destroyed(){
+    this.blockIndex = 0;
+    // window.removeEventListener("scroll",this.toTopEvent,true);
   },
   computed:{
 
@@ -173,6 +254,7 @@ export default {
 .blogItemWrapper
     margin-top:30px;
     margin-bottom:90px;
+    min-height 500px;
 @media screen and (min-width: 950px) 
   .sidebar
     opacity 0

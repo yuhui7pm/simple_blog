@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-05-08 18:51:26
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-08 20:12:52
+ * @LastEditTime: 2020-05-09 19:09:03
  -->
 
 <template>
@@ -23,9 +23,6 @@ export default {
   props:{
     toastText: String,
     toastFlag:Boolean
-  },
-  updated(){
-    console.log('toastFlag====', this.toastFlag)
   }
 }
 </script>
@@ -35,8 +32,9 @@ export default {
       opacity: 1;
       position: fixed;
       z-index: 2000;
-      left: 40%;
-      bottom: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 320px;
       transition:all 2s;
       /* -webkit-transform: translateX(-50%) translateY(-50%);
           -moz-transform: translateX(-50%) translateY(-50%);

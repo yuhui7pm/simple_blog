@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-03-14 00:30:51
+ * @LastEditTime: 2020-05-09 19:29:56
  -->
 <template>
   <div class="write-wrapper">
@@ -249,7 +249,7 @@ export default {
   .write-wrapper
     box-sizing border-box
     background white
-    padding 50px 100px 0
+    padding 40px 100px 0
     border-top-left-radius 6px
     border-top-right-radius 6px
     .show-speech

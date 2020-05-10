@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 23:24:49
+ * @LastEditTime: 2020-05-09 16:51:40
  -->
 <template>
   <div class="comments-wrapper">
@@ -160,7 +160,6 @@ export default {
     })
     eventBus.$on('deleteCommentsLists',obj=>{
       let deletedArr = this.deleteLists(obj,this.commentsLists);
-      console.log('deletedArr:',deletedArr);
       this.commentsLists = deletedArr;
     })
   },

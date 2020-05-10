@@ -4,12 +4,12 @@
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-08 20:21:59
+ * @LastEditTime: 2020-05-09 19:49:28
  -->
 <template>
   <div class="bottomWrapper">
     <toast :toastText="toastText" :toastFlag="toastFlag"></toast>
-    <div class="bottomCenter">
+    <div :class="[toBottom?'bottomFadeIn':'','bottomCenter']">
       <div style="float:left">
         <div ref="webRuntime">
           网站运行了 天 小时 分 秒
@@ -28,7 +28,7 @@
           粤ICP备20013624号
         </div>
       </div>
-      <div style="float:right;text-align:left">
+      <div class="friendLink" style="float:right;text-align:left">
           <div>友情链接:</div>
           <div>
             <a href="http://javawebs.cn/?FbmNv=5eb5332a69584bd0" target="blank">贺显东的个人博客</a>
@@ -59,6 +59,9 @@ export default {
       toastFlag:false,
       toastText:''
     }
+  },
+  props:{
+    toBottom:Boolean
   },
   methods:{
 
@@ -99,8 +102,6 @@ export default {
      const visited = "yuhui7pm";
      let dateNow = Date.now();
      let getVisited = this.getCache(visited);
-
-      console.log('getVisited：------------',getVisited);
 
      // 缓存中没有，我就加1
      if(getVisited == null){
@@ -248,7 +249,7 @@ export default {
     overflow hidden
     position relative
     .bottomCenter
-      padding-top 60px 
+      padding-top 200px 
       width 920px /*no*/
       margin 0 auto
       overflow hidden
@@ -265,8 +266,6 @@ export default {
             color red
       &>div:first-child
         width 40%
-        // box-sizing border-box
-        // border-right 1px dashed #ddd
       &>div:last-child
         width 60%
         a
@@ -275,5 +274,31 @@ export default {
             text-decoration underline 
             cursor pointer
             color red
-        
+    .bottomFadeIn
+      animation bottomFade 1s ease-out forwards
+      @keyframes bottomFade {
+        0%{
+          opacity 0.2
+        }
+        100%{
+          opacity 1
+          transform translateY(-140px)
+        }
+      }
+
+  @media screen and (max-width: 375px) 
+    .friendLink
+      display none
+    .bottomWrapper
+      height 200px
+      width 100%
+      overflow hidden
+      .bottomCenter
+        padding 10px
+        height 200px
+        width 100%
+        box-sizing border-box
+        overflow hidden
+        div
+          height 100%
 </style>

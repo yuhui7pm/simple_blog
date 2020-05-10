@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-08 20:16:27
+ * @LastEditTime: 2020-05-09 19:07:55
  -->
 <template>
   <ol>
@@ -12,15 +12,19 @@
       tag="li"
       v-for="(list,index) of blogLists"
       :key="list.id"
-      class="item-wrapper"
+      :style="(blockIndex>index)?'background:white':''"
+      :class="[(blockIndex>index)&&(index>0)?'animate__fadeInUp animate__slower':'',
+        index===0?'animate__fadeInUp animate__slower':'','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     >
-    <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
-    <!-- <img class="item-left" src="@/assets/images/meinv.jpg" alt="博客列表图片"/> -->
-    <div class="item-right">
-      <p class="createTime">No.{{blogLists.length - index}} | {{timestampToTime(list.createtime)}}</p>
-      <h2 class="article-header">{{list.title}}</h2>
-      <p class="introduction">{{list.introduction}}</p>
+    <div v-if="blockIndex>index || index==0">
+      <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
+      <!-- <img class="item-left" src="@/assets/images/meinv.jpg" alt="博客列表图片"/> -->
+      <div class="item-right">
+        <p class="createTime">No.{{blogLists.length - index}} | {{timestampToTime(list.createtime)}}</p>
+        <h2 class="article-header">{{list.title}}</h2>
+        <p class="introduction">{{list.introduction}}</p>
+      </div>
     </div>
     </router-link>
   </ol>
@@ -28,12 +32,16 @@
 
 <script>
 
+import { WOW } from 'wowjs';
+import 'animate.css';
+
 export default {
   name:'items',
   props:{
     blogsLen:Number,
     blogLists:Array,
-    blogsIndex:Number
+    blogsIndex:Number,
+    blockIndex:Number
   },
   data(){
     return{
@@ -54,6 +62,17 @@ export default {
     }
   },
   mounted(){
+    // 在项目加载完成之后初始化wow
+    // this.$nextTick(() => {
+
+    // });
+
+    let wow = new WOW({
+      offset: 100,
+      mobile: true,
+      live:false
+    })
+    wow.init();
   }
 }
 </script>
@@ -62,10 +81,10 @@ export default {
   .item-wrapper:hover
     cursor default
     box-shadow 0px 5px 15px rgba(0,0,0,0.3);
+  // .blockItemHide
   .item-wrapper
     width 920px /*no*/
     height auto 
-    background white
     border-radius 8px
     padding 45px
     margin 0 auto 25px
