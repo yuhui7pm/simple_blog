@@ -1,12 +1,29 @@
 <template>
   <div class="wrapper">
    <div class="shaky-wrapper">
-     <span class="shaky" @click="getEmojiItem()">（○｀ 3′○）</span>
+     <span @click="getEmojiItem()"><img src="../../../../assets/icons/emoji.svg" width="30" height="30"></span>
    </div>
    <div class="emoji-wrapper" v-show="isShow" ref="emojiWrapper">
+     <div class="emoji-classification">
+       <span class="emojiTitle" @click="emojiFlag=true" :style="emojiFlag?'color:red':''">emoji表情</span>
+       <span class="emojiTitle" @click="emojiFlag=false" :style="!emojiFlag?'color:red':''">颜表情</span>
+     </div>
+      <!-- 颜表情 -->
       <span 
+        v-show="!emojiFlag"
         class="shaky shakyInner"
         v-for="value of emojiLists"
+        :key="value.id"
+        @click.stop="writeEmoji(value.font)"
+        @touchmove.prevent
+      >
+        {{value.font}}
+      </span>
+      <!-- emoji表情 -->
+      <span 
+        v-show="emojiFlag"
+        class="shaky shakyInner"
+        v-for="value of qqEmojiLists"
         :key="value.id"
         @click.stop="writeEmoji(value.font)"
         @touchmove.prevent
@@ -25,7 +42,9 @@ export default {
   name:'shaky',
   data(){
     return{
-      emojiLists:[],//表情包列表数据
+      emojiLists:[],//颜表情列表数据
+      qqEmojiLists:[],//qq表情包
+      emojiFlag:true,
       status:false,//表情选项框的显示与隐藏
       isShow:false,
     }
@@ -38,9 +57,10 @@ export default {
      * @return: 
      * @author: yuhui
      */
-    getEmojiItem(event){
+    getEmojiItem(){
       const data = EmojiUrl.data;
       this.emojiLists = data.emojiLists; 
+      this.qqEmojiLists = data.emojiPic;
       this.isShow = true;
     },
     
@@ -52,8 +72,10 @@ export default {
      */
     emojiDisplay(e){
       let _this = this;
-      // console.log(e.target.className,this.isShow);
-      if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")&&this.isShow!==true){
+      if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")
+        &&this.isShow!==true){
+        this.isShow=true;
+      }else if(e.target.className=="emojiTitle"){
         this.isShow=true;
       }else{
         _this.isShow=false;
@@ -86,14 +108,14 @@ export default {
 @import url('../../../../assets/styles/shaky.css');
   .shaky-wrapper
     display inline-block
-    height 30px
-    line-height 30px
+    height 32px
+    line-height 32px
     width 100px
-    border 1px solid #AEDD81
+    // border 1px solid #AEDD81
     box-sizing border-box
     overflow hidden
-    text-align center
-    background #fafafa
+    text-align left
+    // background #fafafa
     cursor pointer
     border-radius 2px
     .shaky
@@ -112,6 +134,19 @@ export default {
     position absolute
     z-index 10
     background #f7f7f7
+    .emoji-classification
+      width calc(100% - 24px)
+      margin 0px auto
+      padding 0px 0 10px
+      border-bottom 1px solid #ddd
+      span
+        text-align left
+        width 100px
+        display inline-block
+        font-weight bold
+        &:hover
+          cursor pointer
+          color red
     .shakyInner
       font-size 14px
       background #f1f1f1 

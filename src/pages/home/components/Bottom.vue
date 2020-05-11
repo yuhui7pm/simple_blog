@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:49:28
+ * @LastEditTime: 2020-05-11 16:07:52
  -->
 <template>
   <div class="bottomWrapper">
@@ -249,7 +249,9 @@ export default {
     overflow hidden
     position relative
     .bottomCenter
-      padding-top 200px 
+      // padding-top 200px
+      opacity 0
+      padding-top 40px
       width 920px /*no*/
       margin 0 auto
       overflow hidden
@@ -257,8 +259,7 @@ export default {
       line-height 40px
       .contactMe
         a
-          &:first-child
-            color white
+          color white
           &:hover
             text-decoration underline
             cursor pointer
@@ -275,14 +276,15 @@ export default {
             cursor pointer
             color red
     .bottomFadeIn
-      animation bottomFade 1s ease-out forwards
+      animation bottomFade 1s ease-in forwards
+      animation-delay 0.3s
       @keyframes bottomFade {
         0%{
-          opacity 0.2
+          opacity 0
         }
         100%{
           opacity 1
-          transform translateY(-140px)
+          // transform translateY(-140px)
         }
       }
 

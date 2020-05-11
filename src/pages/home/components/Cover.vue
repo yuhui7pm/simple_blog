@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 16:02:21
+ * @LastEditTime: 2020-05-10 13:43:36
  -->
 <template>
   <div class="cover" ref="cover">
@@ -48,7 +48,7 @@ export default {
         height 100%
     .fadein
       opacity 1
-      transition opacity 4s ease
+      transition opacity 3s ease
 
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 

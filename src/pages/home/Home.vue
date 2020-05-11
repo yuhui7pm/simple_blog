@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:17:09
+ * @LastEditTime: 2020-05-11 16:06:43
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -12,7 +12,7 @@
     <!-- <SideBar :class="[sideBarDisplay?'toggleSideBar':'sidebar']" ref="sideBar"></SideBar> -->
     <Header/>
     <Cover class="cover-pic"/>
-    <div :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
+    <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
       <Item 
         class="blog-lists"
         :blogsLen="blogsNum"
@@ -89,6 +89,10 @@ export default {
             this.blogsNum = data.length;//获取博客列表数据的总长度
             this.blogsLists = data;     //湖片区博客列表数据
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+
+            // 动态设置博客列表的高度
+            console.log('+++', this.blogsLists.length * 330);
+            this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (330-25)}px`;
           }
       }).catch(err => {
           console.log('err:',err)
@@ -254,7 +258,7 @@ export default {
 .blogItemWrapper
     margin-top:30px;
     margin-bottom:90px;
-    min-height 500px;
+    height 100%;
 @media screen and (min-width: 950px) 
   .sidebar
     opacity 0

@@ -4,11 +4,10 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 22:54:33
+ * @LastEditTime: 2020-05-11 17:08:58
  -->
 <template>
   <div>
-    <!-- <Header></Header> -->
     <div class="single-episode-wrapper" :key="blogId">
       <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder" :key="blogId"></Title>
       <Context :blogContent="blogContent"></Context>
@@ -108,6 +107,16 @@ export default {
   .single-episode-wrapper
     width 1020px
     margin 80px auto 140px
+    box-shadow: 0px 0px 4px 1px #eeeeee;
+    animation:fadein 1s ease
+    @keyframes fadein{
+      0%{
+        opacity: 0;
+      }
+      100%{
+        opacity: 1;
+      }
+    }
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     header

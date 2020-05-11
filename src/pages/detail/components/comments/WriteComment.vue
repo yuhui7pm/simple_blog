@@ -4,19 +4,25 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:29:56
+ * @LastEditTime: 2020-05-10 17:02:58
  -->
 <template>
   <div class="write-wrapper">
    <!-- <p class="show-speech"></p> -->
-   <div class="input-wrapper">
-      <input placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/>
-      <input placeholder="电子邮件(选填保密)" @input="clearError" @blur="validateEmail" ref="email" :style="emailFlag?'':'border-color:red'"/>
-      <input placeholder="网站(选填保密,以http/https开头)" @input="clearError" @blur="validateWeb" ref="website" :style="websiteFlag?'':'border-color:red'"/>
-   </div>
+   <!-- <div class="input-wrapper"> -->
+      <!-- <input placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/> -->
+      <!-- <input placeholder="电子邮件(选填保密)" @input="clearError" @blur="validateEmail" ref="email" :style="emailFlag?'':'border-color:red'"/>
+      <input placeholder="网站(选填保密,以http/https开头)" @input="clearError" @blur="validateWeb" ref="website" :style="websiteFlag?'':'border-color:red'"/> -->
+   <!-- </div> -->
     <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext" :style="commentFlag?'':'border-color:red'"></textarea>
     <div class="but-wrapper">
-      <button @click="submitComments">发表</button>
+      <button @click="submitComments">
+        <img src="../../../../assets/icons/submit.svg" width="30" height="30"/>
+      </button>
+      <div class="writer-wrapper">
+        <div class="writer-icon"></div>
+        <input class="username" placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/>
+      </div>
       <Shaky></Shaky>
     </div>
   </div>
@@ -271,22 +277,22 @@ export default {
         text-align: center;
   .input-wrapper
     width 100%
-    height 60px
+    height 50px
     display flex
     color #ccc
-    input 
-      padding 15px
-      flex 1
-      margin-left 10px
-      // border 1px solid #5fbf5e
-      border 1px solid #AEDD81
-      margin-bottom 10px
-      box-sizing border-box
-      color #666
-    input::placeholder
-      color #666
-    input:first-child
-      margin-left 0px
+    // input 
+    //   padding 15px
+    //   flex 1
+    //   margin-left 10px
+    //   // border 1px solid #5fbf5e
+    //   border 1px solid #AEDD81
+    //   margin-bottom 10px
+    //   box-sizing border-box
+    //   color #666
+    // input::placeholder
+    //   color #666
+    // input:first-child
+    //   margin-left 0px
   textarea
     width 100%
     height 300px
@@ -294,7 +300,8 @@ export default {
     box-sizing border-box
     resize none
     // border 1px solid #5fbf5e
-    border 1px solid #AEDD81
+    border 1px solid #aaa
+    border-radius 10px
     box-sizing border-box
     color #666
     scrollbar-width: none; /* Firefox */
@@ -306,13 +313,51 @@ export default {
   .but-wrapper
     margin-top 20px
     overflow hidden
+    .writer-wrapper
+      height 30px
+      width 200px
+      float right
+      overflow hidden
+      margin-right 20px
+      .writer-icon
+        width 30px
+        height 30px
+        background-color green
+        background url("../../../../assets/icons/writer.svg");
+        background-size contain
+        background-repeat no-repeat
+        float left
+      input 
+        // width 200px
+        // display inline-block
+        float right
+        // padding 5px
+        // margin-right 20px
+        // flex 1
+        // margin-left 10px
+        // margin-top 15px
+        // border 1px solid #5fbf5e
+        border-bottom 1px solid #555
+        height 100%
+        width calc(100% - 40px)
+        padding-left 5px
+        // border-bottom 1px solid #ddd
+        // margin-bottom 10px
+        box-sizing border-box
+        // line-height 56px
+        color #555
+      input::placeholder
+        color #666
+      input:first-child
+        margin-left 0px
     button
       float right
       color #888
       width 60px
-      height 30px
-      border 1px solid #AEDD81
+      height 32px
+      // border 1px solid #AEDD81
       cursor pointer
+      // text-align right
   @media screen and (max-width: 768px) 
     .write-wrapper
       padding 0px 20px
