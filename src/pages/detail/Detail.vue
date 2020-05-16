@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 14:46:47
+ * @LastEditTime: 2020-05-17 00:34:13
  -->
 <template>
   <div>
@@ -27,7 +27,6 @@ import Context from './components/Context.vue';
 import WriteComment from './components/comments/WriteComment.vue';
 import CommentLists from './components/comments/CommentLists.vue';
 import { eventBus } from '@/assets/bus';
-// import router from '@/router/index.js'
 export default {
   name: 'Detail', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -84,6 +83,22 @@ export default {
       this.$router.push({path:'/'});
     }
   },
+
+  /**
+   * @description: 异步更新页面的title和meta属性
+   * @param {type} 
+   * @return: title {String}, meta {String}
+   * @author: yuhui
+   */
+  metaInfo () {
+    return {
+      title: 'Xlink Blog|' + this.blogContent.title,
+      meta: [
+        { vmid: 'keywords', name: 'keywords', content: 
+          '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,Xlink Blog,个人Blog' + this.blogContent.title }
+      ]
+    }
+  },
   activated(){
     this.insertStatus = true;
     this.blogId= parseInt(this.$route.query.id);
@@ -91,7 +106,6 @@ export default {
     if(this.blogId>0){
       this.getBlogContent(); //博客内容
     }
-    // console.log('this.blogId:',this.$route.query.id, this.blogId,this.$route.query.blogInd,this.blogIndOrder);
     //当页面没有跳转到首页时，自己主动跳转
     window.addEventListener("hashchange",this.jumpToHome, false);
   },

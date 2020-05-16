@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:41:59
+ * @LastEditTime: 2020-05-17 00:34:35
  -->
 <template>
   <div class="blogTitle">
@@ -12,9 +12,6 @@
     <div class="right-wrapper">
       <div class="title-tag">{{`NO.${blogIndOrder} | ${timestampToTime(blogContent.createtime)}`}}</div>
       <h1>{{blogContent.title}}</h1>
-      <!-- <audio controls loop="loop" preload="auto">
-        <source :src="blogContent.musicurl" type="audio/mpeg">
-      </audio> -->
       <audio :src="blogContent.musicurl" controls="controls" preload ref="audioMusic"></audio>
     </div>
   </div>  

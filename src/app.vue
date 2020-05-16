@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 页面总的组件
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 01:11:54
+ * @LastEditTime: 2020-05-17 00:02:12
  -->
 <template>
   <div id="app">
@@ -22,14 +22,6 @@ export default {
   data(){
     return{
     }
-  },
-  methods: {
-  },
-  mounted(){
-        // history.pushState(null, null, document.URL);
-        // window.addEventListener('popstate', function () {
-        //     history.pushState(null, null, document.URL);
-        // });
   }
 }
 </script>

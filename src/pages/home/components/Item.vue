@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 首页博客的列表项组件
+ * @Descripttion: 首页博客的列表项item组件
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 13:20:10
+ * @LastEditTime: 2020-05-17 00:23:24
  -->
 <template>
   <ol>
@@ -19,7 +19,6 @@
     >
     <div v-if="blockIndex>index || index==0">
       <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
-      <!-- <img class="item-left" src="@/assets/images/meinv.jpg" alt="博客列表图片"/> -->
       <div class="item-right">
         <p class="createTime">No.{{blogLists.length - index}} | {{timestampToTime(list.createtime)}}</p>
         <h2 class="article-header">{{list.title}}</h2>
@@ -45,12 +44,16 @@ export default {
   },
   data(){
     return{
-
     }
   },
   methods:{
+    /**
+     * @description: 根据时间戳得到格式化之后的时间
+     * @param timestamp {Number} 
+     * @return: timeFormated {String} 格式化后的时间
+     * @author: yuhui
+     */
     timestampToTime(timestamp) {
-      // console.log('timestamp:',timestamp);
       let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear();
       let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
@@ -58,15 +61,12 @@ export default {
       let h = date.getHours() +':';
       let m = date.getMinutes() +':';
       let s = date.getSeconds();
-      return (Y + '-' + M + '-' + D);//时分秒可以根据自己的需求加上
+      let timeFormated = (Y + '-' + M + '-' + D); 
+      return timeFormated;//时分秒可以根据自己的需求加上
     }
   },
   mounted(){
     // 在项目加载完成之后初始化wow
-    // this.$nextTick(() => {
-
-    // });
-
     let wow = new WOW({
       offset: 100,
       mobile: true,
@@ -81,7 +81,6 @@ export default {
   .item-wrapper:hover
     cursor default
     box-shadow 0px 5px 15px rgba(0,0,0,0.3);
-  // .blockItemHide
   .item-wrapper
     width 920px /*no*/
     height auto 

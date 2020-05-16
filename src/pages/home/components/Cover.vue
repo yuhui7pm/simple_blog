@@ -4,17 +4,13 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-10 13:43:36
+ * @LastEditTime: 2020-05-17 00:23:48
  -->
 <template>
   <div class="cover" ref="cover">
     <div :class="[flag?'fadein':'','cover-pic']">
       <img src="../../../assets/images/header_illustration.png" alt="人物图片">
     </div>
-    <!-- <div class="contact-me">
-      <a href="https://github.com/yuhui7pm" target="_blank"><img src="../../../assets/icons/git_new.svg" alt="通过github联系作者"/></a>
-      <a href="https://blog.csdn.net/qq_40511157" target="_blank"><img src="../../../assets/icons/blog.svg" alt="通过csdn联系作者"/></a>
-    </div> -->
   </div>
 </template>
 

@@ -4,14 +4,16 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-02-23 10:04:11
+ * @LastEditTime: 2020-05-16 23:41:41
  */
 // import 'babel-polyfill';
 import Vue from 'vue';
 import Router from 'vue-router';
+import Meta from 'vue-meta'
 
 //通过全局方法 Vue.use() 使用插件。
 Vue.use(Router);
+Vue.use(Meta);
 
 // 解决报错问题
 // NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated", message: "Navigating to current location ("/index") is not allowed", stack: "Error↵ at new NavigationDuplicated

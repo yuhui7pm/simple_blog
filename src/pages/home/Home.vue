@@ -1,15 +1,53 @@
 <!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-17 00:20:34
+--> 
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-17 00:11:15
+--> 
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-17 00:11:15
+--> 
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-17 00:11:00
+--> 
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2019-12-12 14:59:53
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-17 00:10:57
+--> 
+<!--
  * @Descripttion: 博客首页
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 13:28:10
+ * @LastEditTime: 2020-05-17 00:07:07
  -->
 <template>
-  <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
   <div class="home-wrapper">
-    <!-- <SideBar :class="[sideBarDisplay?'toggleSideBar':'sidebar']" ref="sideBar"></SideBar> -->
     <Header/>
     <Cover class="cover-pic"/>
     <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
@@ -20,11 +58,6 @@
         :blogsIndex="blogsIndex"
         :blockIndex="blockIndex"
       ></Item>
-      <!-- <PagePagination
-        :maxPage="maxPage"
-        :pageDefault="pageDefault"
-        @updatePage="change"
-      ></PagePagination> -->
     </div>
     <Bottom :toBottom="toBottom"/>
   </div>
@@ -35,19 +68,14 @@ import axios from 'axios';
 import Header from '../header/BlogHeader.vue';
 import Cover from './components/Cover.vue';
 import Item from './components/Item.vue';
-import PagePagination from './components/PageNumber.vue';
-import SideBar from '../sideBar/SideBar.vue';
 import Bottom from './components/Bottom.vue'
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
-    SideBar,
     Header,
     Cover,
     Item,
-    PagePagination,
     Bottom
-    // SidebarButton
   },
   data(){
     return{
@@ -91,25 +119,11 @@ export default {
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
 
             // 动态设置博客列表的高度
-            console.log('+++', this.blogsLists.length * 330);
             this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25)}px`;
           }
       }).catch(err => {
           console.log('err:',err)
       })
-    },
- 
-    /**
-     * @description: 改变页码
-     * @param {type} 
-     * @return: 
-     * @author: yuhui
-     */
-    change(pages){
-      if(pages!==this.page){
-        this.page=pages;
-        this.pageDefault = pages;
-      }
     },
 
     /**
@@ -138,27 +152,13 @@ export default {
             }
         };
     },
-
+    
     /**
-     * @description: 鼠标滑到屏幕左边，侧边栏显示出来
-     * @param {Object} 鼠标移动所在的Dom节点
+     * @description: 判断是否滚动到底部，以此控制底部栏文字的淡入
+     * @param {type} 
      * @return: 
      * @author: yuhui
      */
-    move(event){
-      if(this.timer){
-        clearTimeout(this.timer)
-      }
-      let x = event.clientX // 获取x 坐标
-      let scrolltop = document.body.scrollTop||document.documentElement.scrollTop;
-      if(x<350&&scrolltop>400){
-        this.sideBarDisplay = true;
-      }else{
-        this.sideBarDisplay = false;
-      }
-    },
-
-    //判断是否滚动到底部
     judgeToBottom(){
       let gap = this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
       if (gap > - 80) {
@@ -170,7 +170,12 @@ export default {
       }  
     },
 
-    //判断距离顶部的高度，以此控制item块的淡入
+    /**
+     * @description: 判断距离顶部的高度，以此控制item块的淡入
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     judgeScrollHei(){
       const coverHei = 700; //距离顶部图片的高度
       const item = 351; //一个div块的高度加margin
@@ -179,12 +184,16 @@ export default {
       let itemIndex = Math.ceil(toCoverTop/item); //大概估算滑动到了第几个滑块那里
       let index = itemIndex;
       this.blockIndex = index;
-      console.log('index:===',index);
     },
-
-    // 滚动条在Y轴上的滚动距离
+    
+    /**
+     * @description: 滚动条在Y轴上的滚动距离
+     * @param {type} 
+     * @return: scrollTop {Number} 滚动的高度
+     * @author: yuhui
+     */
     getScrollTop() {　　
-        var scrollTop = 0,
+        let scrollTop = 0,
             bodyScrollTop = 0,
             documentScrollTop = 0;　　
         if (document.body) {　　　　
@@ -197,7 +206,12 @@ export default {
         return scrollTop;
     },
 
-    // 获取文档的总高度
+    /**
+     * @description: 获取文档的总高度
+     * @param {type} 
+     * @return: scrollHeight {Number} 滚动的高度
+     * @author: yuhui
+     */
     getScrollHeight() {　　
       var scrollHeight = 0,
           bodyScrollHeight = 0,
@@ -212,7 +226,12 @@ export default {
       return scrollHeight;
     },
 
-    // 获取浏览器视口的高度
+    /**
+     * @description: 获取浏览器视口的高度
+     * @param {type} 
+     * @return: windowHeight {Number} 屏幕的高度
+     * @author: yuhui
+     */
     getWindowHeight() {　　
       var windowHeight = 0;　　
       if (document.compatMode == "CSS1Compat") {　　　　
@@ -232,24 +251,19 @@ export default {
     this.toTopEvent = this.judgeScrollHei;
     window.addEventListener('scroll',this.toTopEvent,true);
   },
-
-  destroyed(){
-    this.blockIndex = 0;
-    // window.removeEventListener("scroll",this.toTopEvent,true);
-  },
-  computed:{
-
-    /**
-     * @description: 对原始博客数据进行过滤，然后再显示到页面，得到每一页博客列表的数据
-     * @param {type} 
-     * @return: 每一页博客列表的数据
-     * @author: yuhui
-     */
-    // blogsListsFilter:function(){
-    //  return this.blogsLists.filter((value,index)=>{
-    //     return ((this.page-1)*this.blogsIndex<=index)&&(this.page*this.blogsIndex>index)
-    //   })
-    // }
+  
+  /**
+   * @description: 使用了vue-meta插件，更新title和keywords
+   * @param {type} 
+   * @return: title {String}, keywords {String}
+   * @author: yuhui
+   */
+  metaInfo: {
+    title: 'Xlink Blog 一个记录日常生活的博客',
+    meta: [
+      { vmid: 'keywords', name: 'keywords', content: 
+        '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,Xlink Blog,个人Blog'}
+    ]
   }
 }
 </script>

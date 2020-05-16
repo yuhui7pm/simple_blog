@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 首页底部栏目
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 17:25:59
+ * @LastEditTime: 2020-05-17 00:31:53
  -->
 <template>
   <div class="bottomWrapper">
@@ -65,9 +65,12 @@ export default {
   },
   methods:{
 
-    /* 
-      网站开始创建的时间
-    */
+    /**
+     * @description: 网站开始创建的时间
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */    
     startTime(){
         let initData= new Date("2/17/2020");
         let today=new Date();
@@ -84,9 +87,12 @@ export default {
           + this.checkTime(B) + "时"+ this.checkTime(C) +"分"+ this.checkTime(D) +"秒";
     },
 
-    /* 
-        检查数字是否为个位数
-    */
+   /**
+     * @description: 检查数字是否为个位数,若为个数，在前面加上0
+     * @param i {Number} 
+     * @return: i {String}
+     * @author: yuhui
+     */
     checkTime(i){
         if(i<10){
             i="0"+i;
@@ -94,8 +100,11 @@ export default {
         return i;
     },
 
-    /* 
-      通过缓存读取，游客访问次数，规定半小时内访问都只为1次数
+   /**
+    * @description: 通过缓存读取，游客访问次数，规定半小时内访问都只为1次数
+    * @param {type} 
+    * @return: 
+    * @author: yuhui
     */
    getVisitedNumber(){
      const flag = false; //表示半个小时内已经访问过了，不算入统计数据中
@@ -117,36 +126,67 @@ export default {
       }
    },
 
-   // 执行更新访客数的一系列操作
+   /**
+    * @description: 执行更新访客数的一系列操作
+    * @param {type} 
+    * @return: 
+    * @author: yuhui
+    */
    updateVisitedNum(visited,dateNow){
       this.setCache(visited,dateNow);//重新赋值，刷新缓存
       this.addVisitedNum();  //往后端发送请求
       return;
    },
 
-   // 刷新访客量，对网站文本内容加1
+   /**
+    * @description: 刷新访客量，对网站文本内容加1
+    * @param {type} 
+    * @return: 
+    * @author: yuhui
+    */
    updateContextVisitedNum(){
      this.wholeVisitedNum +=1;
      this.todayVisitedNum +=1;
    },
 
-   //设置缓存
+   /**
+     * @description: 设置缓存
+     * @param key {String}
+     * @param value {String}
+     * @return: 
+     * @author: yuhui
+     */
     setCache(key,value){
       if(key=='') return false;
       localStorage.setItem(key, value);
     },
 
-    // 获取cache
+    /**
+     * @description: 根据key获取缓存中value
+     * @param key {String}  
+     * @return: localStorage.getItem(key) {String} 缓存中value
+     * @author: yuhui
+     */
     getCache(key){
       return localStorage.getItem(key);
     },
 
-    // 移除缓存
+    /**
+     * @description: 根据key移除缓存中的value
+     * @param key {String} 
+     * @return: 
+     * @author: yuhui
+     */
     removeCache(key){
       localStorage.removeItem(key);
     },
 
-    // 发送请求，要求统计数加1
+    /**
+     * @description: 发送请求，要求统计数加1
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     addVisitedNum(){
       let date = this.getYMDHMS();
       axios.post('/api/blog/setBlogVisited',{
@@ -165,7 +205,12 @@ export default {
       })
     },
 
-    // 进入首页时获取页面总的访问数据
+    /**
+     * @description: 进入首页时获取页面总的访问数据
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     initVisitedNum(){
       axios.get("/api/blog/getBlogVisited").then(res=>{
         if(res.status==200&&res.statusText==='OK'){
@@ -176,9 +221,13 @@ export default {
         }
       })
     },
-
-    // 根据时间戳获取年月日
-    // 根据时间戳获取年月日时分秒
+    
+    /**
+     * @description: 网站的运行时间
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     getYMDHMS() {
       let time = new Date();
       let year = time.getFullYear(),
@@ -204,7 +253,12 @@ export default {
       }
     },
 
-    //复制email地址
+    /**
+     * @description: 复制email地址
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     copyEmail(){
       let input = this.$refs.email;
       input.value = '16hyu@stu.edu.cn'; // 修改文本框的内容
@@ -213,7 +267,6 @@ export default {
 
       this.toastFlag = true;
       this.toastText = "复制成功";
-      // alert("复制成功");
 
       setTimeout(()=>{
         this.toastFlag = false;
@@ -251,7 +304,7 @@ export default {
     .bottomCenter
       // padding-top 200px
       opacity 0
-      padding-top 40px
+      padding-top 60px
       width 920px /*no*/
       margin 0 auto
       overflow hidden

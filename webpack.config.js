@@ -42,7 +42,7 @@ const config = {
     }),
     new VueLoaderPlugin(), // make sure to include the plugin for the magic
     new HTMLPlugin({
-      title:'Xlink Blog 一个记录日常生活的博客',
+      // title:'Xlink Blog 一个记录日常生活的博客',
       favicon:'./favicon.ico'
     }),
   ],
