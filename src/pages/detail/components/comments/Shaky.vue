@@ -5,8 +5,8 @@
    </div>
    <div class="emoji-wrapper" v-show="isShow" ref="emojiWrapper">
      <div class="emoji-classification">
-       <span class="emojiTitle" @click="emojiFlag=true" :style="emojiFlag?'color:red':''">emoji表情</span>
-       <span class="emojiTitle" @click="emojiFlag=false" :style="!emojiFlag?'color:red':''">颜表情</span>
+       <span class="emojiTitle" @click="emojiFlag=true" :style="emojiFlag?'color:#F4606C':''">emoji表情</span>
+       <span class="emojiTitle" @click="emojiFlag=false" :style="!emojiFlag?'color:#F4606C':''">颜表情</span>
      </div>
       <!-- 颜表情 -->
       <span 
@@ -125,12 +125,11 @@ export default {
   .emoji-wrapper
     width 820px 
     opacity 1
-    border 1px solid #AEDD81
+    border 1px solid #8CC2D4
     box-sizing border-box
     padding 10px
     margin-top 5px
     border-radius 5px
-    border-top-left-radius 0px
     position absolute
     z-index 10
     background #f7f7f7
@@ -138,7 +137,7 @@ export default {
       width calc(100% - 24px)
       margin 0px auto
       padding 0px 0 10px
-      border-bottom 1px solid #ddd
+      border-bottom 1px solid #8CC2D4 
       span
         text-align left
         width 100px
@@ -146,7 +145,7 @@ export default {
         font-weight bold
         &:hover
           cursor pointer
-          color red
+          color #F4606C
     .shakyInner
       font-size 14px
       background #f1f1f1 
@@ -154,6 +153,7 @@ export default {
       border-radius 5px
       display inline-block
       margin 10px 0 0 12px
+      border 1px solid #dedede
       cursor pointer
       &:hover
         box-shadow #ddd 0 2px 4px 0px

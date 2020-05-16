@@ -339,12 +339,12 @@ export default {
         display inline-block
         margin-right 20px
         height 100%
-        color #666
+        color #333
         float left
       .time
         height 100%
         display inline
-        color #666
+        color #333
         float left
     .comment-bar
       display table-cell
@@ -371,7 +371,7 @@ export default {
         vertical-align:bottom;
     .context
       margin-top 10px
-      color #666
+      color #333
       font-size 18px
       max-width 660px
       line-height 24px
@@ -394,7 +394,7 @@ export default {
           width 320px
       .context
         margin-top 5px
-        color #666
+        color #333
         font-size 16px
 @media screen and (max-width: 375px) 
   .comment

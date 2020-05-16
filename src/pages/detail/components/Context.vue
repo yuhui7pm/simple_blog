@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:26:55
+ * @LastEditTime: 2020-05-16 16:51:01
  -->
 <template>
   <div class="wrapper">
@@ -43,7 +43,7 @@ export default {
     // border-radius 6px
     color #3d3634;
     margin 0 100px
-    border 1px dashed #ccc
+    border 1px dashed #aaa
     border-left none 
     border-right none
     .context
@@ -52,6 +52,7 @@ export default {
       font-size: 16px;
       line-height: 30px;
       box-sizing border-box
+      color #333
       &>>>img 
         margin 20px 0 
         max-height 500px 

@@ -4,11 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 15:06:59
+ * @LastEditTime: 2020-05-16 16:25:42
  -->
 <template>
   <div class="comments-wrapper">
-    <p class="comments-lists-title" v-if="commentsLists.length>0">{{commentsLists.length}}条评论数据</p>
+    <!-- <p class="comments-lists-title" v-if="commentsLists.length>0">{{commentsLists.length}}条评论数据</p> -->
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
@@ -185,7 +185,7 @@ export default {
 
 <style lang="stylus" scoped>
   .comments-wrapper
-    padding 50px 0
+    padding 20px 0
     background white
     border-bottom-left-radius 6px
     border-bottom-right-radius 6px

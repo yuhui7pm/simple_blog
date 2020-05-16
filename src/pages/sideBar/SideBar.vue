@@ -65,9 +65,9 @@ export default {
       font-size 18px
       position relative
       text-align center
-      color #666
+      color #333
       &::placeholder
-        color #666
+        color #333
       // background url('../../assets/icons/searchBut.svg') no-repeat;
       // background-size 25px 25px
       // background-position 10px 50%
@@ -75,7 +75,7 @@ export default {
       margin-bottom 50px
     .timer 
       font-size 16px
-      color #666
+      color #333
       width 350px  
       position fixed
       top 700px

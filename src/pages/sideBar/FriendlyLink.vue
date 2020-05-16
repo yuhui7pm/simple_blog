@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-14 21:17:12
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-01-01 18:34:12
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-16 16:33:24
  -->
 <template>
   <div class="friendWrapper">
@@ -92,7 +92,7 @@ export default {
       margin-top 10px
     a:hover
       cursor pointer
-      color red
+      color #d81e06
     a 
       display inline-block
       margin 5px

@@ -4,17 +4,17 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 15:11:20
+ * @LastEditTime: 2020-05-16 17:22:38
  -->
 <template>
   <div class="write-wrapper">
    <!-- <p class="show-speech"></p> -->
    <!-- <div class="input-wrapper"> -->
-      <!-- <input placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/> -->
-      <!-- <input placeholder="电子邮件(选填保密)" @input="clearError" @blur="validateEmail" ref="email" :style="emailFlag?'':'border-color:red'"/>
-      <input placeholder="网站(选填保密,以http/https开头)" @input="clearError" @blur="validateWeb" ref="website" :style="websiteFlag?'':'border-color:red'"/> -->
+      <!-- <input placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:#d81e06'"/> -->
+      <!-- <input placeholder="电子邮件(选填保密)" @input="clearError" @blur="validateEmail" ref="email" :style="emailFlag?'':'border-color:#d81e06'"/>
+      <input placeholder="网站(选填保密,以http/https开头)" @input="clearError" @blur="validateWeb" ref="website" :style="websiteFlag?'':'border-color:#d81e06'"/> -->
    <!-- </div> -->
-    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext" :style="commentFlag?'':'border-color:red'"></textarea>
+    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext"></textarea>
     <div class="but-wrapper">
       <button @click="submitComments" title="提交评论">
         <img src="../../../../assets/icons/submit.svg" width="32" height="32"/>
@@ -22,7 +22,7 @@
       <Shaky style="float:left"></Shaky>
       <div class="writer-wrapper">
         <div class="writer-icon"></div>
-        <input class="username" placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/>
+        <input class="username" placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true"/>
       </div>
     </div>
   </div>
@@ -260,6 +260,9 @@ export default {
     padding 40px 100px 0
     border-top-left-radius 6px
     border-top-right-radius 6px
+    .username
+      border-color #8cc2d4
+      color #8cc2d4
     .show-speech
       position: relative;
       margin: 20px 0;
@@ -281,7 +284,7 @@ export default {
     width 100%
     height 50px
     display flex
-    color #ccc
+    color #333
     // input 
     //   padding 15px
     //   flex 1
@@ -290,9 +293,9 @@ export default {
     //   border 1px solid #AEDD81
     //   margin-bottom 10px
     //   box-sizing border-box
-    //   color #666
+    //   color #333
     // input::placeholder
-    //   color #666
+    //   color #333
     // input:first-child
     //   margin-left 0px
   textarea
@@ -302,16 +305,18 @@ export default {
     box-sizing border-box
     resize none
     // border 1px solid #5fbf5e
-    border 1px solid #aaa
+    // border 1px solid #8CC2D4
+    background #f6f9fa
     border-radius 10px
     box-sizing border-box
-    color #666
+    color #8CC2D4
+    box-shadow 0 0 0 1px #8cc2d4
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
     &::-webkit-scrollbar /* Chrome Safari */
       display none
   textarea::placeholder
-    color #666
+    color #8CC2D4
   .but-wrapper
     margin-top 12px
     overflow hidden
@@ -340,7 +345,8 @@ export default {
         // margin-left 10px
         // margin-top 15px
         // border 1px solid #5fbf5e
-        border-bottom 1px solid #555
+        border-bottom 1px solid #8CC2D4
+        color gray
         height 100%
         width calc(100% - 40px)
         padding-left 5px
@@ -348,9 +354,9 @@ export default {
         // margin-bottom 10px
         box-sizing border-box
         // line-height 56px
-        color #555
+        color #8cc2d4
       input::placeholder
-        color #666
+        color #8cc2d4
       input:first-child
         margin-left 0px
     button

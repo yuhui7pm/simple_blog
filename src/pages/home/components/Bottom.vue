@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-11 16:07:52
+ * @LastEditTime: 2020-05-16 17:25:59
  -->
 <template>
   <div class="bottomWrapper">
@@ -277,14 +277,12 @@ export default {
             color red
     .bottomFadeIn
       animation bottomFade 1s ease-in forwards
-      animation-delay 0.3s
       @keyframes bottomFade {
         0%{
           opacity 0
         }
         100%{
           opacity 1
-          // transform translateY(-140px)
         }
       }
 

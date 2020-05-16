@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-14 16:53:33
  * @LastEditors: yuhui
- * @LastEditTime: 2020-01-01 18:32:36
+ * @LastEditTime: 2020-05-16 16:33:17
  -->
 <template>
   <div class="Tag">
@@ -36,7 +36,7 @@ export default {
     margin-bottom 10px 
     color #25a4bb
   .Tag:hover
-    border 1px solid red
-    color red
+    border 1px solid #d81e06
+    color #d81e06
     cursor pointer
 </style>

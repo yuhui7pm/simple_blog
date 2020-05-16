@@ -3,8 +3,8 @@
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-14 14:56:36
- * @LastEditors  : yuhui
- * @LastEditTime : 2020-01-01 18:30:46
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-16 16:29:37
  -->
 <template>
   <div class="listWrapper">
@@ -89,9 +89,9 @@ export default {
     li 
       width 100%
       height 50px
-      border-top 1px solid #666
+      border-top 1px solid #333
       font-size 18px
-      color #666
+      color #333
       background #CCFFCC
       transition-duration 1s  
       &:hover
