@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-10 17:02:58
+ * @LastEditTime: 2020-05-16 15:11:20
  -->
 <template>
   <div class="write-wrapper">
@@ -16,14 +16,14 @@
    <!-- </div> -->
     <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext" :style="commentFlag?'':'border-color:red'"></textarea>
     <div class="but-wrapper">
-      <button @click="submitComments">
-        <img src="../../../../assets/icons/submit.svg" width="30" height="30"/>
+      <button @click="submitComments" title="提交评论">
+        <img src="../../../../assets/icons/submit.svg" width="32" height="32"/>
       </button>
+      <Shaky style="float:left"></Shaky>
       <div class="writer-wrapper">
         <div class="writer-icon"></div>
         <input class="username" placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:red'"/>
       </div>
-      <Shaky></Shaky>
     </div>
   </div>
 </template>
@@ -90,8 +90,6 @@ export default {
     submitComments(){
       let replyUser = this.replyWho;
       let username = String(this.$refs.username.value);
-      const email = this.$refs.email.value;
-      const website = this.$refs.website.value;
       const commentContext = this.$refs.commentContext.value;
       if(this.replyWho.length>0){
         username+=' @'+replyUser.split('@')[0];
@@ -103,8 +101,6 @@ export default {
       if(nameComment&&this.websiteFlag&&this.commentFlag){
           axios.post('/api/writeComment',{
             username,
-            email,
-            website,
             commentContext,
             createTime,
             iconUrl:this.randomPic(),
@@ -120,8 +116,6 @@ export default {
             if(res.status==200){
               eventBus.$emit('addNewComment',{
                 username,
-                email,
-                website,
                 comments:commentContext,
                 createtime:createTime,
                 iconurl:this.picName,
@@ -132,8 +126,6 @@ export default {
               
               //清空输入框
               this.$refs.username.value = '';
-              this.$refs.email.value = '';
-              this.$refs.website.value = '';
               this.$refs.commentContext.value = '';
               this.replyWho = '';
 
@@ -242,7 +234,17 @@ export default {
       let name = num + '.jpg';
       this.picName = name;
       return name;
-    }
+    },
+
+    // /**
+    //  * @description: 聚焦事件，改变input框
+    //  * @param {} 
+    //  * @return: 
+    //  * @author: yuhui
+    //  */
+    // focusInput(){
+    //   document.getElementsByClassName("username")[0].style.borderBottom = "1px solid blue";
+    // }
   }
 }
 </script>
@@ -311,14 +313,15 @@ export default {
   textarea::placeholder
     color #666
   .but-wrapper
-    margin-top 20px
+    margin-top 12px
     overflow hidden
     .writer-wrapper
       height 30px
       width 200px
-      float right
       overflow hidden
       margin-right 20px
+      float left
+      margin-top 2px
       .writer-icon
         width 30px
         height 30px

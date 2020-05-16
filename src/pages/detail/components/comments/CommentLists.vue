@@ -4,16 +4,16 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 16:51:40
+ * @LastEditTime: 2020-05-16 15:06:59
  -->
 <template>
   <div class="comments-wrapper">
-    <p class="comments-lists-title"></p>
+    <p class="comments-lists-title" v-if="commentsLists.length>0">{{commentsLists.length}}条评论数据</p>
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
       <div class="comment-write" v-for="(item,index) in commentsLists" :key="item.createtime">
-        <div style="transition-duration:0.5s;" :class='"deleteWrapper"+index'>
+        <div style="transition-duration:2s;" :class='"deleteWrapper"+index'>
           <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt" :key="index"></Comment>
           <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId'></WriteComment>
         </div>
@@ -65,11 +65,23 @@ export default {
 
       // 评论区域的显示与隐藏
       for(let i=0;i<this.commentsLists.length;i++){
+        document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = 0;
+        document.getElementsByClassName('addWrite'+i)[0].style.margin = '5px 0 10px';
+        // document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = '2px';
+  
         if(this.statusArr[i] === true){
           document.getElementsByClassName('addWrite'+i)[0].style.display = 'block';
-          document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = '20px';
+          document.getElementsByClassName('addWrite'+i)[0].style.opacity = 0;
+          setTimeout(()=>{
+            document.getElementsByClassName('addWrite'+i)[0].style.transition = "opacity 0.5s";
+            document.getElementsByClassName('addWrite'+i)[0].style.opacity = 1;
+          },5)
         }else{
-          document.getElementsByClassName('writeComment')[i].style.display = 'none';
+          document.getElementsByClassName('addWrite'+i)[0].style.transition = "opacity 0.5s";
+          document.getElementsByClassName('addWrite'+i)[0].style.opacity = 0;
+          setTimeout(()=>{
+            document.getElementsByClassName('writeComment')[i].style.display = 'none';
+          },500);
         }
       }
     },
@@ -177,6 +189,11 @@ export default {
     background white
     border-bottom-left-radius 6px
     border-bottom-right-radius 6px
+    .comments-lists-title
+      margin 0 100px 20px
+      font-size 20px
+      &:hover
+        cursor default
     .comment-write
       overflow hidden
       &:last-child

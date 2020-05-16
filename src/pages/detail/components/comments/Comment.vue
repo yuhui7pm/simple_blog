@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-10 00:01:37
+ * @LastEditTime: 2020-05-16 14:56:31
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
@@ -20,17 +20,18 @@
         </div>
         <div class="comment-bar" style="float:right">
           <img 
-            @click.stop="changeHeart"
-            :src="heartChange?heart_click:heart_unclick"
-            alt="回复评论"
-          >
-          <span ref="praiseNum">{{item.likestar}}</span>
-          <img 
             :class="[(smallScreenDeleteIconShow&&deleteIconShow||hoverStatus&&deleteIconShow)?'testList':'','deleteIcon',]" 
             @click.stop="deleteIconShow&&deleteComments(item.username,item.createtime)"
             src="../../../../assets/icons/delete_comment.svg" 
             alt="删除评论"
           >
+          <img 
+            @click.stop="changeHeart"
+            :src="heartChange?heart_click:heart_unclick"
+            alt="回复评论"
+            style="margin-left:10px"
+          >
+          <span ref="praiseNum">{{item.likestar}}</span>
         </div>
       </div>
     </div>
@@ -330,16 +331,21 @@ export default {
       width 340px
       overflow hidden
       .writer
+        width 150px
+        overflow hidden
+        text-overflow ellipsis
+        white-space: nowrap;
         font-weight bold
         display inline-block
         margin-right 20px
         height 100%
         color #666
+        float left
       .time
         height 100%
-        display inline-block
+        display inline
         color #666
-        float right
+        float left
     .comment-bar
       display table-cell
       vertical-align: top;

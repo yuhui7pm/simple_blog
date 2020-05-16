@@ -4,14 +4,16 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-11 17:08:58
+ * @LastEditTime: 2020-05-16 14:46:47
  -->
 <template>
   <div>
     <div class="single-episode-wrapper" :key="blogId">
       <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder" :key="blogId"></Title>
       <Context :blogContent="blogContent"></Context>
-      <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
+      <transition>
+        <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
+      </transition>
       <CommentLists class="commentList" @removeReply="removeWrite" :blogId='blogId'></CommentLists>
     </div>
   </div>
@@ -109,6 +111,7 @@ export default {
     margin 80px auto 140px
     box-shadow: 0px 0px 4px 1px #eeeeee;
     animation:fadein 1s ease
+    background white
     @keyframes fadein{
       0%{
         opacity: 0;
@@ -117,6 +120,16 @@ export default {
         opacity: 1;
       }
     }
+
+  .v-enter,.v-leave-to{
+      opacity: 0;
+  }
+  .v-enter-to,.v-leave{
+      opacity: 1;
+  }
+  .v-enter-active,.v-leave-active{
+      transition: all 0.5s;
+  }
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     header

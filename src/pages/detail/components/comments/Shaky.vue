@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
    <div class="shaky-wrapper">
-     <span @click="getEmojiItem()"><img src="../../../../assets/icons/emoji.svg" width="30" height="30"></span>
+     <span @click="getEmojiItem()"><img style="margin-top:-2px" src="../../../../assets/icons/emoji.svg" width="30" height="30"></span>
    </div>
    <div class="emoji-wrapper" v-show="isShow" ref="emojiWrapper">
      <div class="emoji-classification">
@@ -108,9 +108,9 @@ export default {
 @import url('../../../../assets/styles/shaky.css');
   .shaky-wrapper
     display inline-block
-    height 32px
-    line-height 32px
-    width 100px
+    height 34px
+    line-height 34px
+    width 80px
     // border 1px solid #AEDD81
     box-sizing border-box
     overflow hidden
@@ -128,7 +128,7 @@ export default {
     border 1px solid #AEDD81
     box-sizing border-box
     padding 10px
-    margin-top -2px
+    margin-top 5px
     border-radius 5px
     border-top-left-radius 0px
     position absolute

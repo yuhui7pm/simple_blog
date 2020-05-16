@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-11 16:06:43
+ * @LastEditTime: 2020-05-16 13:28:10
  -->
 <template>
   <!-- <div class="home-wrapper" @mousemove="move($event)"> -->
@@ -92,7 +92,7 @@ export default {
 
             // 动态设置博客列表的高度
             console.log('+++', this.blogsLists.length * 330);
-            this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (330-25)}px`;
+            this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25)}px`;
           }
       }).catch(err => {
           console.log('err:',err)

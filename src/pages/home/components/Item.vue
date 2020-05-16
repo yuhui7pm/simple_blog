@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-09 19:07:55
+ * @LastEditTime: 2020-05-16 13:20:10
  -->
 <template>
   <ol>
@@ -13,8 +13,8 @@
       v-for="(list,index) of blogLists"
       :key="list.id"
       :style="(blockIndex>index)?'background:white':''"
-      :class="[(blockIndex>index)&&(index>0)?'animate__fadeInUp animate__slower':'',
-        index===0?'animate__fadeInUp animate__slower':'','animate__animated item-wrapper']"
+      :class="[(blockIndex>index)&&(index>0)?'animate__fadeInUp animate__slow':'',
+        index===0?'animate__fadeInUp animate__slow':'','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     >
     <div v-if="blockIndex>index || index==0">
