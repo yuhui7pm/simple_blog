@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:12:24
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 16:51:01
+ * @LastEditTime: 2020-05-18 17:37:20
  -->
 <template>
   <div class="wrapper">
@@ -23,10 +23,6 @@ export default {
   data(){
     return{
     }
-  },
-  methods:{
-  },
-  mounted(){
   },
   props:{
     blogContent:Object
@@ -57,10 +53,14 @@ export default {
         margin 20px 0 
         max-height 500px 
         max-width 500px !important
+      &>>>a
+        word-wrap break-word
 @media screen and (max-width: 768px) 
   .wrapper
     .context-wrapper 
       background white
+      margin 0 5px !important
+      border none
       .context 
         width 100% !important
         padding 20px 20px 20px !important

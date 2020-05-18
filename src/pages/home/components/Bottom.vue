@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:31:53
+ * @LastEditTime: 2020-05-18 17:22:45
  -->
 <template>
   <div class="bottomWrapper">
@@ -302,10 +302,10 @@ export default {
     overflow hidden
     position relative
     .bottomCenter
-      // padding-top 200px
       opacity 0
       padding-top 60px
-      width 920px /*no*/
+      width 90% /*no*/
+      max-width 920px
       margin 0 auto
       overflow hidden
       text-align left
@@ -338,7 +338,17 @@ export default {
           opacity 1
         }
       }
-
+  @media screen and (max-width: 768px) 
+    .bottomWrapper
+      height 220px !important
+      .bottomCenter
+        padding-top 20px !important
+        font-size 16px
+        margin 0 20px !important
+        &>div:first-child
+          width 60% !important
+        &>div:last-child
+          width 40% !important
   @media screen and (max-width: 375px) 
     .friendLink
       display none
@@ -354,4 +364,10 @@ export default {
         overflow hidden
         div
           height 100%
+        &>div:first-child
+          width 100% !important
+          height auto
+        &>div:last-child
+          width 100% !important
+          display none
 </style>

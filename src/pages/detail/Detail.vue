@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:34:13
+ * @LastEditTime: 2020-05-18 16:36:58
  -->
 <template>
   <div>
@@ -12,7 +12,7 @@
       <Title :blogContent="blogContent" :blogIndOrder="blogIndOrder" :key="blogId"></Title>
       <Context :blogContent="blogContent"></Context>
       <transition>
-        <WriteComment v-show="insertStatus" :blogId="blogId"></WriteComment>
+        <WriteComment v-if="insertStatus" :blogId="blogId" :name="'initial'"></WriteComment>
       </transition>
       <CommentLists class="commentList" @removeReply="removeWrite" :blogId='blogId'></CommentLists>
     </div>

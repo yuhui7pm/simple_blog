@@ -32,8 +32,8 @@ const config = {
     // https://blog.csdn.net/httguangtt/article/details/84847582
   },
   // 启用sourceMap追踪错误
-  // devtool: 'inline-source-map',
-  devtool: false,
+  devtool: 'cheap-module-eval-source-map',
+  // devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -82,7 +82,7 @@ const config = {
       exclude: /node_modules/,    // 忽略第三方的任何代码
       options:{
         limit:8192,  //小于10kB的图片进行base64编码
-        name:'images/[name].[hash:7].[ext]',
+        name:'images/[name].[hash:8].[ext]',
         esModule: false,//解决img属性src="[object Module]"
       }
     },{
@@ -95,8 +95,20 @@ const config = {
     },{			
       // 这样可以处理ES6语法为ES5语法，但是这时候ES6中的一些新增的Promise或WeakMap，静态方法，如Array.from或Object.assign等等。不会被转义	
       test: /\.js$/,
-      exclude: '/node_modules/',
+      exclude: /node_modules/,
       loader: 'babel-loader',
+      // options:{
+      //   presets: [["@babel/preset-env",{
+      //     targets:{
+      //         edge:"17",
+      //         firefox:"60",
+      //         chrome:"67",
+      //         safari:"11.1",
+      //         ie:"11"
+      //     },
+      //     useBuiltIns:'usage'
+      //   }]]
+      // }
     }]
   }
 }

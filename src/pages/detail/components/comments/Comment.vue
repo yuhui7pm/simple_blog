@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 14:56:31
+ * @LastEditTime: 2020-05-18 17:56:12
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
@@ -13,8 +13,8 @@
       <div class="comment-right">
         <div class="comment_context" style="float:left;">
           <div class="top-wrapper">
-            <div class="writer">{{item.username}}</div>
-            <div class="time" style="">{{timestampToTime(item.createtime)}}</div>
+            <div class="writer" :title="item.username">{{item.username}}</div>
+            <div class="time" style="">{{common.timestampToTime(item.createtime)}}</div>
           </div>
           <div class="context">{{item.comments}}</div>
         </div>
@@ -28,8 +28,8 @@
           <img 
             @click.stop="changeHeart"
             :src="heartChange?heart_click:heart_unclick"
-            alt="回复评论"
-            style="margin-left:10px"
+            alt="点赞"
+            style="visibility:visible"
           >
           <span ref="praiseNum">{{item.likestar}}</span>
         </div>
@@ -41,8 +41,8 @@
 <script>
 import axios from 'axios'; 
 import qs from 'qs';
-import heart_click from '@/assets/icons/heart_click.svg';
-import heart_unclick from '@/assets/icons/heart_unclick.svg';
+// import heart_click from '@/assets/icons/heart_click.svg';
+// import heart_unclick from '@/assets/icons/heart_unclick.svg';
 import storage from 'good-storage';
 import { eventBus } from '@/assets/bus';
 export default {
@@ -54,8 +54,8 @@ export default {
       hoverStatus:false,
       heartChange:false,
       iconUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579534969&di=3833a2461681cd7dafdfcd19e3afc5c1&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201512%2F14%2F20151214104025_NytJX.jpeg',
-      heart_click,
-      heart_unclick,
+      heart_click:require('@/assets/icons/heart_click.svg'),
+      heart_unclick:require('@/assets/icons/heart_unclick.svg'),
       initLikeStatus:false,
       deleteIconShow:false,
       smallScreenDeleteIconShow:false,
@@ -83,23 +83,6 @@ export default {
       }else{
         this.deleteIconShow = false
       }
-    },
-
-    /**
-     * @description: 时间戳转换函数
-     * @param {Number} timestamp 时间戳
-     * @return: 格式化之后的时间戳
-     * @author: yuhui
-     */
-    timestampToTime(timestamp) {
-      let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear();
-      let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
-      let D = date.getDate()<10?'0'+date.getDate():date.getDate();
-      let h = (date.getHours()<10?'0'+date.getHours():date.getHours()) +':';
-      let m = (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes()) +':';
-      let s = date.getSeconds()<10?'0'+date.getSeconds():date.getSeconds();
-      return (Y + '-' + M + '-' + D + ' ' + h  + m  + s);//时分秒可以根据自己的需求加上
     },
 
     /**
@@ -155,7 +138,7 @@ export default {
      */
     changeHeart(){
       // 点击切换爱心图片
-      this.heartChange=!this.heartChange
+      this.heartChange=!this.heartChange;
 
       let likeKey = 'blogId_' + this.blogId + '_time_' + this.item.createtime;
       let likeStatus = this.heartChange;
@@ -173,35 +156,35 @@ export default {
       }
       
       //向后端发送请求，保存数据
+      let username = this.item.username,
+        createtime = this.item.createtime,
+        likeStatusParam = storage.get(likeKey)||'',
+        likeNum = this.$refs.praiseNum.innerText;
+
       axios.post('/api/clickLikeIcon',{
-          username: this.item.username,
-          createtime: this.item.createtime,
-          likeStatus:storage.get(likeKey)
+          username,
+          createtime,
+          likeStatus:likeStatusParam
         },{
         headers: {
-            'Access-Control-Allow-Origin':'*',  //解决cors头问题
-            'Access-Control-Allow-Credentials':'true', //解决session问题
             'Content-Type': 'application/json'
-        },
-        withCredentials : true //跨域请求要想带上cookie
+        }
       }).then(res=>{
-        if(res){
+        if(res && res.status==200 && res.statusText==='OK'){
           eventBus.$emit('changeCommentsLists',{
-            username: this.item.username,
-            createtime: this.item.createtime,
-            likeStatus:storage.get(likeKey),
-            likeNum:this.$refs.praiseNum.innerText
+            username,
+            createtime,
+            likeStatus:likeStatusParam,
+            likeNum,
           })
         }
-      }).catch(err => {
-          console.log('err:',err)
       })
     },
     
     /**
      * @description: 将后端返回的图片名字拼接成新的路径
      * @param {String} name 后端返回的图片名字 
-     * @return: 返回新的图片路径
+     * @return {Object} 返回新的图片路径
      * @author: yuhui
      */
     userIconUrl(name){
@@ -222,7 +205,13 @@ export default {
       }
       this.browserRedirect();
     },
-    // 判断移动端还是pc端
+
+    /**
+     * @description: 判断移动端还是pc端
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
     browserRedirect() {
       var sUserAgent = navigator.userAgent.toLowerCase();
       if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
@@ -232,73 +221,6 @@ export default {
         // console.log('PC端');//跳转pc端页面
         this.smallScreenDeleteIconShow = false;
       }
-    },
-    nameRandom(){
-      const name = [
-        "满香天",
-        "隗华晖",
-        "达雅志",
-        "智静逸",
-        "通以彤",
-        "盘叶农",
-        "畅春竹",
-        "邛雯华",
-        "风萦思",
-        "合鹤梦",
-        "勤浩阔",
-        "肖从筠",
-        "麦子",
-        "孔梦寒",
-        "邗天",
-        "经妙思",
-        "典若雁",
-        "弭小凝",
-        "卜秋华",
-        "寿馨逸",
-        "百里华乐",
-        "香和平",
-        "蒉涵畅",
-        "逄觅双",
-        "茹又柔",
-        "亓秋灵",
-        "扶秀梅",
-        "潭温",
-        "周好",
-        "司徒笑柳",
-        "许冰安",
-        "敖布侬",
-        "镜尔芙",
-        "荆依波",
-        "麻茗",
-        "徐紫",
-        "台白凝",
-        "田长星",
-        "裴品",
-        "呼延凝旋",
-        "性梓暄",
-        "徭梓馨",
-        "随思菱",
-        "建悦可",
-        "方智志",
-        "邓胤骞",
-        "斐又香",
-        "蓝优",
-        "袭永康"
-      ];
-
-      const adj = [
-        "郁郁寡欢",
-        "悲观失意", 
-        "好吃懒做",
-        "疑神疑鬼", 
-        "患得患失", "异想天开","多愁善感","狡猾多变","贪小便宜","见异思迁","情绪多变","脾气暴躁","重色轻友","胆小怕事", 
-        "好吃懒做","成熟稳重","幼稚调皮","温柔体贴","诚实坦白","婆婆妈妈", "活泼可爱","普普通通","内向害羞","外向开朗", 
-        "心地善良","聪明伶俐","善解人意","风趣幽默","思想开放","积极进取","小心谨慎", "郁郁寡欢","正义正直", "悲观失意",
-        "好吃懒做","处事洒脱","疑神疑鬼","患得患失","异想天开","多愁善感", "淡泊名利", "见利忘义","瞻前顾后", "循规蹈矩",
-        "热心助人","快言快语","少言寡语","爱管闲事","追求刺激","豪放不羁","狡猾多变","贪小便宜","见异思迁","情绪多变", 
-        "水性扬花","重色轻友","胆小怕事","积极负责","勇敢正义", "聪明好学","实事求是","务实实际","老实巴交","圆滑老练","脾气暴躁",
-        "慢条斯理","冲动","任性","神经质","暴躁","善变","难以琢磨","患得患失","浮躁","见异思迁","莽撞","易怒","犹豫不决","轻率", "善变"
-      ] 
     }
   },
   activated(){
@@ -358,9 +280,11 @@ export default {
         &.deleteIcon
           opacity 0
           transition-duration 0.2s
-          margin-left 10px
+          // margin-left 10px
           width 16px
           height 16px
+        &:last-child
+          margin-left:10px;
       .testList
         opacity 1 !important
       span
@@ -405,14 +329,15 @@ export default {
       height 50px !important
       margin-right 15px !important
     .comment-right
-      width 250px !important 
+      width 200px !important 
       &>div:first-child
-        width 200px !important
+        max-width 200px !important
       .context
-        width 250px !important
+        max-width 200px !important
         overflow: hidden;
         text-overflow: ellipsis;
     .top-wrapper
+      width auto !important
       height 40px !important
       &>div
         height 20px !important

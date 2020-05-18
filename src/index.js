@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:01:30
+ * @LastEditTime: 2020-05-18 15:24:13
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -15,6 +15,9 @@ import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js';
 import 'animate.css'; //wow动画库
+
+import common from '@/common/js/common.js';//引入公共js
+Vue.prototype.common = common;
 
 let head = document.getElementsByTagName('head')[0];
 
@@ -45,3 +48,17 @@ new Vue({
   router:router,
   render:(h)=>h(App)
 }).$mount(root);
+
+
+// 路由跳转
+// if (
+//   '-ms-scroll-limit' in document.documentElement.style && 
+//   '-ms-ime-align' in document.documentElement.style
+// ) { // detect it's IE11
+//   window.addEventListener("hashchange", function(event) {
+//     var currentPath = window.location.hash.slice(1);
+//     if (store.state.route.path !== currentPath) {
+//       router.push(currentPath)
+//     }
+//   }, false)
+// }

@@ -1,21 +1,20 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 文章评论列表和其对应的输入框
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 16:25:42
+ * @LastEditTime: 2020-05-18 17:52:36
  -->
 <template>
   <div class="comments-wrapper">
-    <!-- <p class="comments-lists-title" v-if="commentsLists.length>0">{{commentsLists.length}}条评论数据</p> -->
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
       <div class="comment-write" v-for="(item,index) in commentsLists" :key="item.createtime">
         <div style="transition-duration:2s;" :class='"deleteWrapper"+index'>
           <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt" :key="index"></Comment>
-          <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId'></WriteComment>
+          <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId' :order="index" :key="item.createtime"></WriteComment>
         </div>
       </div>
     </div>
@@ -42,10 +41,10 @@ export default {
       listNum:'',
       replyName:'',
       commentsLists:[],
+      ind:null,
     }
   },
   props:{
-    // commentsLists:Array,
     blogId:Number,
   },
   methods:{
@@ -94,17 +93,19 @@ export default {
      * @author: yuhui
      */
     replyIt(ind,name){
-      // 两次点击同一个评论，理应不出现@
-      // console.log(this.replyName,'+++',name);
-
+      let newName;
       if(this.replyName===name){
         this.replyName='';
+        newName = '';
       }else{
         this.replyName=name;
+        newName = name;
       }
-      eventBus.$emit('replyName',this.replyName); 
+      this.ind = ind;
+      let replyUser = sessionStorage.setItem('replyName', newName);
       this.insertReply(ind);
     },
+
     /**
      * @description: 得到所有评论数据,开发环境与线上环境
      * @param {type} 
@@ -137,17 +138,34 @@ export default {
         this.statusArr[i] === false;
         document.getElementsByClassName("addWrite"+i)[0].style.display = 'none';
       }
-      this.$emit('removeReply',true)
+      this.$emit('removeReply',true);
     },
+
+    /**
+     * @description: 修改评论点赞的数据
+     * @param {Object} obj 需要修改的点赞数据
+     * @param {Object} list 所有的评论数据
+     * @return: {Object} newArr 修改了点赞信息之后的评论数据
+     * @author: yuhui
+     */
     changeListsStatus(obj,list){
-      let newArr = list.map( function(value,index){
+      let newArr = list.map(function(value,index){
         if(value.createtime==obj.createtime){
-          value.likestar = obj.likeNum
+          //IE11 这里有问题
+          value.likestar = obj.likeNum;
         }
         return value
       })
       return newArr
     },
+
+    /**
+     * @description: 删除评论数据
+     * @param {Object} obj 需要删除的评论数据 
+     * @param {Object} list 所有的评论数据
+     * @return: {Object} deleteArr 删除某一项之后的评论数据
+     * @author: yuhui
+     */
     deleteLists(obj,list){
       let deletedArr = list;
       for(let i=0; i<list.length; i++) {
@@ -158,23 +176,30 @@ export default {
       return deletedArr;
     },
   },
+
   mounted(){
     this.getCommentsItem();//页面挂载的时候就获取评论列表数据
+
     eventBus.$on('changeCommentsLists',obj=>{
-      let arr = this.changeListsStatus(obj,this.commentsLists);
+      let commentsLists = this.commentsLists;
+      // console.log('obj===',obj)
+      let arr = this.changeListsStatus(obj,commentsLists);
       this.commentsLists = arr;
     })
+
     eventBus.$on('addNewComment',obj=>{
       let arrOld = this.commentsLists.reverse();
       this.commentsLists = [];
       arrOld.push(obj);
       this.commentsLists = arrOld.reverse();
     })
+    
     eventBus.$on('deleteCommentsLists',obj=>{
       let deletedArr = this.deleteLists(obj,this.commentsLists);
       this.commentsLists = deletedArr;
     })
   },
+  
   beforeDestroy () {
     eventBus.$off('addNewComment')
     eventBus.$off('changeCommentsLists')

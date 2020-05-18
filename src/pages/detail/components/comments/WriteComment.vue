@@ -4,17 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-16 17:22:38
+ * @LastEditTime: 2020-05-18 17:54:52
  -->
 <template>
   <div class="write-wrapper">
-   <!-- <p class="show-speech"></p> -->
-   <!-- <div class="input-wrapper"> -->
-      <!-- <input placeholder="昵称(必填)" maxlength="8" ref="username" @input="nameFlag=true" :style="nameFlag?'':'border-color:#d81e06'"/> -->
-      <!-- <input placeholder="电子邮件(选填保密)" @input="clearError" @blur="validateEmail" ref="email" :style="emailFlag?'':'border-color:#d81e06'"/>
-      <input placeholder="网站(选填保密,以http/https开头)" @input="clearError" @blur="validateWeb" ref="website" :style="websiteFlag?'':'border-color:#d81e06'"/> -->
-   <!-- </div> -->
-    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext"></textarea>
+    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" :ref="`commentContext${order}`"></textarea>
     <div class="but-wrapper">
       <button @click="submitComments" title="提交评论">
         <img src="../../../../assets/icons/submit.svg" width="32" height="32"/>
@@ -43,7 +37,7 @@ export default {
       websiteFlag:true,//网站格式校验
       commentFlag:true,//评论是否为空
       replyWho:'',
-      picName:'',
+      picName:''
     }
   },
   components:{
@@ -51,36 +45,37 @@ export default {
   },
   props:{
     blogId:Number,
+    name:String,
+    order:Number
   },
-  mounted(){
+  mounted(){  
+    var _this = this;
     eventBus.$on('writeEmoji',emoji=>{
-      this.insert(emoji)
+      emoji && _this.insert(emoji,_this);
     })
-    eventBus.$on('replyName',name=>{
-      this.replyWho = name;
-    });
   },
   methods:{
     /**
-     * @description: 有可能表情会加在文字中间
+     * @description: 有可能表情会加在文字中间,一定要加这一句，否则移动端会有问题
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
-    async insert(myValue) {
-        const myField = this.$refs.commentContext;
-        if (myField.selectionStart || myField.selectionStart === 0) {
-            var startPos = myField.selectionStart
-            var endPos = myField.selectionEnd
-            this.str = myField.value.substring(0, startPos) + myValue 
-                        + myField.value.substring(endPos, myField.value.length)
-            await this.$nextTick() // 这句是重点, 圈起来
+    async insert(myValue, _this) {
+        const myField = _this.$refs[`commentContext${this.order}`];
+        if (myValue && myField && (myField.selectionStart || myField.selectionStart === 0)) {
+            let startPos = myField.selectionStart
+            let endPos = myField.selectionEnd
+            _this.str = myField.value.substring(0, startPos) + myValue 
+                        + myField.value.substring(endPos, myField.value.length);
+            await _this.$nextTick() // 这句是重点, 圈起来
             myField.focus()
             myField.setSelectionRange(endPos + myValue.length, endPos + myValue.length)
         } else {
-            this.str += myValue
+            _this.str += myValue
         }
     },
+
     /**
      * @description: 点击提交评论按钮，提交评论数据
      * @param {type} 
@@ -88,15 +83,16 @@ export default {
      * @author: yuhui
      */
     submitComments(){
-      let replyUser = this.replyWho;
+      let replyUser = sessionStorage.getItem('replyName');
       let username = String(this.$refs.username.value);
-      const commentContext = this.$refs.commentContext.value;
-      if(this.replyWho.length>0){
-        username+=' @'+replyUser.split('@')[0];
-      }   
+      const commentContext = this.$refs[`commentContext${this.order}`].value;
 
       let nameComment = this.nullAlert(username,commentContext);
       let createTime = Date.now();
+
+      if(replyUser && replyUser.length>0){
+        username+=' @'+replyUser.split('@')[0];
+      }   
       
       if(nameComment&&this.websiteFlag&&this.commentFlag){
           axios.post('/api/writeComment',{
@@ -122,12 +118,15 @@ export default {
                 blogId:this.blogId,
                 likestar:0
               })
-              this.$emit('closeComment');
               
               //清空输入框
+              sessionStorage.setItem('replyName', '');
+              this.$refs[`commentContext${this.order}`].value = '';
               this.$refs.username.value = '';
-              this.$refs.commentContext.value = '';
-              this.replyWho = '';
+              this.str = '';
+              eventBus.$off('writeEmoji');
+              
+              this.$emit('closeComment');
 
               //可删除标志位保存到缓存中
               this.deleteCommentFlag(this.blogId,createTime);
@@ -177,53 +176,6 @@ export default {
     },
 
     /**
-     * @description: 校验所填写的邮箱是否合法
-     * @param {type} 
-     * @return: 
-     * @author: yuhui
-     */
-    validateEmail(){
-      let str = this.$refs.email.value;
-      const emailReg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
-      if(str.length>0&&!emailReg.test(str)){
-        this.emailFlag = false;
-      }else if(emailReg.test(str)){
-        this.emailFlag = true;
-      }
-    },
-
-    /**
-     * @description: 检测网站格式
-     * @param {type} 
-     * @return: 
-     * @author: yuhui
-     */
-    validateWeb(){
-      let str = this.$refs.website.value;
-      const webReg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/
-      if(str.length>0&&!webReg.test(str)){
-        this.websiteFlag = false;
-      }else if(webReg.test(str)){
-        this.websiteFlag = true;
-      }
-    },
-    
-    /**
-     * @description: 输入框清零时,消除警告
-     * @param {type} 
-     * @return: 
-     * @author: yuhui
-     */
-    clearError(){
-      if(this.$refs.email.value.length===0){
-        this.emailFlag = true;
-      }
-      if(this.$refs.website.value.length===0){
-        this.websiteFlag = true;
-      }
-    },
-
-    /**
      * @description: 生成随机的评论头像图片
      * @param {type} 
      * @return: 
@@ -234,17 +186,7 @@ export default {
       let name = num + '.jpg';
       this.picName = name;
       return name;
-    },
-
-    // /**
-    //  * @description: 聚焦事件，改变input框
-    //  * @param {} 
-    //  * @return: 
-    //  * @author: yuhui
-    //  */
-    // focusInput(){
-    //   document.getElementsByClassName("username")[0].style.borderBottom = "1px solid blue";
-    // }
+    }
   }
 }
 </script>
@@ -280,32 +222,12 @@ export default {
         font-size: 16px;
         color: #888
         text-align: center;
-  .input-wrapper
-    width 100%
-    height 50px
-    display flex
-    color #333
-    // input 
-    //   padding 15px
-    //   flex 1
-    //   margin-left 10px
-    //   // border 1px solid #5fbf5e
-    //   border 1px solid #AEDD81
-    //   margin-bottom 10px
-    //   box-sizing border-box
-    //   color #333
-    // input::placeholder
-    //   color #333
-    // input:first-child
-    //   margin-left 0px
   textarea
     width 100%
     height 300px
     padding 15px
     box-sizing border-box
     resize none
-    // border 1px solid #5fbf5e
-    // border 1px solid #8CC2D4
     background #f6f9fa
     border-radius 10px
     box-sizing border-box
@@ -336,24 +258,14 @@ export default {
         background-repeat no-repeat
         float left
       input 
-        // width 200px
-        // display inline-block
-        float right
-        // padding 5px
-        // margin-right 20px
-        // flex 1
-        // margin-left 10px
-        // margin-top 15px
-        // border 1px solid #5fbf5e
+        margin-left 10px
+        float left
         border-bottom 1px solid #8CC2D4
         color gray
         height 100%
         width calc(100% - 40px)
         padding-left 5px
-        // border-bottom 1px solid #ddd
-        // margin-bottom 10px
         box-sizing border-box
-        // line-height 56px
         color #8cc2d4
       input::placeholder
         color #8cc2d4
@@ -364,18 +276,15 @@ export default {
       color #888
       width 60px
       height 32px
-      // border 1px solid #AEDD81
       cursor pointer
-      // text-align right
   @media screen and (max-width: 768px) 
     .write-wrapper
       padding 0px 20px
-      .input-wrapper
-        display block
-        height auto
-        input
-          width 100% !important
-          margin-left 0
+      .writer-wrapper
+        width 50% !important
+        min-width 160px !important
+        .username
+          margin-left 5px
           padding 5px
       textarea
         height 100px
@@ -386,4 +295,6 @@ export default {
           height 24px
           line-height 24px
           font-size 16px
+        // .shaky-wrapper 
+        //   width auto !important
 </style>

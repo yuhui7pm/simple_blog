@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 评论的表情项
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2020-05-17 12:25:55
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-05-18 17:41:36
+--> 
 <template>
   <div class="wrapper">
    <div class="shaky-wrapper">
@@ -95,11 +103,9 @@ export default {
   mounted(){
     //点击颜色其它区域隐藏
     document.addEventListener('click', this.emojiDisplay,true);
-    // document.addEventListener('touchstart', this.emojiDisplay,true);
   },
   destroyed(){
     document.removeEventListener('click',this.emojiDisplay,true);
-    // document.removeEventListener('touchstart', this.emojiDisplay,true);
   }
 }
 </script>
@@ -111,11 +117,9 @@ export default {
     height 34px
     line-height 34px
     width 80px
-    // border 1px solid #AEDD81
     box-sizing border-box
     overflow hidden
     text-align left
-    // background #fafafa
     cursor pointer
     border-radius 2px
     .shaky
@@ -161,10 +165,11 @@ export default {
       margin-bottom 10px
 @media screen and (max-width: 768px) and (min-width :375px)
   .shaky-wrapper
-    height 24px
-    line-height 24px
-    width 80px
+    height 34px
+    line-height 34px
+    width auto
     font-size 16px
+    margin-right 20px
     .shakyInner
       font-size 12px !important
       padding 5px !important 
@@ -174,7 +179,11 @@ export default {
     height 400px
     overflow-y scroll
     margin 0px 30px 0 0 !important
+    .emoji-classification
+      margin-top 10px
 @media screen and (max-width: 375px) 
+  .shaky-wrapper
+    width 40px
   .emoji-wrapper
     width 320px !important
     height 150px !important
@@ -182,4 +191,6 @@ export default {
     overflow-y scroll
     .shakyInner
       font-size 10px
+    .emoji-classification
+      margin-top 10px
 </style>

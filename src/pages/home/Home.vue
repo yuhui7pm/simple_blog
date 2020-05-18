@@ -1,50 +1,10 @@
 <!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2019-12-12 14:59:53
- * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:20:34
---> 
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2019-12-12 14:59:53
- * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:11:15
---> 
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2019-12-12 14:59:53
- * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:11:15
---> 
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2019-12-12 14:59:53
- * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:11:00
---> 
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2019-12-12 14:59:53
- * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:10:57
---> 
-<!--
  * @Descripttion: 博客首页
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:07:07
+ * @LastEditTime: 2020-05-18 16:54:45
  -->
 <template>
   <div class="home-wrapper">
@@ -119,11 +79,30 @@ export default {
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
 
             // 动态设置博客列表的高度
-            this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25)}px`;
+            if(!this.browserRedirect()){
+              this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25)}px`;
+            }
           }
       }).catch(err => {
           console.log('err:',err)
       })
+    },
+
+    /**
+     * @description: 判断移动端还是pc端
+     * @param {type} 
+     * @return: 
+     * @author: yuhui
+     */
+    browserRedirect() {
+      var sUserAgent = navigator.userAgent.toLowerCase();
+      if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
+        // console.log('移动端');//跳转移动端页面
+        return true;
+      } else {
+        // console.log('PC端');//跳转pc端页面
+        return false;
+      }
     },
 
     /**
@@ -161,7 +140,7 @@ export default {
      */
     judgeToBottom(){
       let gap = this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
-      if (gap > - 80) {
+      if (gap > - 100) {
         this.toBottom = true;
         window.removeEventListener("scroll",this.scrollEvent,true);
 

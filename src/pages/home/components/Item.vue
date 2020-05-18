@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:23:24
+ * @LastEditTime: 2020-05-18 15:27:23
  -->
 <template>
   <ol>
@@ -20,7 +20,7 @@
     <div v-if="blockIndex>index || index==0">
       <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
       <div class="item-right">
-        <p class="createTime">No.{{blogLists.length - index}} | {{timestampToTime(list.createtime)}}</p>
+        <p class="createTime">No.{{blogLists.length - index}} | {{common.timestampToTime(list.createtime,'toDay')}}</p>
         <h2 class="article-header">{{list.title}}</h2>
         <p class="introduction">{{list.introduction}}</p>
       </div>
@@ -47,23 +47,9 @@ export default {
     }
   },
   methods:{
-    /**
-     * @description: 根据时间戳得到格式化之后的时间
-     * @param timestamp {Number} 
-     * @return: timeFormated {String} 格式化后的时间
-     * @author: yuhui
-     */
-    timestampToTime(timestamp) {
-      let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear();
-      let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
-      let D = date.getDate();
-      let h = date.getHours() +':';
-      let m = date.getMinutes() +':';
-      let s = date.getSeconds();
-      let timeFormated = (Y + '-' + M + '-' + D); 
-      return timeFormated;//时分秒可以根据自己的需求加上
-    }
+    // checkIE(){
+    //   return '-ms-scroll-limit' in document.documentElement.style && '-ms-ime-align' in document.documentElement.style
+    // }
   },
   mounted(){
     // 在项目加载完成之后初始化wow
@@ -73,6 +59,15 @@ export default {
       live:false
     })
     wow.init();
+
+    // if (this.checkIE()) {
+    //     window.addEventListener('hashchange', () => {
+    //       var currentPath = window.location.hash.slice(1);
+    //       if (this.$route.path !== currentPath) {
+    //       this.$router.push(currentPath)
+    //     }
+    //   }, false)
+    // }
   }
 }
 </script>

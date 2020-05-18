@@ -4,13 +4,13 @@
  * @Author: yuhui
  * @Date: 2019-12-13 15:31:36
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:34:35
+ * @LastEditTime: 2020-05-17 17:20:54
  -->
 <template>
   <div class="blogTitle">
     <img :src="blogContent.picurl" class="pic-left" alt="封面图片"/>
     <div class="right-wrapper">
-      <div class="title-tag">{{`NO.${blogIndOrder} | ${timestampToTime(blogContent.createtime)}`}}</div>
+      <div class="title-tag">{{`NO.${blogIndOrder} | ${common.timestampToTime(blogContent.createtime,'toDay')}`}}</div>
       <h1>{{blogContent.title}}</h1>
       <audio :src="blogContent.musicurl" controls="controls" preload ref="audioMusic"></audio>
     </div>
@@ -30,19 +30,7 @@ export default {
   props:{
     blogContent:Object,
     blogIndOrder:Number
-  },
-  methods:{
-    timestampToTime(timestamp) {
-      let date =new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear();
-      let M = (date.getMonth() +1 <10 ?'0' + (date.getMonth() +1) : date.getMonth() +1);
-      let D = date.getDate();
-      let h = date.getHours() +':';
-      let m = date.getMinutes() +':';
-      let s = date.getSeconds();
-      return (Y + '-' + M + '-' + D);//时分秒可以根据自己的需求加上
-    },
-  },
+  }
 }
 </script>
 
@@ -82,11 +70,8 @@ export default {
         color #3d3634
         font-weight bold  
       audio
-        height 54px
         width 100%
         outline none
-        background-color #f7f7f7
-        border-radius 27px
   @media screen and (max-width: 768px) 
     .blogTitle
       text-align center 
