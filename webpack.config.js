@@ -32,8 +32,8 @@ const config = {
     // https://blog.csdn.net/httguangtt/article/details/84847582
   },
   // 启用sourceMap追踪错误
-  devtool: 'cheap-module-eval-source-map',
-  // devtool: false,
+  // devtool: 'cheap-module-eval-source-map',
+  devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -42,7 +42,7 @@ const config = {
     }),
     new VueLoaderPlugin(), // make sure to include the plugin for the magic
     new HTMLPlugin({
-      // title:'Xlink Blog 一个记录日常生活的博客',
+      title:'Xlink Blog 一个记录日常生活的博客',
       favicon:'./favicon.ico'
     }),
   ],

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 16:54:45
+ * @LastEditTime: 2020-05-18 19:35:38
  -->
 <template>
   <div class="home-wrapper">
@@ -80,7 +80,7 @@ export default {
 
             // 动态设置博客列表的高度
             if(!this.browserRedirect()){
-              this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25)}px`;
+              this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;
             }
           }
       }).catch(err => {
@@ -250,7 +250,7 @@ export default {
 <style lang="stylus" scoped>
 .blogItemWrapper
     margin-top:30px;
-    margin-bottom:90px;
+    margin-bottom:70px;
     height 100%;
 @media screen and (min-width: 950px) 
   .sidebar
@@ -272,7 +272,7 @@ export default {
     width 100%
     transition-duration 0.8s
   .blogItemWrapper
-    margin-top:60px;
+    margin-top:40px;
 @media screen and (max-width:768px)
   .blogItemWrapper
     margin-top:20px;

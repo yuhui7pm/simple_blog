@@ -4,11 +4,11 @@
  * @Author: yuhui
  * @Date: 2019-12-13 16:27:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 17:54:52
+ * @LastEditTime: 2020-05-18 18:40:09
  -->
 <template>
-  <div class="write-wrapper">
-    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" :ref="`commentContext${order}`"></textarea>
+  <div class="write-wrapper" @click="test">
+    <textarea placeholder="在这里输入你的评论" v-model="str" @input="commentFlag=true" ref="commentContext"></textarea>
     <div class="but-wrapper">
       <button @click="submitComments" title="提交评论">
         <img src="../../../../assets/icons/submit.svg" width="32" height="32"/>
@@ -48,13 +48,24 @@ export default {
     name:String,
     order:Number
   },
+  beforeMount(){
+    sessionStorage.setItem('replyName', '');
+    this.str = '';
+  },
   mounted(){  
-    var _this = this;
+    this.picName = '';
+    this.$refs[`commentContext`].value = '';
+    this.$refs.username.value = '';
+    
+    let _this = this;
     eventBus.$on('writeEmoji',emoji=>{
       emoji && _this.insert(emoji,_this);
     })
   },
   methods:{
+    test(){
+      console.log("++++++++++",this.order);
+    },
     /**
      * @description: 有可能表情会加在文字中间,一定要加这一句，否则移动端会有问题
      * @param {type} 
@@ -62,7 +73,7 @@ export default {
      * @author: yuhui
      */
     async insert(myValue, _this) {
-        const myField = _this.$refs[`commentContext${this.order}`];
+        const myField = _this.$refs[`commentContext`];
         if (myValue && myField && (myField.selectionStart || myField.selectionStart === 0)) {
             let startPos = myField.selectionStart
             let endPos = myField.selectionEnd
@@ -85,13 +96,13 @@ export default {
     submitComments(){
       let replyUser = sessionStorage.getItem('replyName');
       let username = String(this.$refs.username.value);
-      const commentContext = this.$refs[`commentContext${this.order}`].value;
+      const commentContext = this.$refs[`commentContext`].value;
 
       let nameComment = this.nullAlert(username,commentContext);
       let createTime = Date.now();
 
       if(replyUser && replyUser.length>0){
-        username+=' @'+replyUser.split('@')[0];
+        username+='@'+replyUser.split('@')[0];
       }   
       
       if(nameComment&&this.websiteFlag&&this.commentFlag){
@@ -121,9 +132,9 @@ export default {
               
               //清空输入框
               sessionStorage.setItem('replyName', '');
-              this.$refs[`commentContext${this.order}`].value = '';
+              this.$refs[`commentContext`].value = '';
               this.$refs.username.value = '';
-              this.str = '';
+              this.str = '';             
               eventBus.$off('writeEmoji');
               
               this.$emit('closeComment');

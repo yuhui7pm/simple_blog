@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:00:47
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 17:52:36
+ * @LastEditTime: 2020-05-18 18:38:20
  -->
 <template>
   <div class="comments-wrapper">
@@ -14,7 +14,7 @@
       <div class="comment-write" v-for="(item,index) in commentsLists" :key="item.createtime">
         <div style="transition-duration:2s;" :class='"deleteWrapper"+index'>
           <Comment class="commentOne" :insert="index" :item='item' :blogId='blogId' @replyComment="replyIt" :key="index"></Comment>
-          <WriteComment :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId' :order="index" :key="item.createtime"></WriteComment>
+          <WriteComment :id="item.createtime" :class='["writeComment","addWrite"+index]' @closeComment='closeOther' :blogId='blogId' :order="index"></WriteComment>
         </div>
       </div>
     </div>
@@ -66,7 +66,6 @@ export default {
       for(let i=0;i<this.commentsLists.length;i++){
         document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = 0;
         document.getElementsByClassName('addWrite'+i)[0].style.margin = '5px 0 10px';
-        // document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = '2px';
   
         if(this.statusArr[i] === true){
           document.getElementsByClassName('addWrite'+i)[0].style.display = 'block';
@@ -104,6 +103,8 @@ export default {
       this.ind = ind;
       let replyUser = sessionStorage.setItem('replyName', newName);
       this.insertReply(ind);
+
+      // document.getElementsByClassName('addWrite'+ind)[0].style.display = 'block';
     },
 
     /**
