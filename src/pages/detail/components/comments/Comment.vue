@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-13 21:17:40
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 17:56:12
+ * @LastEditTime: 2020-05-18 20:42:57
  -->
 <template>
   <div class="comment-wrapper" ref="commentItem" @mouseover="hoverStatus=true;" @mouseout="hoverStatus=false" @click="replyComments">
@@ -296,9 +296,9 @@ export default {
     .context
       margin-top 10px
       color #333
-      font-size 18px
+      font-size 16px
       max-width 660px
-      line-height 24px
+      line-height 25px
       white-space normal
       font-family Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-serif
       cursor default

@@ -4,17 +4,24 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 15:27:23
+ * @LastEditTime: 2020-06-01 18:27:34
  -->
 <template>
   <ol>
-    <router-link
+    <!-- <router-link
       tag="li"
       v-for="(list,index) of blogLists"
       :key="list.id"
       :style="(blockIndex>index)?'background:white':''"
       :class="[(blockIndex>index)&&(index>0)?'animate__fadeInUp animate__slow':'',
         index===0?'animate__fadeInUp animate__slow':'','animate__animated item-wrapper']"
+      :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
+    > -->
+    <router-link
+      tag="li"
+      v-for="(list,index) of blogLists"
+      :key="list.id"
+      :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     >
     <div v-if="blockIndex>index || index==0">
@@ -85,6 +92,7 @@ export default {
     overflow hidden
     box-sizing border-box
     transition-duration 0.5s
+    background white
     &:hover
       cursor pointer
     .item-left
