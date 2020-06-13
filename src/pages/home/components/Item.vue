@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-06-01 18:27:34
+ * @LastEditTime: 2020-06-13 10:02:42
  -->
 <template>
   <ol>
@@ -20,11 +20,11 @@
     <router-link
       tag="li"
       v-for="(list,index) of blogLists"
-      :key="list.id"
+      :key="index"
       :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     >
-    <div v-if="blockIndex>index || index==0">
+    <div>
       <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
       <div class="item-right">
         <p class="createTime">No.{{blogLists.length - index}} | {{common.timestampToTime(list.createtime,'toDay')}}</p>
@@ -53,11 +53,6 @@ export default {
     return{
     }
   },
-  methods:{
-    // checkIE(){
-    //   return '-ms-scroll-limit' in document.documentElement.style && '-ms-ime-align' in document.documentElement.style
-    // }
-  },
   mounted(){
     // 在项目加载完成之后初始化wow
     let wow = new WOW({
@@ -66,15 +61,6 @@ export default {
       live:false
     })
     wow.init();
-
-    // if (this.checkIE()) {
-    //     window.addEventListener('hashchange', () => {
-    //       var currentPath = window.location.hash.slice(1);
-    //       if (this.$route.path !== currentPath) {
-    //       this.$router.push(currentPath)
-    //     }
-    //   }, false)
-    // }
   }
 }
 </script>

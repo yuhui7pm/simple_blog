@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 19:35:38
+ * @LastEditTime: 2020-06-13 10:00:28
  -->
 <template>
   <div class="home-wrapper">
@@ -229,6 +229,9 @@ export default {
 
     this.toTopEvent = this.judgeScrollHei;
     window.addEventListener('scroll',this.toTopEvent,true);
+
+    // let onePage = this.getScrollHeight() - this.getWindowHeight();//是否只有一页，是的话就直接显示了，不滚动
+    // onePage ? this.toBottom==true : this.toBottom==false;
   },
   
   /**
