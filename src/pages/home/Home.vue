@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-06-13 10:00:28
+ * @LastEditTime: 2020-10-03 23:11:13
  -->
 <template>
   <div class="home-wrapper">
@@ -73,11 +73,11 @@ export default {
         .then(res=>{
           res = res.data;
           if(res.data){
-            const data = res.data;
+            const data = res.data.blogLists;
             this.blogsNum = data.length;//获取博客列表数据的总长度
             this.blogsLists = data;     //湖片区博客列表数据
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-
+            
             // 动态设置博客列表的高度
             if(!this.browserRedirect()){
               this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;

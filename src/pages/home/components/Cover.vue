@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:23:48
+ * @LastEditTime: 2020-10-04 00:14:15
  -->
 <template>
   <div class="cover" ref="cover">
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { eventBus } from '../../../assets/bus';
 export default {
   data(){
     return{
@@ -25,7 +24,6 @@ export default {
   },
   mounted(){
     this.flag = true;
-    eventBus.$emit('getCoverHei',this.$refs.cover.offsetHeight);//兄弟组件间传值,传递顶部的高度
   }
 }
 </script>

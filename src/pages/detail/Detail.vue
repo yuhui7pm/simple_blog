@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 16:36:58
+ * @LastEditTime: 2020-10-04 00:13:01
  -->
 <template>
   <div>
@@ -21,16 +21,13 @@
 
 <script>
 import axios from 'axios'; 
-import Header from '../header/BlogHeader.vue';
 import Title from './components/Title.vue';
 import Context from './components/Context.vue';
 import WriteComment from './components/comments/WriteComment.vue';
 import CommentLists from './components/comments/CommentLists.vue';
-import { eventBus } from '@/assets/bus';
 export default {
   name: 'Detail', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
-    Header,
     Title,
     Context,
     WriteComment,

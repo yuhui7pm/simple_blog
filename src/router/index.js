@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 15:32:19
+ * @LastEditTime: 2020-10-01 15:13:55
  */
 // import 'babel-polyfill';
 import Vue from 'vue';
@@ -20,38 +20,41 @@ Vue.use(Meta);
 //  (webpack-int…e_modules/element-ui/lib/mixins/emitter.js:29:22)"}
 // 原因:在路由跳转的时候同一个路由多次添加是不被允许的
 
-const VueRouterPush = Router.prototype.push 
-Router.prototype.push = function push (to) {
-    return VueRouterPush.call(this, to).catch(err => err)
-}
+// const VueRouterPush = Router.prototype.push 
+// Router.prototype.push = function push (to) {
+//     return VueRouterPush.call(this, to).catch(err => err)
+// }
 
 export default new Router({
   //vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
-  mode:"hash",//必须放在routers前面,如果使用history则刷新页面的时候会显示Can not GET
+  // mode:"hash",//必须放在routers前面,如果使用history则刷新页面的时候会显示Can not GET
   routes:[{
     path:'/',
     name:'Home',
-    component:() => import('../pages/home/Home.vue'),
+    component: resolve => require.ensure([], () => resolve(require('@/pages/home/Home.vue')), 'home'),
     meta: {
-      keepAlive: true, //此组件需要被缓存
+      keepAlive: true,
     }
   },{
     path:'/detail',
     name:'Detail',
-    component:() => import('../pages/detail/Detail.vue'),
+    component: resolve => require.ensure([], () => resolve(require('@/pages/detail/Detail.vue'), 'Detail')),
     meta: {
-      keepAlive: false, //此组件需要被缓存
+      keepAlive: false,
     }
   },{
     path:'/404',
     name:'NotFound',
-    component:() => import('../pages/notFound/NotFound.vue')
+    component: resolve => require.ensure([], () => resolve(require('@/pages/notFound/NotFound.vue'), 'NotFound')),
+    meta: {
+      keepAlive: false,
+    }
   },{
     path: '*', // 页面不存在的情况下会跳到404页面
     redirect: '/404',
   }],
   //滚动到顶部
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior () {
     return { x: 0, y: 0 }
   },
 })
