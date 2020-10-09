@@ -4,12 +4,13 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-03 23:11:13
+ * @LastEditTime: 2020-10-06 23:35:38
  -->
 <template>
   <div class="home-wrapper">
     <Header/>
     <Cover class="cover-pic"/>
+    <lang :name="11" :sccore="'足球'">my name is {name} , i like {sccore}</lang>
     <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
       <Item 
         class="blog-lists"
@@ -17,7 +18,7 @@
         :blogLists="blogsLists"
         :blogsIndex="blogsIndex"
         :blockIndex="blockIndex"
-      ></Item>
+      />
     </div>
     <Bottom :toBottom="toBottom"/>
   </div>
@@ -28,7 +29,7 @@ import axios from 'axios';
 import Header from '../header/BlogHeader.vue';
 import Cover from './components/Cover.vue';
 import Item from './components/Item.vue';
-import Bottom from './components/Bottom.vue'
+import Bottom from './components/Bottom.vue';
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -51,6 +52,7 @@ export default {
       toBottom:false, //判断是否滚动到页面底部
       toTopEvent:null, //判断距离页面顶部的监听事件
       blockIndex:0, 
+      value: true
     }
   },
   methods:{
@@ -251,10 +253,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.blogItemWrapper
-    margin-top:30px;
-    margin-bottom:70px;
-    height 100%;
+.home-wrapper 
+  position: relative;
+  .blogItemWrapper
+      margin-top:30px;
+      margin-bottom:70px;
+      height 100%;
 @media screen and (min-width: 950px) 
   .sidebar
     opacity 0

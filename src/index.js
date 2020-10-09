@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 15:24:13
+ * @LastEditTime: 2020-10-06 23:13:42
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -15,9 +15,16 @@ import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js';
 import 'animate.css'; //wow动画库
+import VueI18n from 'vue-i18n';
+import './utils/global';
+
+import Lang from './components/lang/index';
+Vue.use(Lang);
 
 import common from '@/common/js/common.js';//引入公共js
 Vue.prototype.common = common;
+
+Vue.use(VueI18n);
 
 let head = document.getElementsByTagName('head')[0];
 
@@ -43,8 +50,17 @@ head.appendChild(oMeta4);
 const root = document.createElement('div');
 document.body.appendChild(root);
 
+const I18N = new VueI18n({
+  locale: 'zh',
+  messages: {
+    'zh': require('./i18n/zh'),
+    'en': require('./i18n/en')
+  }
+});
+
 //给绑定节点渲染一个vue组件
 new Vue({
+  i18n: I18N,
   router:router,
   render:(h)=>h(App)
 }).$mount(root);

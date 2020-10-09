@@ -2,6 +2,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // 在resolves中起alias，打包时，显示resolve is not defined
 function resolve (dir) {
@@ -18,7 +19,7 @@ const config = {
   context:path.resolve(__dirname),
   //入口文件
   entry:{
-    'main':['babel-polyfill',path.join(__dirname,'src/index.js')],//兼容IE，解决空白页问题
+    'main':['babel-polyfill', path.join(__dirname,'src/index.js')],//兼容IE，解决空白页问题
   },
   //出口文件
   output:{ 
@@ -31,9 +32,8 @@ const config = {
     // },
     // https://blog.csdn.net/httguangtt/article/details/84847582
   },
-  // 启用sourceMap追踪错误
-  // devtool: 'cheap-module-eval-source-map',
-  devtool: false,
+  devtool: 'source-map',   // 启用sourceMap追踪错误
+  // devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -45,6 +45,10 @@ const config = {
       title:'Xlink Blog 一个记录日常生活的博客',
       favicon:'./favicon.ico'
     }),
+    // new StyleLintPlugin({
+    //   // 正则匹配想要lint监测的文件
+    //   files: ['src/**/*.vue', 'src/assets/css/*.l?(e|c)ss']
+    // }),
   ],
   resolve:{
     extensions:['.js','.vue','.json'],
@@ -55,7 +59,10 @@ const config = {
   module:{
     rules:[{
       test: /\.vue$/,
-      loader:'vue-loader',//vue-loader 是一个 webpack 的 loader,可以将Vue 组件转换为 JavaScript 模块:
+      use:[
+        'vue-loader',
+        // 'eslint-loader'
+      ],
     },{
       test:/\.css$/,
       use:[
@@ -125,7 +132,7 @@ if(isDev){
     host:'127.0.0.1',//0.0.0.0就是表示所有的IP地址
     overlay:{
       errors:true,//有错误就显示在网页上
-      warnings:false
+      warnings:true,
     },
     historyApiFallback: {
       index: '/index.html' //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
