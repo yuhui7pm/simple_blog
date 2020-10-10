@@ -23,7 +23,6 @@ export default {
   },
   data() {
       return {
-          msg:'loading......',
           chineseGroups: chineseGroups,
           englishGroups: englishGroups
       }

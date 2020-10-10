@@ -1,5 +1,3 @@
-const { arguments } = require("file-loader");
-
 /*
  * @Descripttion: 
  * @version: 1.0
@@ -8,6 +6,6 @@ const { arguments } = require("file-loader");
  * @LastEditors: yuhui
  * @LastEditTime: 2020-10-06 23:34:08
  */
-global._ = () => {
+global._ = (str, ...args) => {
 
 };
