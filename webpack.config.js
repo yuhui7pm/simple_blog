@@ -70,6 +70,13 @@ const config = {
         'css-loader',  //将vue里面的css代码写到js里面去
       ]
     },{
+      test:/\.less$/, 
+      use:[
+        'style-loader', //将js代码写到html里面去
+        'css-loader',   //将vue里面的css代码写到js里面去
+        'less-loader',//使用模块化的方法去写css代码
+      ]      
+    },{
       test:/\.styl/, //不可以写成/\.styl$/，不然.vue文件里面的<style>无法打包
       use:[
         'style-loader', //将js代码写到html里面去

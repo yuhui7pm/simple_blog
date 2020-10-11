@@ -4,12 +4,13 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-11 15:55:36
+ * @LastEditTime: 2020-10-11 16:20:15
  -->
 <template>
   <div class="home-wrapper">
     <Header/>
     <Cover class="cover-pic"/>
+    <tabs></tabs>
     <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
       <Item 
         class="blog-lists"
@@ -29,13 +30,15 @@ import Header from '../header/BlogHeader.vue';
 import Cover from './components/Cover.vue';
 import Item from './components/Item.vue';
 import Bottom from './components/Bottom.vue';
+import Tabs from '@/components/tab-slider/index.vue';
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
     Header,
     Cover,
     Item,
-    Bottom
+    Bottom,
+    Tabs
   },
   data(){
     return{

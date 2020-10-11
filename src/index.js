@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-06 23:13:42
+ * @LastEditTime: 2020-10-11 17:07:32
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -17,6 +17,9 @@ import router from './router/index.js';
 import 'animate.css'; //wow动画库
 import VueI18n from 'vue-i18n';
 import './utils/global';
+import Vuex from 'vuex';
+import store from './store/store.js';
+import '@/common/style/variables.less';
 
 import Lang from './components/lang/index';
 Vue.use(Lang);
@@ -25,6 +28,8 @@ import common from '@/common/js/common.js';//引入公共js
 Vue.prototype.common = common;
 
 Vue.use(VueI18n);
+
+Vue.use(Vuex);
 
 let head = document.getElementsByTagName('head')[0];
 
@@ -62,6 +67,7 @@ const I18N = new VueI18n({
 new Vue({
   i18n: I18N,
   router:router,
+  store,
   render:(h)=>h(App)
 }).$mount(root);
 
