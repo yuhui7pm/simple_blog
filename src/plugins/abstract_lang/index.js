@@ -1,19 +1,36 @@
+/*
+ * @Descripttion: 国际化操作：提取中文函数的脚本
+ * @version: 1.0
+ * @Author: yuhui
+ * @Date: 2020-10-11 11:02:28
+ * @LastEditors: yuhui
+ * @LastEditTime: 2020-10-11 14:14:50
+ */
 let fs = require("fs");
 let path = require('path');
+let { 
+    isArrayNull,
+    arrFilterRepeate,
+    arrayToObject
+} = require('../../utils/array.js');
+
 let filePath = path.resolve(__dirname, '../', '../');
-let dirRegEx = /^((?!i18n).)*$/;
-let pathRegEx = /^.*\.(js|vue)$/;
+let chineseFilePath = path.resolve(__dirname, '../', '../', './i18n', 'zh.js');
+let englishFilePath = path.resolve(__dirname, '../', '../', './i18n', 'en.js');
 let filePathArr = [];
-let filteredLang = {};
+let filteredAllLang = [];
 
 findPath(filePath);
 filterData();
+writeI18Data();
 
 /**
  * 查找目录下的文件或者文件
  * @param {String} path 需要查找的目录或者文件路径 
  */
 function findPath (rootPath) {
+    let dirRegEx = /^((?!i18n|abstract_lang).)*$/;
+    let pathRegEx = /^.*\.(js|vue)$/;
     let files = fs.readdirSync(rootPath);
 
     if (files) {
@@ -47,8 +64,42 @@ function findPath (rootPath) {
     }
 }
 
+/**
+ * 取出src目录下所有被中文翻译函数包裹着的文本数据
+ */
 function filterData () {
-    fs.readFile(filePathArr[0], 'utf-8', (err,data) => {
-        console.log(data);
-    });
+    let langFunRegEx =  /(?<=_\(["']).*?(?=(['"]\s*,?.*\)))/gm;   // 匹配_('翻译函数')
+    let langHtmlRegEx = /(?<=<lang[^>]*?>).*?(?=<\/lang>)/gm;  // 匹配<lang>翻译函数</lang>
+
+    filePathArr.forEach(item => {
+        let text = fs.readFileSync(item, 'utf-8');
+        let langFunParse = text.match(langFunRegEx);
+        let langHtmlParse = text.match(langHtmlRegEx);
+
+        if (langFunParse && !isArrayNull(langFunParse)) {
+            filteredAllLang = filteredAllLang.concat(langFunParse);
+        }
+
+        if (langHtmlParse && !isArrayNull(langHtmlParse)) {
+            filteredAllLang = filteredAllLang.concat(langHtmlParse);
+        }
+    })
+}
+
+/**
+ * 将数据写进i18目录下的ch.js和en.js文件里
+ */
+function writeI18Data () {
+    if (isArrayNull(filteredAllLang)) {
+        return;
+    }
+
+    let delRepeateArr = arrFilterRepeate(filteredAllLang);
+    let chineseObj = arrayToObject(delRepeateArr, delRepeateArr);
+    let englishObj = arrayToObject(delRepeateArr);
+
+    fs.writeFileSync(chineseFilePath, 'exports.data =' + JSON.stringify(chineseObj));
+    fs.writeFileSync(englishFilePath, 'exports.data =' + JSON.stringify(englishObj));
+
+    console.log('===========翻译函数已经提取完毕========== \n');
 }

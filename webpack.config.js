@@ -32,8 +32,8 @@ const config = {
     // },
     // https://blog.csdn.net/httguangtt/article/details/84847582
   },
-  devtool: 'source-map',   // 启用sourceMap追踪错误
-  // devtool: false,
+  // devtool: 'source-map',   // 启用sourceMap追踪错误
+  devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{

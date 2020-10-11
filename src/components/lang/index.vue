@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-10-05 22:03:13
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-06 22:32:02
+ * @LastEditTime: 2020-10-11 14:48:54
 -->
 <template>
     <div>
@@ -38,26 +38,26 @@ export default {
     },
 
     changeBraces () {
-      let text = this.$slots.default[0].text;
-      let braces = this.$attrs;
+      // let text = this.$slots.default[0].text;
+      // let braces = this.$attrs;
 
-      let regEx = /(?<=\{)[^}]*(?=\})/g;
-      let bracesTextArr = text.match(regEx);
+      // let regEx = /(?<=\{)[^}]*(?=\})/g;
+      // let bracesTextArr = text.match(regEx);
 
-      bracesTextArr.forEach(item => {
-        text = text.replace(`{${item}}`, braces[item]);
-      })
+      // bracesTextArr.forEach(item => {
+      //   text = text.replace(`{${item}}`, braces[item]);
+      // })
     },
 
     writeSentence () {
 
       // 往文件里面写入key和value
-      let text = this.$slots.default[0].text;
-      let lang = this.$i18n.locale === 'zh';
-      this.chineseGroups[text] = lang ? text : '';
-      this.englishGroups[text] = lang ? '' : text; 
+      // let text = this.$slots.default[0].text;
+      // let lang = this.$i18n.locale === 'zh';
+      // this.chineseGroups[text] = lang ? text : '';
+      // this.englishGroups[text] = lang ? '' : text; 
     
-      console.log(chineseGroups, englishGroups, this.$attrs);
+      // console.log(chineseGroups, englishGroups, this.$attrs);
     }
   }
 }

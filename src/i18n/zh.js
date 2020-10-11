@@ -1,14 +1,1 @@
-/*
- * @Descripttion: 
- * @version: 1.0
- * @Author: yuhui
- * @Date: 2020-10-05 21:11:14
- * @LastEditors: yuhui
- * @LastEditTime: 2020-10-06 22:12:22
- */
-
-let chineseGroups = {
-  'my name is {name} , i like {sccore}': ''
-};
-
-module.exports = { chineseGroups };
+exports.data ={"网站运行了 天 小时 分 秒":"网站运行了 天 小时 分 秒","联系方式:":"联系方式:","粤ICP备20013624号":"粤ICP备20013624号","{0} 一个记录日常生活的博客":"{0} 一个记录日常生活的博客","博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,{0},个人{1}":"博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,{0},个人{1}"}

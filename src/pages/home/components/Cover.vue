@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-04 00:14:15
+ * @LastEditTime: 2020-10-11 15:02:04
  -->
 <template>
   <div class="cover" ref="cover">

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:52:04
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:32:23
+ * @LastEditTime: 2020-10-11 15:19:24
  -->
 <template>
   <div>
@@ -13,6 +13,7 @@
         <div class="header-wrapper">
           <img src="../../assets/icons/coffee.svg" alt="博客icon"/>
           <p>Xlink Blog</p>
+          <switch-button v-model="value" text="Ch|En" class="switch-botton"></switch-button>
         </div>
       </header>
     </router-link>
@@ -20,20 +21,27 @@
 </template>
 
 <script>
+import SwitchButton from '@/components/switch/index.vue';
 export default {
   name:'Header',
+  components: {
+    SwitchButton
+  },
   data(){
-    return{}
+    return{
+      value: ''
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
   header
-    width 100%
+    width auto
     height 80px
-    padding-left 40px
+    margin 0 40px
     box-sizing border-box
+    position relative
     .header-wrapper
       height 100%
       min-width 238px 
@@ -52,6 +60,13 @@ export default {
         line-height 80px  
         letter-spacing:2px
         display inline-block
+      .switch-botton {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
   //小于屏幕宽度时，图片消失
   @media screen and (max-width: 768px) 
     header

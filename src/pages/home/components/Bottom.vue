@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-03-26 13:08:59
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-18 17:22:45
+ * @LastEditTime: 2020-10-11 12:07:25
  -->
 <template>
   <div class="bottomWrapper">
@@ -12,11 +12,11 @@
     <div :class="[toBottom?'bottomFadeIn':'','bottomCenter']">
       <div style="float:left">
         <div ref="webRuntime">
-          网站运行了 天 小时 分 秒
+          <lang>网站运行了 天 小时 分 秒</lang>
         </div>
         <div>总访问:{{this.wholeVisitedNum}} | 今日访问:{{this.todayVisitedNum}}</div>
         <div class="contactMe">
-          联系方式:
+          <lang>联系方式:</lang>
           <a @click="copyEmail()">邮箱</a>
           <span>·</span>
           <input ref="email" value="16hyu@stu.edu.cn" style="position:absolute;bottom:0;opacity:0"/>
@@ -25,7 +25,7 @@
           <a href="https://blog.csdn.net/qq_40511157" target="_blank">CSDN</a>
         </div>
         <div class="recordation">
-          粤ICP备20013624号
+          <lang>粤ICP备20013624号</lang>
         </div>
       </div>
       <div class="friendLink" style="float:right;text-align:left">

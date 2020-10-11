@@ -4,13 +4,12 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-06 23:35:38
+ * @LastEditTime: 2020-10-11 15:55:36
  -->
 <template>
   <div class="home-wrapper">
     <Header/>
     <Cover class="cover-pic"/>
-    <lang :name="11" :sccore="'足球'">my name is {name} , i like {sccore}</lang>
     <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
       <Item 
         class="blog-lists"
@@ -52,7 +51,7 @@ export default {
       toBottom:false, //判断是否滚动到页面底部
       toTopEvent:null, //判断距离页面顶部的监听事件
       blockIndex:0, 
-      value: true
+      value: ""
     }
   },
   methods:{
@@ -243,10 +242,10 @@ export default {
    * @author: yuhui
    */
   metaInfo: {
-    title: 'Xlink Blog 一个记录日常生活的博客',
+    title: _('{0} 一个记录日常生活的博客', 'Xlink Blog'),
     meta: [
       { vmid: 'keywords', name: 'keywords', content: 
-        '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,Xlink Blog,个人Blog'}
+        _('博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,{0},个人{1}', 'Xlink Blog', 'Blog')}
     ]
   }
 }
