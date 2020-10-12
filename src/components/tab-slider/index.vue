@@ -9,17 +9,21 @@
 <template>
   <div class="tabs-slider__wrapper">
     <div class="tab-slider__row-wrapper">
-      <div v-for="(item, index) in tabs" 
+      <div v-for="(tab, index) in tabs" 
           class="tab-slider"
           :key="uuid(index)">
-
+        <p class="tab-slider__name">
+          {{ tab.name }}
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
-  @sliderHeight: 160px;
+  @sliderHeight: 50px;
+  @sliderWidth: 80px;
+  @blogItemWidth: 920px;
 
   .tabs-slider__wrapper {
     width: 100%;
@@ -28,17 +32,22 @@
     height: @sliderHeight;
     
     .tab-slider__row-wrapper {
-      max-width: @blogItemWidth;
+      width: @blogItemWidth;
       margin: 0 auto;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      justify-content: space-around; 
 
       .tab-slider {
-        background-color: #DDD;
-        display: inline-block;
         height: @sliderHeight;
-        width: 100px;
+        width: @sliderWidth;
+
+        .tab-slider__name {
+          font-size: 20px;
+          color: #AAA;
+        }
       }
     }
   }
@@ -52,15 +61,15 @@ export default {
     tabs: {
       type: Array,
       default: [{
-        name: '博客首页',
+        name: '文章',
         iconCls: '',
         img: '@/assets/icons/coffee.svg'
       }, {
-        name: '博客首页',
+        name: '图片',
         iconCls: '',
         img: '@/assets/icons/coffee.svg'
       }, {
-        name: '博客首页',
+        name: '音频',
         iconCls: '',
         img: '@/assets/icons/coffee.svg'
       }]

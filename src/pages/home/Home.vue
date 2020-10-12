@@ -258,7 +258,7 @@ export default {
 .home-wrapper 
   position: relative;
   .blogItemWrapper
-      margin-top:30px;
+      margin-top: 0px;
       margin-bottom:70px;
       height 100%;
 @media screen and (min-width: 950px) 
