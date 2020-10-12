@@ -8,11 +8,11 @@
 -->
 <template>
   <div class="tabs-slider__wrapper">
-    <div class="tab-slider__row-wrapper">
+    <div class="tab-slider__row-wrapper" @click="changeTab($event)">
       <div v-for="(tab, index) in tabs" 
           class="tab-slider"
           :key="uuid(index)">
-        <p class="tab-slider__name">
+        <p class="tab-slider__name" :class="tabValue === tab.name ? 'tab-clicked' : ''">
           {{ tab.name }}
         </p>
       </div>
@@ -38,7 +38,7 @@
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      justify-content: space-around; 
+      justify-content: center; 
 
       .tab-slider {
         height: @sliderHeight;
@@ -47,9 +47,15 @@
         .tab-slider__name {
           font-size: 20px;
           color: #AAA;
+          cursor: pointer;
+          transition: 1s;
         }
       }
     }
+  }
+
+  .tab-clicked {
+    color: black;
   }
 </style>
 
@@ -75,11 +81,20 @@ export default {
       }]
     }
   },
-  created () {
-    console.log(this);
+  data: {
+    tabValue: ''
   },
+  created () {
+
+  },
+
   methods: {
     uuid,
+
+    changeTab (e) {
+      console.log(e.target.innerHtml)
+      this.tabValue = e.target.innerHtml;
+    }
   }
 }
 </script>
