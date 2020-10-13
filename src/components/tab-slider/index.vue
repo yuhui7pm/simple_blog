@@ -12,7 +12,7 @@
       <div v-for="(tab, index) in tabs" 
           class="tab-slider"
           :key="uuid(index)">
-        <p class="tab-slider__name" :class="tabValue === tab.name ? 'tab-clicked' : ''">
+        <p class="tab-slider__name" :class="tabValue == tab.name ? 'tab-clicked' : ''">
           {{ tab.name }}
         </p>
       </div>
@@ -48,14 +48,24 @@
           font-size: 20px;
           color: #AAA;
           cursor: pointer;
-          transition: 1s;
+        }
+
+        .tab-clicked {
+          animation: tabChange 0.6s forwards;
+        }
+
+        @keyframes tabChange{
+          from { 
+            color: #AAA;
+            font-size: 18px;
+          }
+          to { 
+            color: #666;
+            font-size: 20px;
+          }
         }
       }
     }
-  }
-
-  .tab-clicked {
-    color: black;
   }
 </style>
 
@@ -81,8 +91,10 @@ export default {
       }]
     }
   },
-  data: {
-    tabValue: ''
+  data () {
+    return {
+      tabValue: ''
+    }
   },
   created () {
 
@@ -92,8 +104,8 @@ export default {
     uuid,
 
     changeTab (e) {
-      console.log(e.target.innerHtml)
-      this.tabValue = e.target.innerHtml;
+      this.tabValue = e.target.innerText.trim();
+      console.log(this.tabValue);
     }
   }
 }
