@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-11 17:07:32
+ * @LastEditTime: 2020-10-18 10:50:25
  */
 // vue组件的一个出口文件
 import 'lib-flexible';
@@ -19,7 +19,6 @@ import VueI18n from 'vue-i18n';
 import './utils/global';
 import Vuex from 'vuex';
 import store from './store/store.js';
-import '@/common/style/variables.less';
 
 import Lang from './components/lang/index';
 Vue.use(Lang);
@@ -70,17 +69,3 @@ new Vue({
   store,
   render:(h)=>h(App)
 }).$mount(root);
-
-
-// 路由跳转
-// if (
-//   '-ms-scroll-limit' in document.documentElement.style && 
-//   '-ms-ime-align' in document.documentElement.style
-// ) { // detect it's IE11
-//   window.addEventListener("hashchange", function(event) {
-//     var currentPath = window.location.hash.slice(1);
-//     if (store.state.route.path !== currentPath) {
-//       router.push(currentPath)
-//     }
-//   }, false)
-// }

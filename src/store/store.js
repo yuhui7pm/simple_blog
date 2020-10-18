@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-10-11 16:37:12
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-11 16:39:46
+ * @LastEditTime: 2020-10-18 13:57:02
  */
 import Vue from 'vue';
 
@@ -14,7 +14,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    blogItemWidth: 920,
+    blogItemWidth: 960,
   },
 
   mutations: {

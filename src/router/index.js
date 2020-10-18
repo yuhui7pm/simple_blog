@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-01 15:13:55
+ * @LastEditTime: 2020-10-18 11:14:28
  */
 // import 'babel-polyfill';
 import Vue from 'vue';
@@ -29,7 +29,7 @@ export default new Router({
   //vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
   // mode:"hash",//必须放在routers前面,如果使用history则刷新页面的时候会显示Can not GET
   routes:[{
-    path:'/',
+    path:'/home/:type',
     name:'Home',
     component: resolve => require.ensure([], () => resolve(require('@/pages/home/Home.vue')), 'home'),
     meta: {

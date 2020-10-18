@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-06-13 10:02:42
+ * @LastEditTime: 2020-10-18 13:24:30
  -->
 <template>
   <ol>
@@ -42,7 +42,7 @@ import { WOW } from 'wowjs';
 import 'animate.css';
 
 export default {
-  name:'items',
+  name:'article',
   props:{
     blogsLen:Number,
     blogLists:Array,
@@ -70,7 +70,6 @@ export default {
     cursor default
     box-shadow 0px 5px 15px rgba(0,0,0,0.3);
   .item-wrapper
-    width 920px /*no*/
     height auto 
     border-radius 8px
     padding 45px

@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-05-17 00:02:12
+ * @LastEditTime: 2020-10-18 12:47:40
  -->
 <template>
   <div id="app">
@@ -26,8 +26,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-// @import是stylus的语法
-@import './assets/styles/reset.css';//全局初始化文件
-@import './common/font/font.css';   //引入字体文件
+<style lang="less" scoped>
+  @import './assets/styles/reset.css';//全局初始化文件
+  @import './common/font/font.css';   //引入字体文件
 </style>

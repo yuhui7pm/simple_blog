@@ -4,22 +4,37 @@
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-11 16:20:15
+ * @LastEditTime: 2020-10-18 17:57:47
  -->
 <template>
   <div class="home-wrapper">
     <Header/>
     <Cover class="cover-pic"/>
-    <tabs></tabs>
-    <div ref="blogListWrapper" :class="[sideBarDisplay?'blog-pagination-right':'blog-pagination-left','blogItemWrapper']">
-      <Item 
-        class="blog-lists"
-        :blogsLen="blogsNum"
-        :blogLists="blogsLists"
-        :blogsIndex="blogsIndex"
-        :blockIndex="blockIndex"
-      />
+    <tabs :tabs='tabs' @tab-click="tabClick"></tabs>
+    <div ref="blogListWrapper" class="blogItemWrapper">
+      <router-link tag="div" 
+                   to="/home/article" 
+                   class="router-link-wrapper">
+          <Item 
+            class="blog-lists"
+            :blogsLen="blogsNum"
+            :blogLists="blogsLists"
+            :blogsIndex="blogsIndex"
+            :blockIndex="blockIndex"
+            v-show="routeType === 'article'"
+          />
+      </router-link>
+
+      <router-link tag="div" 
+                   to="/home/picture" 
+                   class="router-link-wrapper">
+        <Pictures v-show="routeType === 'picture'"  
+                  class="router-link-wrapper"
+                  :column-num="4">
+        </Pictures>
+      </router-link>
     </div>
+    
     <Bottom :toBottom="toBottom"/>
   </div>
 </template>
@@ -31,6 +46,8 @@ import Cover from './components/Cover.vue';
 import Item from './components/Item.vue';
 import Bottom from './components/Bottom.vue';
 import Tabs from '@/components/tab-slider/index.vue';
+import Pictures from './components/picture.vue';
+
 export default {
   name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
   components:{
@@ -38,7 +55,8 @@ export default {
     Cover,
     Item,
     Bottom,
-    Tabs
+    Tabs,
+    Pictures
   },
   data(){
     return{
@@ -54,9 +72,41 @@ export default {
       toBottom:false, //判断是否滚动到页面底部
       toTopEvent:null, //判断距离页面顶部的监听事件
       blockIndex:0, 
-      value: ""
+      value: "",
+      routeType: ''
     }
   },
+  watch: {
+    $route: {
+      deep: true,
+      handler (val) {
+        this.routeType = val.params?.type;
+      },
+      immediate: true
+    }
+  },
+
+  computed: {
+    tabs () {
+      return [{
+        name: '文章',
+        iconCls: '',
+        type: 'article',
+        img: '@/assets/icons/coffee.svg'
+      }, {
+        name: '图片',
+        iconCls: '',
+        type: 'picture',
+        img: '@/assets/icons/coffee.svg'
+      }, {
+        name: '音频',
+        iconCls: '',
+        type: 'audio',
+        img: '@/assets/icons/coffee.svg'
+      }];
+    }
+  },
+
   methods:{
     
     /**
@@ -66,13 +116,6 @@ export default {
      * @author: yuhui
      */
     getBlogItem(){
-      //开发环境用测试数据
-      // if(process.env.NODE_ENV=="development"){
-      //   const data = require('../../../static/mock/lists').data.blogLists;
-      //   this.blogsNum = data.length;//获取博客列表数据的总长度
-      //   this.blogsLists = data;     //湖片区博客列表数据
-      //   this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-      // }
       axios.get('/api/blog/lists')
         .then(res=>{
           res = res.data;
@@ -81,11 +124,11 @@ export default {
             this.blogsNum = data.length;//获取博客列表数据的总长度
             this.blogsLists = data;     //湖片区博客列表数据
             this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
-            
+
             // 动态设置博客列表的高度
-            if(!this.browserRedirect()){
-              this.$refs.blogListWrapper.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;
-            }
+            // if(!this.browserRedirect()){
+            //   this.$refs.blogListWrapper?.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;
+            // }
           }
       }).catch(err => {
           console.log('err:',err)
@@ -223,27 +266,30 @@ export default {
           windowHeight = document.body.clientHeight;　　
       }　　
       return windowHeight;
+    },
+
+    tabClick (val) {
+      let { type } = this.tabs.filter(item => item.name === val)[0];
+      console.log('选中了:', type);
+      this.routeType = type;
+      this.$router.replace({path: '/home/' + type});
+    },
+
+    init () {
+        this.getBlogItem();//页面挂载的时候就获取博客列表数据
+
+        this.scrollEvent = this.judgeToBottom
+        window.addEventListener('scroll',this.scrollEvent,true);
+
+        this.toTopEvent = this.judgeScrollHei;
+        window.addEventListener('scroll',this.toTopEvent,true);
     }
   },
+  
   mounted(){
-    this.getBlogItem();//页面挂载的时候就获取博客列表数据
-
-    this.scrollEvent = this.judgeToBottom
-    window.addEventListener('scroll',this.scrollEvent,true);
-
-    this.toTopEvent = this.judgeScrollHei;
-    window.addEventListener('scroll',this.toTopEvent,true);
-
-    // let onePage = this.getScrollHeight() - this.getWindowHeight();//是否只有一页，是的话就直接显示了，不滚动
-    // onePage ? this.toBottom==true : this.toBottom==false;
+    this.init();
   },
   
-  /**
-   * @description: 使用了vue-meta插件，更新title和keywords
-   * @param {type} 
-   * @return: title {String}, keywords {String}
-   * @author: yuhui
-   */
   metaInfo: {
     title: _('{0} 一个记录日常生活的博客', 'Xlink Blog'),
     meta: [
@@ -254,36 +300,60 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.home-wrapper 
-  position: relative;
-  .blogItemWrapper
-      margin-top: 0px;
-      margin-bottom:70px;
-      height 100%;
-@media screen and (min-width: 950px) 
-  .sidebar
-    opacity 0
-    transition-duration 0.8s
-    z-index 1000
-    transform translateX(-150px)
-  .toggleSideBar
-    opacity 1
-    transition-duration 0.8s
-    z-index 1000
-    transform translateX(0px)
-  .blog-pagination-right
-    transform translateX(350px)
-    width calc(100% - 350px)
-    transition-duration 0.8s
-  .blog-pagination-left
-    transform translateX(0px)
-    width 100%
-    transition-duration 0.8s
-  .blogItemWrapper
-    margin-top:40px;
-@media screen and (max-width:768px)
-  .blogItemWrapper
-    margin-top:20px;
-    margin-bottom:0px !important;
+<style lang="less" scoped>
+  @import '@/common/style/variables.less';
+
+  .home-wrapper {
+    position: relative;
+    width: 100%;
+
+    .blogItemWrapper {
+        margin-top: 0px;
+        margin-bottom:70px;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    .router-link-wrapper {
+        display: block;
+        width: @blogItemWidth;
+        margin: 0 auto;
+    }
+  }
+  
+  @media screen and (min-width: 950px) {
+    .sidebar {
+      opacity: 0;
+      transition-duration: 0.8s;
+      z-index: 1000;
+      transform: translateX(-150px);
+    }
+    .toggleSideBar{
+      opacity: 1;
+      transition-duration: 0.8s;
+      z-index: 1000;
+      transform: translateX(0px);
+    }
+    // .blog-pagination-right {
+    //   transform: translateX(350px);
+    //   width: calc(100% - 350px);
+    //   transition-duration: 0.8s;
+    // }
+    // .blog-pagination-left {
+    //   transform: translateX(0px);
+    //   width: 100%;
+    //   transition-duration: 0.8s;
+    // }
+    .blogItemWrapper {
+      margin-top:40px;
+    }
+  }
+
+  @media screen and (max-width:768px) {
+    .blogItemWrapper {
+      margin-top:20px;
+      margin-bottom:0px !important;
+    }
+  }
 </style>
