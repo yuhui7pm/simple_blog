@@ -30,7 +30,7 @@
                    class="router-link-wrapper">
         <Pictures v-if="routeType === 'picture'"  
                   class="router-link-wrapper"
-                  :column-num="3">
+                  :column-num="4">
         </Pictures>
       </router-link>
     </div>
@@ -94,14 +94,9 @@ export default {
         type: 'article',
         img: '@/assets/icons/coffee.svg'
       }, {
-        name: '图片',
+        name: '影像',
         iconCls: '',
         type: 'picture',
-        img: '@/assets/icons/coffee.svg'
-      }, {
-        name: '音频',
-        iconCls: '',
-        type: 'audio',
         img: '@/assets/icons/coffee.svg'
       }];
     }

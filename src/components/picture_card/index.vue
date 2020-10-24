@@ -1,15 +1,31 @@
 <template>
-    <div class="pic-card" 
-        :style="{width: cardWidth}"
-        @mouseover="showMask=true"
-        @mouseout="showMask=false">
-      <img :src="picUrl"
-            :alt="picture.name"
-            class="pic-card__img"/>
-   
-      <div v-show="showMask" :class="showMask && 'pic-card__mask'"></div>
-      <p class="pic-card__content-introduce">这里是商品介绍</p>
-    </div>
+  <div @mouseover="showMask=true"
+       @mouseout="showMask=false">
+      <div class="pic-card" 
+          :style="{width: cardWidth}">
+        <img :src="picUrl"
+              :alt="picture.name"
+              class="pic-card__img"/>
+    
+        <div v-show="showMask" :class="showMask && 'pic-card__mask'"></div>
+
+        <div class="pic-card__icon-wrapper">
+          <div class="pic-card__vedio-icon"></div>
+          <div class="pic-card__zan-msg-wrapper" v-show="showMask">
+            <div class="pic-card__zan-icon-wrapper">
+                <div class="pic-card__zan-icon"></div>
+                <p class="pic-card__zan-num">11111</p>
+            </div>
+              <div class="pic-card__msg-icon-wrapper">
+                <div class="pic-card__msg-icon"></div>
+                <p class="pic-card__msg-num">22222</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="pic-card__content-introduce">这里是商品介绍</p>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -46,6 +62,11 @@ export default {
 
 <style lang="less" scoped>
   @maskShowtime: 1s;
+  @cardBorder: 1px solid #eee;
+  @iconBgBack: #000;
+  @iconBgOpacity: 0.6;
+  @iconSize: 80% 80%;
+  @imgMinHei: 120px;
 
   .pic-card {
     border-radius: 9px;
@@ -53,7 +74,13 @@ export default {
     margin: 20px 0;
     height: auto;
     position: relative;
-    border: 1px solid gray;
+    border: @cardBorder;
+    transition: @maskShowtime;
+    cursor: default;
+
+    &:hover {
+      transform: translateY(-8px);
+    }
 
     &__img {
       width: 100%;
@@ -62,6 +89,7 @@ export default {
       height: auto;
       animation: fade-in;/*动画名称*/
       animation-duration: 2s;/*动画持续时间*/
+      min-height: @imgMinHei;
     }
 
     &__mask {
@@ -71,20 +99,80 @@ export default {
       bottom: 0;
       left: 0;
       transition: @maskShowtime;
+      background: @iconBgBack;
+      opacity: @iconBgOpacity;
+      // &:hover {
+      //   background: @iconBgBack;
+      //   opacity: @iconBgOpacity;
+      // }
+    }
 
-      &:hover {
-        background: #000;
-        opacity: 0.5;
+    &__icon-wrapper {
+      width: 100%;
+      height: @imgMinHei;
+      position: absolute;
+      top: 0;
+      z-index: 20;
+      padding: 15px;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      .pic-card__vedio-icon {
+          height: 22px;
+          width: 22px;
+          background-color: #eee;
+          border-radius: 11px;
+          opacity: 0.6;
+          float: left;
+          background-image: url('../../assets/icons/card_vedio.svg');
+          background-size: @iconSize;
+          background-repeat: no-repeat;
+          background-position: center center;
+      }
+
+      .pic-card__zan-msg-wrapper {
+          float: right;
+          width: 30px;
+          height: 100%;
+
+          .pic-card__zan-icon {
+            height: 30px;
+            width: 30px;
+            background-color: #eee;
+            border-radius: 20px;
+            opacity: 0.6;
+            float: left;
+            background-image: url('../../assets/icons/card_zan.svg');
+            background-size: @iconSize;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+
+          .pic-card__zan-num {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 14px;
+            width: 24px;
+            color: #fff;
+            border-radius: 7px;
+            background-color: #ff4466;
+          }
+
+          .pic-card__msg-icon {
+            height: 30px;
+            width: 30px;
+            background-color: #eee;
+            border-radius: 20px;
+            opacity: 0.6;
+            float: left;
+            background-image: url('../../assets/icons/card_message.svg');
+            background-size: @iconSize;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
       }
     }
-    
-    // &__content {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   left: 0;
-    // }
 
     .pic-card__content-introduce {
       font-size: 18px;
@@ -94,12 +182,12 @@ export default {
       z-index: 10;
       // margin: 15px;
       width: 100%;
-      height: 60px;
-      line-height: 60px;
+      height: 56px;
+      line-height: 56px;
       background-color: #fff;
-      padding: 0 20px;
+      padding: 0 15px;
+      border-top: @cardBorder;
       box-sizing: border-box;
-
       // opacity: 0;
       // animation: fade-in;/*动画名称*/
       // animation-duration: @maskShowtime;/*动画持续时间*/

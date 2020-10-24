@@ -23,7 +23,7 @@ import Vue from 'vue';
 import { uuid } from '@/utils/util.js';
 import axios from 'axios'; 
 
-const COLUMN_WIDTH = 20,
+const COLUMN_WIDTH = 10,
       INTERVAL_TIME = 300;
 
 export default {
