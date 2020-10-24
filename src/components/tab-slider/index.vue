@@ -104,6 +104,11 @@ export default {
 
     changeTab (e) {
       this.tabValue = e.target.innerText.trim();
+    },
+
+    setTabValue (val) {
+      console.log(val, '设置值')
+      this.tabValue = val;
     }
   }
 }

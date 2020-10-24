@@ -10,7 +10,7 @@
   <div class="home-wrapper">
     <Header/>
     <Cover class="cover-pic"/>
-    <tabs :tabs='tabs' @tab-click="tabClick"></tabs>
+    <tabs ref="tabsRef" :tabs='tabs' @tab-click="tabClick"></tabs>
     <div ref="blogListWrapper" class="blogItemWrapper">
       <router-link tag="div" 
                    to="/home/article" 
@@ -282,6 +282,11 @@ export default {
 
         this.toTopEvent = this.judgeScrollHei;
         window.addEventListener('scroll',this.toTopEvent,true);
+
+        // 页面更新，获取参数
+        let defaultRouteType = this.$route.params.type || 'article';
+        let type = this.tabs.filter(item => item.type === defaultRouteType)[0].name;
+        this.$refs.tabsRef.setTabValue(type);
     }
   },
   
