@@ -42,21 +42,18 @@ export default {
     margin: 10px 0;
     height: auto;
 
-    .pic-enter,.pic-leave-to{
-        opacity: 0;
-    }
-    .pic-enter-to,.pic-leave{
-        opacity: 1;
-    }
-    .pic-enter-active,.pic-leave-active{
-        transition: all 3s;
-    }
-
     &__img {
       width: 100%;
       object-fit: cover;
       object-position: left center;
       height: auto;
+      animation: fade-in;/*动画名称*/  
+      animation-duration: 3s;/*动画持续时间*/
     }
+
+    @keyframes fade-in {  
+      0% {opacity: 0;};/*初始状态 透明度为0*/  
+      100% {opacity: 1;};/*结束状态 透明度为1*/  
+    }  
   }
 </style>

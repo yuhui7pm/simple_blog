@@ -73,7 +73,7 @@ export default {
           data.forEach((data, index) => {
             setTimeout(() => {
               this.setPicData(data, index);
-            }, 200 * index);
+            }, 400 * index);
           })
 
       }).catch(err => {
@@ -115,9 +115,11 @@ export default {
 <style lang="less" scoped>
   .pic-container {
     width: 100%;
-      
+    min-height: 500px;
+
     &__column-wrapper {
       display: inline-block;
+      vertical-align:top;
 
       div {
         height: auto;

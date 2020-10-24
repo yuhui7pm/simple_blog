@@ -22,7 +22,7 @@ const config = {
     'main':['babel-polyfill', path.join(__dirname,'src/index.js')],//兼容IE，解决空白页问题
   },
   //出口文件
-  output:{ 
+  output:{
     filename:'bundle.js',
     path:path.join(__dirname,'dist'),
     // publicPath: '/'
@@ -70,12 +70,12 @@ const config = {
         'css-loader',  //将vue里面的css代码写到js里面去
       ]
     },{
-      test:/\.less$/, 
+      test:/\.less$/,
       use:[
         'style-loader', //将js代码写到html里面去
         'css-loader',   //将vue里面的css代码写到js里面去
         'less-loader',//使用模块化的方法去写css代码
-      ]      
+      ]
     },{
       test:/\.styl/, //不可以写成/\.styl$/，不然.vue文件里面的<style>无法打包
       use:[
@@ -89,7 +89,7 @@ const config = {
         //   }
         // },
         'stylus-loader',//使用模块化的方法去写css代码
-      ]      
+      ]
     },{
       test:/\.(gif|jpg|png|svg|jpeg)$/,
       loader:'url-loader',//url-loader可以设置图片大小限制，当图片超过限制时，其表现行为等同于file-loader
@@ -106,8 +106,8 @@ const config = {
         limit:10000,
         name:'fonts/[name].[hash:7].[ext]'
       }
-    },{			
-      // 这样可以处理ES6语法为ES5语法，但是这时候ES6中的一些新增的Promise或WeakMap，静态方法，如Array.from或Object.assign等等。不会被转义	
+    },{
+      // 这样可以处理ES6语法为ES5语法，但是这时候ES6中的一些新增的Promise或WeakMap，静态方法，如Array.from或Object.assign等等。不会被转义
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader',

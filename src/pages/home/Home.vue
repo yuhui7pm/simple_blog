@@ -30,7 +30,7 @@
                    class="router-link-wrapper">
         <Pictures v-if="routeType === 'picture'"  
                   class="router-link-wrapper"
-                  :column-num="4">
+                  :column-num="3">
         </Pictures>
       </router-link>
     </div>

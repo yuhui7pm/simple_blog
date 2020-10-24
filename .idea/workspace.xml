@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="881b76e3-fa8f-43f6-ae59-f2773cfc314a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/components/picture_card/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/picture_card/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/components/picture.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/picture.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +42,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603510855927</updated>
-      <workItem from="1603510858953" duration="1454000" />
+      <workItem from="1603510858953" duration="1824000" />
     </task>
     <task id="LOCAL-00001" summary="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向">
       <created>1603511014384</created>
@@ -59,7 +58,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603511728392</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[Add] 实现图片瀑布流">
+      <created>1603522730012</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603522730012</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -67,20 +73,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向" />
+    <MESSAGE value="[Add] 实现图片瀑布流" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Add] 实现图片瀑布流" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="177" y="86" width="1743" height="868" key="CommitChangelistDialog2" timestamp="1603511724057">
+    <state x="177" y="86" width="1743" height="868" key="CommitChangelistDialog2" timestamp="1603522727723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="177" y="86" width="1743" height="868" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603511724057" />
+    <state x="177" y="86" width="1743" height="868" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603522727723" />
+    <state x="272" y="85" key="DiffContextDialog" timestamp="1603522604506">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="272" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603522604506" />
     <state x="807" y="220" key="RollbackChangesDialog" timestamp="1603511659151">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="220" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603511659151" />
-    <state x="552" y="238" key="Vcs.Push.Dialog.v2" timestamp="1603511731968">
+    <state x="552" y="238" key="Vcs.Push.Dialog.v2" timestamp="1603522732799">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603511731968" />
+    <state x="552" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603522732799" />
   </component>
 </project>
