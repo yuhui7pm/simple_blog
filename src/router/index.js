@@ -49,7 +49,10 @@ export default new Router({
     meta: {
       keepAlive: false,
     }
-  },{
+  }, {
+    path: '/', 
+    redirect: '/home/article'
+  }, { 
     path: '*', // 页面不存在的情况下会跳到404页面
     redirect: '/404',
   }],

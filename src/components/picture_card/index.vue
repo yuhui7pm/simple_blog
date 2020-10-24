@@ -1,6 +1,6 @@
 <template>
   <div class="pic-card" :style="{width: cardWidth}">
-    <img :src="picUrl" 
+    <img src="../../assets/images/pic_demo4.jpg" 
           :alt="picture.name" 
           class="pic-card__img"/>
   </div>
@@ -27,7 +27,7 @@ export default {
   computed: {
     picUrl () {
       let url = this.picture.url
-      return require(url);
+      return require('../../assets/images/pic_demo4.jpg');
     }
   }
 }
