@@ -1,9 +1,11 @@
 <template>
-  <div class="pic-card" :style="{width: cardWidth}">
-    <img src="../../assets/images/pic_demo4.jpg" 
-          :alt="picture.name" 
-          class="pic-card__img"/>
-  </div>
+    <div class="pic-card" :style="{width: cardWidth}">
+    <transition name="pic">
+        <img :src="picUrl"
+              :alt="picture.name"
+              class="pic-card__img"/>
+    </transition>
+    </div>
 </template>
 
 <script>
@@ -26,8 +28,8 @@ export default {
   },
   computed: {
     picUrl () {
-      let url = this.picture.url
-      return require('../../assets/images/pic_demo4.jpg');
+      let url = this.picture.url;
+      return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`);
     }
   }
 }
@@ -37,7 +39,18 @@ export default {
   .pic-card {
     border-radius: 9px;
     overflow: hidden;
+    margin: 10px 0;
     height: auto;
+
+    .pic-enter,.pic-leave-to{
+        opacity: 0;
+    }
+    .pic-enter-to,.pic-leave{
+        opacity: 1;
+    }
+    .pic-enter-active,.pic-leave-active{
+        transition: all 3s;
+    }
 
     &__img {
       width: 100%;

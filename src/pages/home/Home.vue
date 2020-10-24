@@ -28,7 +28,7 @@
       <router-link tag="div" 
                    to="/home/picture" 
                    class="router-link-wrapper">
-        <Pictures v-show="routeType === 'picture'"  
+        <Pictures v-if="routeType === 'picture'"  
                   class="router-link-wrapper"
                   :column-num="4">
         </Pictures>
@@ -270,7 +270,6 @@ export default {
 
     tabClick (val) {
       let { type } = this.tabs.filter(item => item.name === val)[0];
-      console.log('选中了:', type);
       this.routeType = type;
       this.$router.replace({path: '/home/' + type});
     },
