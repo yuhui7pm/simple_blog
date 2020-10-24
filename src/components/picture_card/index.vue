@@ -14,11 +14,11 @@
           <div class="pic-card__zan-msg-wrapper" v-show="showMask">
             <div class="pic-card__zan-icon-wrapper">
                 <div class="pic-card__zan-icon"></div>
-                <p class="pic-card__zan-num">11111</p>
+                <p class="pic-card__zan-num">111</p>
             </div>
               <div class="pic-card__msg-icon-wrapper">
                 <div class="pic-card__msg-icon"></div>
-                <p class="pic-card__msg-num">22222</p>
+                <p class="pic-card__msg-num">2</p>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default {
       position: absolute;
       top: 0;
       z-index: 20;
-      padding: 15px;
+      padding: 15px 30px;
       box-sizing: border-box;
       overflow: hidden;
 
@@ -135,41 +135,66 @@ export default {
           width: 30px;
           height: 100%;
 
-          .pic-card__zan-icon {
-            height: 30px;
-            width: 30px;
-            background-color: #eee;
-            border-radius: 20px;
-            opacity: 0.6;
-            float: left;
-            background-image: url('../../assets/icons/card_zan.svg');
-            background-size: @iconSize;
-            background-repeat: no-repeat;
-            background-position: center center;
+          .pic-card__zan-icon-wrapper {
+            height: 40px;
+            width: 40px;
+            position: relative;
+            margin-bottom: 10px;
+
+            .pic-card__zan-icon {
+              height: 100%;
+              width: 100%;
+              background-color: #eee;
+              border-radius: 20px;
+              opacity: 0.6;
+              float: left;
+              background-image: url('../../assets/icons/card_zan.svg');
+              background-size: @iconSize;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+
+            .pic-card__zan-num {
+              position: absolute;
+              right: -5px;
+              top: -5px;
+              height: 14px;
+              width: auto;
+              color: #fff;
+              border-radius: 7px;
+              background-color: #ff4466;
+            }
           }
 
-          .pic-card__zan-num {
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 14px;
-            width: 24px;
-            color: #fff;
-            border-radius: 7px;
-            background-color: #ff4466;
-          }
+          .pic-card__msg-icon-wrapper {
+            height: 40px;
+            width: 40px;
+            position: relative;
+            margin-bottom: 10px;
 
-          .pic-card__msg-icon {
-            height: 30px;
-            width: 30px;
-            background-color: #eee;
-            border-radius: 20px;
-            opacity: 0.6;
-            float: left;
-            background-image: url('../../assets/icons/card_message.svg');
-            background-size: @iconSize;
-            background-repeat: no-repeat;
-            background-position: center center;
+            .pic-card__msg-icon {
+              height: 100%;
+              width: 100%;
+              background-color: #eee;
+              border-radius: 20px;
+              opacity: 0.6;
+              float: left;
+              background-image: url('../../assets/icons/card_message.svg');
+              background-size: @iconSize;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+
+            .pic-card__msg-num {
+              position: absolute;
+              right: -5px;
+              top: -5px;
+              height: 14px;
+              width: auto;
+              color: #fff;
+              border-radius: 7px;
+              background-color: #ff4466;
+            }
           }
       }
     }

@@ -8,7 +8,6 @@
     <list default="true" id="881b76e3-fa8f-43f6-ae59-f2773cfc314a" name="Default Changelist" comment="Merge branch 'yuhui_dev' of https://github.com/yuhui7pm/simple_blog into yuhui_dev&#10;&#10;# Conflicts:&#10;#&#9;src/components/picture_card/index.vue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/picture_card/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/picture_card/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tab-slider/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tab-slider/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/home/components/picture.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/picture.vue" afterDir="false" />
     </list>
@@ -49,7 +48,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603510855927</updated>
-      <workItem from="1603510858953" duration="3556000" />
+      <workItem from="1603510858953" duration="5286000" />
     </task>
     <task id="LOCAL-00001" summary="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向">
       <created>1603511014384</created>
@@ -79,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603524637470</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[Add] 瀑布流图标">
+      <created>1603546374785</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603546374791</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,13 +131,14 @@
     <MESSAGE value="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向" />
     <MESSAGE value="[Add] 实现图片瀑布流" />
     <MESSAGE value="[Add] 完成瀑布流布局" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Add] 完成瀑布流布局" />
+    <MESSAGE value="[Add] 瀑布流图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Add] 瀑布流图标" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="63" y="61" width="1743" height="901" key="CommitChangelistDialog2" timestamp="1603524635344">
+    <state x="63" y="60" width="1743" height="901" key="CommitChangelistDialog2" timestamp="1603546372925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="63" y="61" width="1743" height="901" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603524635344" />
+    <state x="63" y="60" width="1743" height="901" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603546372925" />
     <state x="272" y="85" width="1536" height="832" key="DiffContextDialog" timestamp="1603523389386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -144,10 +151,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="355" y="400" key="VCS.ChangelistChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603523383232" />
-    <state x="552" y="238" key="Vcs.Push.Dialog.v2" timestamp="1603524640827">
+    <state x="552" y="238" key="Vcs.Push.Dialog.v2" timestamp="1603546376577">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603524640827" />
+    <state x="552" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603546376577" />
     <state x="832" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1603528176097">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
