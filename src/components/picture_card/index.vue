@@ -12,14 +12,8 @@
         <div class="pic-card__icon-wrapper">
           <div class="pic-card__vedio-icon"></div>
           <div class="pic-card__zan-msg-wrapper" v-show="showMask">
-            <div class="pic-card__zan-icon-wrapper">
-                <div class="pic-card__zan-icon"></div>
-                <p class="pic-card__zan-num">111</p>
-            </div>
-              <div class="pic-card__msg-icon-wrapper">
-                <div class="pic-card__msg-icon"></div>
-                <p class="pic-card__msg-num">2</p>
-            </div>
+            <circle-icon pic-url="assets/icons/card_zan.svg" key="zan" :num="22"/>
+            <circle-icon pic-url="assets/icons/card_msg.svg" key="msg" :num="1"/>
           </div>
         </div>
 
@@ -30,9 +24,13 @@
 
 <script>
 import picTest from '@/assets/images/pic_demo.jpg';
+import CircleIcon from '@/components/circle-icon/index.vue';
 
 export default {
   name: 'Card',
+  components: {
+    CircleIcon
+  },
   props: {
     cardWidth: {
       type: String,
@@ -74,6 +72,7 @@ export default {
     margin: 20px 0;
     height: auto;
     position: relative;
+    box-shadow: 0px 0px 4px 2px #eeeeee;
     border: @cardBorder;
     transition: @maskShowtime;
     cursor: default;
@@ -134,68 +133,6 @@ export default {
           float: right;
           width: 30px;
           height: 100%;
-
-          .pic-card__zan-icon-wrapper {
-            height: 40px;
-            width: 40px;
-            position: relative;
-            margin-bottom: 10px;
-
-            .pic-card__zan-icon {
-              height: 100%;
-              width: 100%;
-              background-color: #eee;
-              border-radius: 20px;
-              opacity: 0.6;
-              float: left;
-              background-image: url('../../assets/icons/card_zan.svg');
-              background-size: @iconSize;
-              background-repeat: no-repeat;
-              background-position: center center;
-            }
-
-            .pic-card__zan-num {
-              position: absolute;
-              right: -5px;
-              top: -5px;
-              height: 14px;
-              width: auto;
-              color: #fff;
-              border-radius: 7px;
-              background-color: #ff4466;
-            }
-          }
-
-          .pic-card__msg-icon-wrapper {
-            height: 40px;
-            width: 40px;
-            position: relative;
-            margin-bottom: 10px;
-
-            .pic-card__msg-icon {
-              height: 100%;
-              width: 100%;
-              background-color: #eee;
-              border-radius: 20px;
-              opacity: 0.6;
-              float: left;
-              background-image: url('../../assets/icons/card_message.svg');
-              background-size: @iconSize;
-              background-repeat: no-repeat;
-              background-position: center center;
-            }
-
-            .pic-card__msg-num {
-              position: absolute;
-              right: -5px;
-              top: -5px;
-              height: 14px;
-              width: auto;
-              color: #fff;
-              border-radius: 7px;
-              background-color: #ff4466;
-            }
-          }
       }
     }
 

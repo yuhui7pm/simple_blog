@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2020-10-18 12:20:22
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-18 17:51:39
+ * @LastEditTime: 2020-10-25 21:53:09
 -->
 <template>
   <div class="pic-container">
@@ -72,9 +72,10 @@ export default {
           }
 
           data.forEach((data, index) => {
-            setTimeout(() => {
-              this.setPicData(data, index);
-            }, INTERVAL_TIME * index);
+this.setPicData(data, index);
+// setTimeout(() => {
+            //   this.setPicData(data, index);
+            // }, INTERVAL_TIME * index);
           })
 
       }).catch(err => {

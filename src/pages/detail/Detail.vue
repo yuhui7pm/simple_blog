@@ -4,7 +4,7 @@
  * @Author: yuhui
  * @Date: 2019-12-12 21:05:27
  * @LastEditors: yuhui
- * @LastEditTime: 2020-10-04 00:13:01
+ * @LastEditTime: 2020-10-25 17:55:06
  -->
 <template>
   <div>
@@ -120,7 +120,7 @@ export default {
   .single-episode-wrapper
     width 1020px
     margin 80px auto 140px
-    box-shadow: 0px 0px 4px 1px #eeeeee;
+    box-shadow: 0px 0px 4px 1px #eee;
     animation:fadein 1s ease
     background white
     @keyframes fadein{
