@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 
+ * @Descripttion:
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2019-12-12 14:59:53
@@ -20,7 +20,7 @@ Vue.use(Meta);
 //  (webpack-int…e_modules/element-ui/lib/mixins/emitter.js:29:22)"}
 // 原因:在路由跳转的时候同一个路由多次添加是不被允许的
 
-// const VueRouterPush = Router.prototype.push 
+// const VueRouterPush = Router.prototype.push
 // Router.prototype.push = function push (to) {
 //     return VueRouterPush.call(this, to).catch(err => err)
 // }
@@ -31,28 +31,28 @@ export default new Router({
   routes:[{
     path:'/home/:type',
     name:'Home',
-    component: resolve => require.ensure([], () => resolve(require('@/pages/home/Home.vue')), 'home'),
+    component: resolve => require.ensure([], () => resolve(require('../pages/home/Home.vue')), 'home'),
     meta: {
       keepAlive: true,
     }
   },{
     path:'/detail',
     name:'Detail',
-    component: resolve => require.ensure([], () => resolve(require('@/pages/detail/Detail.vue'), 'Detail')),
+    component: resolve => require.ensure([], () => resolve(require('../pages/detail/Detail.vue'), 'Detail')),
     meta: {
       keepAlive: false,
     }
   },{
     path:'/404',
     name:'NotFound',
-    component: resolve => require.ensure([], () => resolve(require('@/pages/notFound/NotFound.vue'), 'NotFound')),
+    component: resolve => require.ensure([], () => resolve(require('../pages/notFound/NotFound.vue'), 'NotFound')),
     meta: {
       keepAlive: false,
     }
   }, {
-    path: '/', 
+    path: '/',
     redirect: '/home/article'
-  }, { 
+  }, {
     path: '*', // 页面不存在的情况下会跳到404页面
     redirect: '/404',
   }],

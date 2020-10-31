@@ -23,7 +23,7 @@ import store from './store/store.js';
 import Lang from './components/lang/index';
 Vue.use(Lang);
 
-import common from '@/common/js/common.js';//引入公共js
+import common from './common/js/common.js';//引入公共js
 Vue.prototype.common = common;
 
 Vue.use(VueI18n);

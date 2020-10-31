@@ -109,7 +109,10 @@ const config = {
     },{
       // 这样可以处理ES6语法为ES5语法，但是这时候ES6中的一些新增的Promise或WeakMap，静态方法，如Array.from或Object.assign等等。不会被转义
       test: /\.js$/,
-      exclude: /node_modules/,
+      exclude: [
+        path.resolve(__dirname, 'node_modules'),
+        path.resolve(__dirname, 'src/plugins')
+      ],
       loader: 'babel-loader',
       // options:{
       //   presets: [["@babel/preset-env",{
@@ -124,6 +127,9 @@ const config = {
       //   }]]
       // }
     }]
+  },
+  node: {
+    fs: 'empty'
   }
 }
 

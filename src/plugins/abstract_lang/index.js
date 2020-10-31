@@ -8,7 +8,7 @@
  */
 let fs = require("fs");
 let path = require('path');
-let { 
+let {
     isArrayNull,
     arrFilterRepeate,
     arrayToObject
@@ -26,7 +26,7 @@ writeI18Data();
 
 /**
  * 查找目录下的文件或者文件
- * @param {String} path 需要查找的目录或者文件路径 
+ * @param {String} rootPath 需要查找的目录或者文件路径
  */
 function findPath (rootPath) {
     let dirRegEx = /^((?!i18n|abstract_lang).)*$/;

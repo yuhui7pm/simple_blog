@@ -5,11 +5,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="881b76e3-fa8f-43f6-ae59-f2773cfc314a" name="Default Changelist" comment="Merge branch 'yuhui_dev' of https://github.com/yuhui7pm/simple_blog into yuhui_dev&#10;&#10;# Conflicts:&#10;#&#9;src/components/picture_card/index.vue">
+    <list default="true" id="881b76e3-fa8f-43f6-ae59-f2773cfc314a" name="Default Changelist" comment="[add] 提取出来图片瀑布流的图标icon为公共组件">
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/picture_card/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/picture_card/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/components/picture.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/picture.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugins/abstract_lang/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/abstract_lang/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +23,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/webpack.config.js" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1jJ8UhH46rbMtUjVgmRQkwObNdY" />
   <component name="ProjectViewState">
@@ -38,6 +46,7 @@
     <property name="node.js.selected.package.stylelint" value="D:\Users\sangfor\Desktop\simple_blog\simple_blog\node_modules\stylelint" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="D:\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -49,6 +58,8 @@
       <option name="presentableId" value="Default" />
       <updated>1603510855927</updated>
       <workItem from="1603510858953" duration="5286000" />
+      <workItem from="1603634613623" duration="299000" />
+      <workItem from="1604106006848" duration="4290000" />
     </task>
     <task id="LOCAL-00001" summary="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向">
       <created>1603511014384</created>
@@ -85,11 +96,35 @@
       <option name="project" value="LOCAL" />
       <updated>1603546374791</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[add] 提取出来图片瀑布流的图标icon为公共组件">
+      <created>1603634665536</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1603634665536</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[add] 提取出来图片瀑布流的图标icon为公共组件">
+      <created>1603634741323</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603634741323</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -119,29 +154,90 @@
             </State>
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/simple_Blog/src/plugins" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="3">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/simple_Blog/src" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
       </map>
     </option>
     <option name="OPEN_GENERIC_TABS">
       <map>
         <entry key="1" value="TOOL_WINDOW" />
+        <entry key="2" value="TOOL_WINDOW" />
+        <entry key="3" value="TOOL_WINDOW" />
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Add] 删除之前模仿明鸿的一些无用文件；路由重定向" />
     <MESSAGE value="[Add] 实现图片瀑布流" />
     <MESSAGE value="[Add] 完成瀑布流布局" />
     <MESSAGE value="[Add] 瀑布流图标" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Add] 瀑布流图标" />
+    <MESSAGE value="[add] 提取出来图片瀑布流的图标icon为公共组件" />
+    <option name="LAST_COMMIT_MESSAGE" value="[add] 提取出来图片瀑布流的图标icon为公共组件" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="63" y="60" width="1743" height="901" key="CommitChangelistDialog2" timestamp="1603546372925">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="49" y="55" width="1192" height="847" key="CommitChangelistDialog2" timestamp="1604107292178">
+      <screen x="0" y="0" width="1500" height="960" />
     </state>
+    <state x="49" y="55" width="1192" height="847" key="CommitChangelistDialog2/0.0.1500.960@0.0.1500.960" timestamp="1604107292178" />
     <state x="63" y="60" width="1743" height="901" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603546372925" />
-    <state x="272" y="85" width="1536" height="832" key="DiffContextDialog" timestamp="1603523389386">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="213" y="78" width="1200" height="768" maximized="true" key="DiffContextDialog" timestamp="1604110181814">
+      <screen x="0" y="0" width="1500" height="960" />
     </state>
+    <state x="213" y="78" width="1200" height="768" maximized="true" key="DiffContextDialog/0.0.1500.960@0.0.1500.960" timestamp="1604110181814" />
     <state x="272" y="85" width="1536" height="832" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603523389386" />
     <state x="807" y="220" key="RollbackChangesDialog" timestamp="1603511659151">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -151,10 +247,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="355" y="400" key="VCS.ChangelistChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603523383232" />
-    <state x="552" y="238" key="Vcs.Push.Dialog.v2" timestamp="1603546376577">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="431" y="220" key="Vcs.Push.Dialog.v2" timestamp="1603634667436">
+      <screen x="0" y="0" width="1500" height="960" />
     </state>
+    <state x="431" y="220" key="Vcs.Push.Dialog.v2/0.0.1500.960@0.0.1500.960" timestamp="1603634667436" />
     <state x="552" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603546376577" />
+    <state x="451" y="77" width="596" height="804" key="find.popup" timestamp="1604107307987">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="451" y="77" width="596" height="804" key="find.popup/0.0.1500.960@0.0.1500.960" timestamp="1604107307987" />
     <state x="832" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1603528176097">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
