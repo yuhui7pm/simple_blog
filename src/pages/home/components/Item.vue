@@ -7,8 +7,8 @@
  * @LastEditTime: 2020-10-18 13:24:30
  -->
 <template>
-  <ol>
-    <!-- <router-link
+    <ol>
+        <!-- <router-link
       tag="li"
       v-for="(list,index) of blogLists"
       :key="list.id"
@@ -17,51 +17,71 @@
         index===0?'animate__fadeInUp animate__slow':'','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
     > -->
-    <router-link
-      tag="li"
-      v-for="(list,index) of blogLists"
-      :key="index"
-      :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
-      :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
-    >
-    <div>
-      <img class="item-left" :src="list.picurl" alt="博客列表图片"/>
-      <div class="item-right">
-        <p class="createTime">No.{{blogLists.length - index}} | {{common.timestampToTime(list.createtime,'toDay')}}</p>
-        <h2 class="article-header">{{list.title}}</h2>
-        <p class="introduction">{{list.introduction}}</p>
-      </div>
-    </div>
-    </router-link>
-  </ol>
+        <router-link
+            v-for="(list,index) of blogLists"
+            :key="index"
+            tag="li"
+            :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
+            :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
+        >
+            <div>
+                <img class="item-left" :src="list.picurl" alt="博客列表图片">
+                <div class="item-right">
+                    <p class="createTime">
+                        No.{{ blogLists.length - index }} | {{ common.timestampToTime(list.createtime,'toDay') }}
+                    </p>
+                    <h2 class="article-header">
+                        {{ list.title }}
+                    </h2>
+                    <p class="introduction">
+                        {{ list.introduction }}
+                    </p>
+                </div>
+            </div>
+        </router-link>
+    </ol>
 </template>
 
 <script>
 
-import { WOW } from 'wowjs';
-import 'animate.css';
+import { WOW } from 'wowjs'
+import 'animate.css'
 
 export default {
-  name:'article',
-  props:{
-    blogsLen:Number,
-    blogLists:Array,
-    blogsIndex:Number,
-    blockIndex:Number
-  },
-  data(){
-    return{
-    }
-  },
-  mounted(){
+    name:'Article',
+    props:{
+        blogsLen: {
+            type: Number,
+            default: 0
+        },
+        blogLists: {
+            type: Array,
+            default: () => {
+                return []
+            }
+        },
+        blogsIndex: {
+            type: Number,
+            default: 0
+        },
+        blockIndex:{
+            type: Number,
+            default: 0
+        }
+    },
+    data(){
+        return{
+        }
+    },
+    mounted(){
     // 在项目加载完成之后初始化wow
-    let wow = new WOW({
-      offset: 100,
-      mobile: true,
-      live:false
-    })
-    wow.init();
-  }
+        let wow = new WOW({
+            offset: 100,
+            mobile: true,
+            live:false
+        })
+        wow.init()
+    }
 }
 </script>
 

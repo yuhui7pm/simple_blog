@@ -7,5 +7,5 @@
  * @LastEditTime: 2020-10-06 23:34:08
  */
 global._ = (str, ...args) => {
-
-};
+    window.console.log(str, args)
+}

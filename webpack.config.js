@@ -47,7 +47,7 @@ const config = {
     }),
     // new StyleLintPlugin({
     //   // 正则匹配想要lint监测的文件
-    //   files: ['src/**/*.vue', 'src/assets/css/*.l?(e|c)ss']
+    //   files: ['src/**/*.{vue,html,css,scss,sass,less,styl,stylus}', 'src/assets/css/*.l?(e|c)ss']
     // }),
   ],
   resolve:{
@@ -60,8 +60,7 @@ const config = {
     rules:[{
       test: /\.vue$/,
       use:[
-        'vue-loader',
-        // 'eslint-loader'
+        'vue-loader'
       ],
     },{
       test:/\.css$/,
@@ -126,6 +125,17 @@ const config = {
       //     useBuiltIns:'usage'
       //   }]]
       // }
+    }, {
+      test: /\.(vue|js|jsx)$/,
+      loader:'eslint-loader',
+      enforce: "pre", // 编译前检查
+      exclude: /node_modules/, // 不检测的文件
+      include: [path.resolve(__dirname, 'src')], // 指定检查的目录
+      options: {
+        formatter: require('eslint-friendly-formatter'),
+        emitWarning: true,
+        fix:true
+      }
     }]
   },
   node: {
@@ -147,6 +157,7 @@ if(isDev){
       errors:true,//有错误就显示在网页上
       warnings:true,
     },
+    // overlay: true,
     historyApiFallback: {
       index: '/index.html' //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
     },

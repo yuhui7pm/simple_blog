@@ -14,51 +14,51 @@
 
 <script>
 
-import { chineseGroups } from '@/i18n/zh.js';
-import { englishGroups } from '@/i18n/en.js';
+import { chineseGroups } from '@/i18n/zh.js'
+import { englishGroups } from '@/i18n/en.js'
 
 export default {
-  props: {
-    msg: '测试中'
-  },
-  data() {
-      return {
-          chineseGroups: chineseGroups,
-          englishGroups: englishGroups
-      }
-  },
-  mounted () {
-    this.init();
-  },
-
-  methods: {
-    init () {
-      this.changeBraces();
-      this.writeSentence();
+    props: {
+        msg: 测试中
+    },
+    data() {
+        return {
+            chineseGroups: chineseGroups,
+            englishGroups: englishGroups
+        }
+    },
+    mounted() {
+        this.init()
     },
 
-    changeBraces () {
-      // let text = this.$slots.default[0].text;
-      // let braces = this.$attrs;
+    methods: {
+        init() {
+            this.changeBraces()
+            this.writeSentence()
+        },
 
-      // let regEx = /(?<=\{)[^}]*(?=\})/g;
-      // let bracesTextArr = text.match(regEx);
+        changeBraces() {
+            // let text = this.$slots.default[0].text;
+            // let braces = this.$attrs;
 
-      // bracesTextArr.forEach(item => {
-      //   text = text.replace(`{${item}}`, braces[item]);
-      // })
-    },
+            // let regEx = /(?<=\{)[^}]*(?=\})/g;
+            // let bracesTextArr = text.match(regEx);
 
-    writeSentence () {
+            // bracesTextArr.forEach(item => {
+            //   text = text.replace(`{${item}}`, braces[item]);
+            // })
+        },
 
-      // 往文件里面写入key和value
-      // let text = this.$slots.default[0].text;
-      // let lang = this.$i18n.locale === 'zh';
-      // this.chineseGroups[text] = lang ? text : '';
-      // this.englishGroups[text] = lang ? '' : text; 
+        writeSentence() {
+
+            // 往文件里面写入key和value
+            // let text = this.$slots.default[0].text;
+            // let lang = this.$i18n.locale === 'zh';
+            // this.chineseGroups[text] = lang ? text : '';
+            // this.englishGroups[text] = lang ? '' : text; 
     
-      // console.log(chineseGroups, englishGroups, this.$attrs);
+            // console.log(chineseGroups, englishGroups, this.$attrs);
+        }
     }
-  }
 }
 </script>

@@ -7,106 +7,109 @@
  * @LastEditTime: 2020-05-18 17:41:36
 --> 
 <template>
-  <div class="wrapper">
-   <div class="shaky-wrapper">
-     <span @click="getEmojiItem()"><img style="margin-top:-2px" src="../../../../assets/icons/emoji.svg" width="30" height="30"></span>
-   </div>
-   <div class="emoji-wrapper" v-show="isShow" ref="emojiWrapper">
-     <div class="emoji-classification">
-       <span class="emojiTitle" @click="emojiFlag=true" :style="emojiFlag?'color:#F4606C':''">emoji表情</span>
-       <span class="emojiTitle" @click="emojiFlag=false" :style="!emojiFlag?'color:#F4606C':''">颜表情</span>
-     </div>
-      <!-- 颜表情 -->
-      <span 
-        v-show="!emojiFlag"
-        class="shaky shakyInner"
-        v-for="value of emojiLists"
-        :key="value.id"
-        @click.stop="writeEmoji(value.font)"
-        @touchmove.prevent
-      >
-        {{value.font}}
-      </span>
-      <!-- emoji表情 -->
-      <span 
-        v-show="emojiFlag"
-        class="shaky shakyInner"
-        v-for="value of qqEmojiLists"
-        :key="value.id"
-        @click.stop="writeEmoji(value.font)"
-        @touchmove.prevent
-      >
-        {{value.font}}
-      </span>
-   </div>
-  </div>
+    <div class="wrapper">
+        <div class="shaky-wrapper">
+            <span @click="getEmojiItem()"><img
+                style="margin-top:-2px" src="../../../../assets/icons/emoji.svg" width="30"
+                height="30"
+            ></span>
+        </div>
+        <div v-show="isShow" ref="emojiWrapper" class="emoji-wrapper">
+            <div class="emoji-classification">
+                <span class="emojiTitle" :style="emojiFlag?'color:#F4606C':''" @click="emojiFlag=true">emoji表情</span>
+                <span class="emojiTitle" :style="!emojiFlag?'color:#F4606C':''" @click="emojiFlag=false">颜表情</span>
+            </div>
+            <!-- 颜表情 -->
+            <span 
+                v-for="value of emojiLists"
+                v-show="!emojiFlag"
+                :key="value.id"
+                class="shaky shakyInner"
+                @click.stop="writeEmoji(value.font)"
+                @touchmove.prevent
+            >
+                {{ value.font }}
+            </span>
+            <!-- emoji表情 -->
+            <span 
+                v-for="value of qqEmojiLists"
+                v-show="emojiFlag"
+                :key="value.id"
+                class="shaky shakyInner"
+                @click.stop="writeEmoji(value.font)"
+                @touchmove.prevent
+            >
+                {{ value.font }}
+            </span>
+        </div>
+    </div>
 </template>
 
 <script>
 
-import { eventBus } from '@/assets/bus';
-let EmojiUrl = require('../../../../../static/mock/emoji.json');
+import { eventBus } from '@/assets/bus'
+let EmojiUrl = require('../../../../../static/mock/emoji.json')
 export default {
-  name:'shaky',
-  data(){
-    return{
-      emojiLists:[],//颜表情列表数据
-      qqEmojiLists:[],//qq表情包
-      emojiFlag:true,
-      status:false,//表情选项框的显示与隐藏
-      isShow:false,
-    }
-  },
-  methods:{
+    name:'Shaky',
+    data(){
+        return{
+            emojiLists:[],//颜表情列表数据
+            qqEmojiLists:[],//qq表情包
+            emojiFlag:true,
+            status:false,//表情选项框的显示与隐藏
+            isShow:false,
+        }
+    },
+    mounted(){
+    //点击颜色其它区域隐藏
+        document.addEventListener('click', this.emojiDisplay,true)
+    },
+    destroyed(){
+        document.removeEventListener('click',this.emojiDisplay,true)
+    },
+    methods:{
     
-    /**
+        /**
      * @description: 获取表情包列表数据
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
-    getEmojiItem(){
-      const data = EmojiUrl.data;
-      this.emojiLists = data.emojiLists; 
-      this.qqEmojiLists = data.emojiPic;
-      this.isShow = true;
-    },
+        getEmojiItem(){
+            const data = EmojiUrl.data
+            this.emojiLists = data.emojiLists 
+            this.qqEmojiLists = data.emojiPic
+            this.isShow = true
+        },
     
-    /**
+        /**
      * @description: 监听表情栏点击事件
      * @param {Object} e 鼠标点击的对象 
      * @return: 
      * @author: yuhui
      */
-    emojiDisplay(e){
-      let _this = this;
-      if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")
+        emojiDisplay(e){
+            let _this = this
+            if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")
         &&this.isShow!==true){
-        this.isShow=true;
-      }else if(e.target.className=="emojiTitle"){
-        this.isShow=true;
-      }else{
-        _this.isShow=false;
-      }
-    },
+                this.isShow=true
+            }else if(e.target.className=="emojiTitle"){
+                this.isShow=true
+            }else{
+                _this.isShow=false
+            }
+        },
     
-    /**
+        /**
      * @description: 将表情传过去给textarea
      * @param {String} emoji 鼠标所点击的emoji表情 
      * @return: 
      * @author: yuhui
      */
-    writeEmoji(emoji){
-      eventBus.$emit('writeEmoji', emoji)
-    },
-  },
-  mounted(){
-    //点击颜色其它区域隐藏
-    document.addEventListener('click', this.emojiDisplay,true);
-  },
-  destroyed(){
-    document.removeEventListener('click',this.emojiDisplay,true);
-  }
+        writeEmoji(emoji){
+            eventBus.$emit('write-emoji', emoji)
+        },
+    }
 }
 </script>
 

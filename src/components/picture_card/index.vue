@@ -1,60 +1,70 @@
 <template>
-  <div @mouseover="showMask=true"
-       @mouseout="showMask=false">
-      <div class="pic-card" 
-          :style="{width: cardWidth}">
-        <img :src="picUrl"
-              :alt="picture.name"
-              class="pic-card__img"/>
+    <div
+        @mouseover="showMask=true"
+        @mouseout="showMask=false"
+    >
+        <div
+            class="pic-card" 
+            :style="{width: cardWidth}"
+        >
+            <img
+                :src="picUrl"
+                :alt="picture.name"
+                class="pic-card__img"
+            >
     
-        <div v-show="showMask" :class="showMask && 'pic-card__mask'"></div>
+            <div v-show="showMask" :class="showMask && 'pic-card__mask'" />
 
-        <div class="pic-card__icon-wrapper">
-          <div class="pic-card__vedio-icon"></div>
-          <div class="pic-card__zan-msg-wrapper" v-show="showMask">
-            <circle-icon pic-url="assets/icons/card_zan.svg" key="zan" :num="22"/>
-            <circle-icon pic-url="assets/icons/card_msg.svg" key="msg" :num="1"/>
-          </div>
+            <div class="pic-card__icon-wrapper">
+                <div class="pic-card__vedio-icon" />
+                <div v-show="showMask" class="pic-card__zan-msg-wrapper">
+                    <circle-icon key="zan" pic-url="assets/icons/card_zan.svg" :num="22" />
+                    <circle-icon key="msg" pic-url="assets/icons/card_msg.svg" :num="1" />
+                </div>
+            </div>
+
+            <p class="pic-card__content-introduce">
+                这里是商品介绍
+            </p>
         </div>
-
-        <p class="pic-card__content-introduce">这里是商品介绍</p>
-      </div>
-  </div>
+    </div>
 </template>
 
 <script>
-import picTest from '@/assets/images/pic_demo.jpg';
-import CircleIcon from '@/components/circle-icon/index.vue';
+import picTest from '@/assets/images/pic_demo.jpg'
+import CircleIcon from '@/components/circle-icon/index.vue'
 
 export default {
-  name: 'Card',
-  components: {
-    CircleIcon
-  },
-  props: {
-    cardWidth: {
-      type: String,
-      default: '220px'
+    name: 'Card',
+    components: {
+        CircleIcon
     },
-    picture: {
-      type: Object,
-      default: {
-        url: picTest,
-        name: '图片demo'
-      }
+    props: {
+        cardWidth: {
+            type: String,
+            default: '220px'
+        },
+        picture: {
+            type: Object,
+            default: () => {
+                return {
+                    url: picTest,
+                    name: '图片demo'
+                }
+            }
+        }
+    },
+    data() {
+        return {
+            showMask: false
+        }
+    },
+    computed: {
+        picUrl() {
+            // let url = this.picture.url
+            return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`)
+        }
     }
-  },
-  data () {
-    return {
-      showMask: false
-    }
-  },
-  computed: {
-    picUrl () {
-      let url = this.picture.url;
-      return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`);
-    }
-  }
 }
 </script>
 
@@ -72,7 +82,7 @@ export default {
     margin: 20px 0;
     height: auto;
     position: relative;
-    box-shadow: 0px 0px 4px 2px #eeeeee;
+    box-shadow: 0 0 4px 2px #eee;
     border: @cardBorder;
     transition: @maskShowtime;
     cursor: default;
@@ -86,8 +96,8 @@ export default {
       object-fit: cover;
       object-position: left center;
       height: auto;
-      animation: fade-in;/*动画名称*/
-      animation-duration: 2s;/*动画持续时间*/
+      animation: fade-in;/* 动画名称 */
+      animation-duration: 2s;/* 动画持续时间 */
       min-height: @imgMinHei;
     }
 
@@ -100,10 +110,6 @@ export default {
       transition: @maskShowtime;
       background: @iconBgBack;
       opacity: @iconBgOpacity;
-      // &:hover {
-      //   background: @iconBgBack;
-      //   opacity: @iconBgOpacity;
-      // }
     }
 
     &__icon-wrapper {
@@ -117,32 +123,31 @@ export default {
       overflow: hidden;
 
       .pic-card__vedio-icon {
-          height: 22px;
-          width: 22px;
-          background-color: #eee;
-          border-radius: 11px;
-          opacity: 0.6;
-          float: left;
-          background-image: url('../../assets/icons/card_vedio.svg');
-          background-size: @iconSize;
-          background-repeat: no-repeat;
-          background-position: center center;
+        height: 22px;
+        width: 22px;
+        background-color: #eee;
+        border-radius: 11px;
+        opacity: 0.6;
+        float: left;
+        background-image: url('../../assets/icons/card_vedio.svg');
+        background-size: @iconSize;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
 
       .pic-card__zan-msg-wrapper {
-          float: right;
-          width: 30px;
-          height: 100%;
+        float: right;
+        width: 30px;
+        height: 100%;
       }
     }
 
     .pic-card__content-introduce {
       font-size: 18px;
-      color: #AAA;
+      color: #aaa;
       position: absolute;
       bottom: 0;
       z-index: 10;
-      // margin: 15px;
       width: 100%;
       height: 56px;
       line-height: 56px;
@@ -150,14 +155,16 @@ export default {
       padding: 0 15px;
       border-top: @cardBorder;
       box-sizing: border-box;
-      // opacity: 0;
-      // animation: fade-in;/*动画名称*/
-      // animation-duration: @maskShowtime;/*动画持续时间*/
     }
 
     @keyframes fade-in {
-      0% {opacity: 0;};/*初始状态 透明度为0*/
-      100% {opacity: 1;};/*结束状态 透明度为1*/
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
   }
 </style>

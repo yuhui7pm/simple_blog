@@ -7,12 +7,12 @@
  * @LastEditTime: 2020-10-11 13:00:54
  */
 
-function isArrayNull (arr) {
-  return !arr || !arr.length;
+function isArrayNull(arr) {
+    return !arr || !arr.length
 }
 
-function arrFilterRepeate (arr) {
-  return [... new Set(arr)];
+function arrFilterRepeate(arr) {
+    return [... new Set(arr)]
 }
 
 /**
@@ -20,22 +20,22 @@ function arrFilterRepeate (arr) {
  * @param { Array } arr 对象的key值
  * @param { Array } arrCompared 对象的value值
  */
-function arrayToObject (arr, arrCompared) {
-  let formatedObj = {};
+function arrayToObject(arr, arrCompared) {
+    let formatedObj = {}
   
-  if (isArrayNull(arr)) {
-    return formatedObj;
-  }
+    if (isArrayNull(arr)) {
+        return formatedObj
+    }
 
-  arr.forEach((item, index) => {
-    formatedObj[item] = (isArrayNull(arrCompared) ? '' : arrCompared[index]);
-  })
+    arr.forEach((item, index) => {
+        formatedObj[item] = (isArrayNull(arrCompared) ? '' : arrCompared[index])
+    })
 
-  return formatedObj;
+    return formatedObj
 }
 
 module.exports = {
-  isArrayNull,
-  arrFilterRepeate,
-  arrayToObject
+    isArrayNull,
+    arrFilterRepeate,
+    arrayToObject
 }

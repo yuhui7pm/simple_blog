@@ -7,35 +7,36 @@
  * @LastEditTime: 2020-10-11 15:19:24
  -->
 <template>
-  <div>
-    <router-link to='/'>
-      <header>
-        <div class="header-wrapper">
-          <img src="../../assets/icons/coffee.svg" alt="博客icon"/>
-          <p>Xlink Blog</p>
-          <switch-button v-model="value" text="Ch|En" class="switch-botton"></switch-button>
-        </div>
-      </header>
-    </router-link>
-  </div>
+    <div>
+        <router-link to="/">
+            <header>
+                <div class="header-wrapper">
+                    <img src="../../assets/icons/coffee.svg" alt="博客icon">
+                    <p>Xlink Blog</p>
+                    <switch-button v-model="value" text="Ch|En" class="switch-botton" />
+                </div>
+            </header>
+        </router-link>
+    </div>
 </template>
 
 <script>
-import SwitchButton from '@/components/switch/index.vue';
+import SwitchButton from '@/components/switch/index.vue'
 export default {
-  name:'Header',
-  components: {
-    SwitchButton
-  },
-  data(){
-    return{
-      value: ''
+    name:'Header',
+    components: {
+        SwitchButton
+    },
+    data(){
+        return{
+            value: ''
+        }
     }
-  }
 }
 </script>
 
 <style lang="stylus" scoped>
+/* stylelint-disable */
   header
     width auto
     height 80px
@@ -67,7 +68,7 @@ export default {
         top: 50%;
         transform: translateY(-50%);
       }
-  //小于屏幕宽度时，图片消失
+
   @media screen and (max-width: 768px) 
     header
       padding-left 0

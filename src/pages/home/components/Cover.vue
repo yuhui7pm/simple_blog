@@ -7,24 +7,24 @@
  * @LastEditTime: 2020-10-11 15:02:04
  -->
 <template>
-  <div class="cover" ref="cover">
-    <div :class="[flag?'fadein':'','cover-pic']">
-      <img src="../../../assets/images/header_illustration.png" alt="人物图片">
+    <div ref="cover" class="cover">
+        <div :class="[flag?'fadein':'','cover-pic']">
+            <img src="../../../assets/images/header_illustration.png" alt="人物图片">
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return{
-      hei:0,
-      flag:false
+    data(){
+        return{
+            hei:0,
+            flag:false
+        }
+    },
+    mounted(){
+        this.flag = true
     }
-  },
-  mounted(){
-    this.flag = true;
-  }
 }
 </script>
 
