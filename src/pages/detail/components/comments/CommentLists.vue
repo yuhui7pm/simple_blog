@@ -7,19 +7,26 @@
  * @LastEditTime: 2020-05-18 18:38:20
  -->
 <template>
-  <div class="comments-wrapper">
+  <div :key="commentkey" class="comments-wrapper">
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
       <div v-for="(item,index) in commentsLists" :key="item.createtime" class="comment-write">
         <div style="transition-duration:2s;" :class="&quot;deleteWrapper&quot;+index">
           <Comment
-            :key="index" class="commentOne" :insert="index"
-            :item="item" :blog-id="blogId" @reply-comment="replyIt"
+            :key="index"
+            class="commentOne"
+            :insert="index"
+            :item="item"
+            :blog-id="blogId"
+            @reply-comment="replyIt"
           />
           <WriteComment
-            :id="item.createtime" :class="[&quot;writeComment&quot;,&quot;addWrite&quot;+index]" :blog-id="blogId"
-            :order="index" @close-comment="closeOther"
+            :key="item.createtime"
+            :class="['writeComment','addWrite&quot'+index]"
+            :blog-id="blogId"
+            :order="index"
+            :reply-name="replyName"
           />
         </div>
       </div>
@@ -42,18 +49,16 @@ export default {
     blogId: {
       type: Number,
       default: 0
-    },
+    }
   },
   data (){
     return{
       statusArr: [],
       count: -1,//用于计数
-      insert: true,//顶部评论框的显示与隐藏
-      displayIcon: false,
-      listNum: '',
       replyName: '',
       commentsLists: [],
       ind: null,
+      commentkey: 0
     };
   },
 
@@ -67,11 +72,10 @@ export default {
       this.commentsLists = arr;
     });
 
-    eventBus.$on('add-new-comment',obj=>{
-      let arrOld = this.commentsLists.reverse();
-      this.commentsLists = [];
-      arrOld.push(obj);
-      this.commentsLists = arrOld.reverse();
+    eventBus.$on('add-new-comment',() => {
+      this.commentkey += 1;
+      this.getCommentsItem();
+      this.closeOther();
     });
     
     eventBus.$on('delete-comments-lists',obj=>{
@@ -122,27 +126,10 @@ export default {
       }
     },
 
-    /**
-     * @description: 点击评论操作，触发insertReply()方法
-     * @param {Number} ind 点击的第几条评论
-     * @param {String} name 该条评论的评论者
-     * @return: 
-     * @author: yuhui
-     */
     replyIt (ind,name){
-      window.console.log(name);
-      // let newName
-      // if(this.replyName===name){
-      //     this.replyName=''
-      //     newName = ''
-      // }else{
-      //     this.replyName=name
-      //     newName = name
-      // }
+      this.replyName = name;
       this.ind = ind;
       this.insertReply(ind);
-
-      // document.getElementsByClassName('addWrite'+ind)[0].style.display = 'block';
     },
 
     /**
@@ -174,7 +161,7 @@ export default {
      */
     closeOther (){
       for(let i=0;i<this.commentsLists.length-1;i++){
-        this.statusArr[i] === false;
+        this.statusArr[i] = false;
         document.getElementsByClassName("addWrite"+i)[0].style.display = 'none';
       }
       this.$emit('remove-reply',true);
@@ -213,8 +200,8 @@ export default {
         }
       }
       return deletedArr;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -20,10 +20,7 @@
         <Item
           v-show="routeType === 'article'"
           class="blog-lists"
-          :blogs-len="blogsNum"
           :blog-lists="blogsLists"
-          :blogs-index="blogsIndex"
-          :block-index="blockIndex"
         />
       </router-link>
 
@@ -69,7 +66,6 @@ export default {
       page: 1,//博客页码数
       blogsLists: [],//博客数据
       blogsIndex: 6,//每一页最多包含的博客数目
-      maxPage: 0,//博客最大页码数
       pageDefault: 1,//默认博客页码
       sideBarDisplay: false,//sideBar的显示与隐藏
       timer: null,//用于节流函数
@@ -122,18 +118,28 @@ export default {
     getBlogItem (){
       axios.get('/api/blog/lists')
         .then(res=>{
-          res = res.data;
-          if(res.data){
-            const data = res.data.blogLists;
-            this.blogsNum = data.length;//获取博客列表数据的总长度
-            this.blogsLists = data;     //湖片区博客列表数据
-            this.maxPage = Math.ceil(this.blogsNum/this.blogsIndex); //最多能显示多少页
+          let { data, errNum, msg } = res.data;
 
-            // 动态设置博客列表的高度
-            // if(!this.browserRedirect()){
-            //   this.$refs.blogListWrapper?.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;
-            // }
+          if (errNum === -1) {
+            this.$toast({
+              toastText: _(msg || '获取数据失败'),
+              duration: 300
+            });
+
+            return;
           }
+
+          if (!data.length) {
+            return;
+          }
+
+          this.blogsNum = data.length;//获取博客列表数据的总长度
+          this.blogsLists = data;     //湖片区博客列表数据
+
+          // 动态设置博客列表的高度
+          // if(!this.browserRedirect()){
+          //   this.$refs.blogListWrapper?.style.minHeight=`${this.blogsLists.length * (290 + 25 - 2)}px`;
+          // }
         }).catch(err => {
           console.log('err:',err);
         });

@@ -13,13 +13,13 @@
       :key="uuid(index)"
       tag="li"
       :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
-      :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
+      :to="{path:'/detail',query:{id: list.id, blogInd: blogLists.length - index}}"
     >
       <div>
         <img class="item-left" :src="list.picurl" alt="博客列表图片">
         <div class="item-right">
           <p class="createTime">
-            No.{{ blogLists.length - index }} | {{ common.timestampToTime(list.createtime,'toDay') }}
+            No.{{ blogLists.length - index }} | {{ timestampToTime(list.createtime,'toDay') }}
           </p>
           <h2 class="article-header">
             {{ list.title }}
@@ -38,27 +38,24 @@
 import { WOW } from 'wowjs';
 import 'animate.css';
 import { uuid } from '@/utils/util.js';
+import { timestampToTime } from '@/utils/time';
 
 export default {
   name: 'Article',
   props: {
-    blogsLen: {
-      type: Number,
-      default: 0
-    },
     blogLists: {
       type: Array,
       default: () => {
         return [];
       }
     },
-    blogsIndex: {
+    pageSize: {
       type: Number,
-      default: 0
+      default: 8
     },
-    blockIndex: {
-      type: Number,
-      default: 0
+    hasPagination: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -70,7 +67,8 @@ export default {
     wow.init();
   },
   methods: {
-    uuid
+    uuid,
+    timestampToTime
   }
 };
 </script>

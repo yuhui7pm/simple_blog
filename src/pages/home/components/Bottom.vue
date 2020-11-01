@@ -8,7 +8,7 @@
  -->
 <template>
   <div class="bottomWrapper">
-    <toast :toast-text="toastText" :toast-flag="toastFlag" />
+    <!--    <toast :toast-text="toastText" :toast-flag="toastFlag" />-->
     <div :class="[toBottom?'bottomFadeIn':'','bottomCenter']">
       <div style="float:left">
         <div ref="webRuntime">
@@ -45,12 +45,12 @@
 
 <script>
 import axios from 'axios';
-import Toast from '../components/toast';
+// import Toast from '../components/toast';
 export default {
   name: 'PageBottom',
-  components: {
-    Toast
-  },
+  // components: {
+  //   Toast
+  // },
   props: {
     toBottom: Boolean
   },

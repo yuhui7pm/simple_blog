@@ -43,12 +43,12 @@ export default {
       min-height 30px
       color #3d3634;
       margin 0 100px
-      border 1px dashed #aaa
+      //border 1px dashed #aaa
       border-left none
       border-right none
       .context
         width: 100%;
-        padding: 30px 0px;
+        //padding: 30px 0px;
         font-size: 16px;
         line-height: 30px;
         box-sizing border-box

@@ -45,7 +45,9 @@ export default {
       deep: true,
       immediate: true,
       handler (val) {
-        val.length && (this.tabValue = val[0].name);
+        if(val.length) {
+          (this.tabValue = val[0].name);
+        }
       }
     },
 

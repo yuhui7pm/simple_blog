@@ -11,7 +11,7 @@
     <img :src="blogContent.picurl" class="pic-left" alt="封面图片">
     <div class="right-wrapper">
       <div class="title-tag">
-        {{ `NO.${blogIndOrder} | ${common.timestampToTime(blogContent.createtime,'toDay')}` }}
+        {{ `NO.${blogIndOrder} | ${timestampToTime(blogContent.createtime,'toDay')}` }}
       </div>
       <h1>{{ blogContent.title }}</h1>
       <audio
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { timestampToTime } from '@/utils/time';
 
 export default {
   name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
@@ -40,9 +41,8 @@ export default {
       default: 0
     }
   },
-  data (){
-    return{
-    };
+  methods: {
+    timestampToTime
   }
 };
 </script>

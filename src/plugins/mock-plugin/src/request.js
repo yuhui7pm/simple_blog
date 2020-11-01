@@ -70,6 +70,7 @@ module.exports = function (host, req) {
       console.error(`请求错误：${err.message}`);
     });
 
+    // eslint-disable-next-line
     proxy.end;
   });
 };

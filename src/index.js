@@ -21,13 +21,11 @@ import Vuex from 'vuex';
 import store from './store/store.js';
 
 import Lang from './components/lang/index';
+import Toast from './components/toast/index';
+
 Vue.use(Lang);
-
-import common from './common/js/common.js';//引入公共js
-Vue.prototype.common = common;
-
+Vue.use(Toast);
 Vue.use(VueI18n);
-
 Vue.use(Vuex);
 
 let head = document.getElementsByTagName('head')[0];

@@ -9,12 +9,24 @@
 <template>
   <div>
     <div :key="blogId" class="single-episode-wrapper">
-      <Title :key="blogId" :blog-content="blogContent" :blog-ind-order="blogIndOrder" />
+      <Title
+        :key="blogId"
+        :blog-content="blogContent"
+        :blog-ind-order="blogIndOrder"
+      />
       <Context :blog-content="blogContent" />
       <transition>
-        <WriteComment v-if="insertStatus" :blog-id="blogId" :name="'initial'" />
+        <WriteComment
+          v-if="insertStatus"
+          :blog-id="blogId"
+          :name="'initial'"
+        />
       </transition>
-      <CommentLists class="commentList" :blog-id="blogId" @remove-reply="removeWrite" />
+      <CommentLists
+        class="commentList"
+        :blog-id="blogId"
+        @remove-reply="removeWrite"
+      />
     </div>
   </div>
 </template>
@@ -68,6 +80,7 @@ export default {
   },
 
   mounted (){
+    this.getBlogContent();
     window.addEventListener("hashchange",this.jumpToHome, false);
   },
 

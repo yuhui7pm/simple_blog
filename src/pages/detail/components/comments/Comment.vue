@@ -8,11 +8,18 @@
  -->
 <template>
   <div
-    ref="commentItem" class="comment-wrapper" @mouseover="hoverStatus=true;"
-    @mouseout="hoverStatus=false" @click="replyComments"
+    ref="commentItem"
+    class="comment-wrapper"
+    @mouseover="hoverStatus=true;"
+    @mouseout="hoverStatus=false"
+    @click="replyComments"
   >
     <div :key="item.createtime" class="comment">
-      <img class="user-icon" :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl" alt="用户头像">
+      <img
+        class="user-icon"
+        :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl"
+        alt="用户头像"
+      >
       <div class="comment-right">
         <div class="comment_context" style="float:left;">
           <div class="top-wrapper">
@@ -20,7 +27,7 @@
               {{ item.username }}
             </div>
             <div class="time" style="">
-              {{ common.timestampToTime(item.createtime) }}
+              {{ timestampToTime(item.createtime) }}
             </div>
           </div>
           <div class="context">
@@ -51,6 +58,7 @@
 import axios from 'axios';
 // import heart_click from '@/assets/icons/heart_click.svg';
 // import heart_unclick from '@/assets/icons/heart_unclick.svg';
+import { timestampToTime } from '@/utils/time';
 import storage from 'good-storage';
 import { eventBus } from '@/assets/bus';
 export default {
@@ -94,6 +102,7 @@ export default {
     this.deleteIcon();
   },
   methods: {
+    timestampToTime,
     
     /**
      * @description: 移动端，显示出删除评论的icon
