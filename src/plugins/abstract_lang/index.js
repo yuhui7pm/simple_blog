@@ -38,7 +38,7 @@ function findPath (rootPath) {
       if (fileName.match(dirRegEx)) {
         let fileDir = path.join(rootPath, fileName);
 
-        //根据文件路径获取文件信息，返回一个fs.Stats对象
+        // 根据文件路径获取文件信息，返回一个fs.Stats对象
 
         let status = fs.statSync(fileDir);
         if (status) {
@@ -54,7 +54,7 @@ function findPath (rootPath) {
             filePathArr.push(fileDir);
           }
 
-          //递归，如果是文件夹，就继续遍历该文件夹下面的文件.
+          // 递归，如果是文件夹，就继续遍历该文件夹下面的文件.
           if (isDir) {
             findPath(fileDir);
           }

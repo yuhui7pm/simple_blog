@@ -51,7 +51,7 @@ import Tabs from '@/components/tab-slider/index.vue';
 import Pictures from './components/picture.vue';
 
 export default {
-  name: 'Home', //不能与下面组件名字重读，否则会堆栈溢出
+  name: 'Home', // 不能与下面组件名字重读，否则会堆栈溢出
   components: {
     Header,
     Cover,
@@ -62,16 +62,16 @@ export default {
   },
   data (){
     return{
-      blogsNum: 0,//博客数据长度
-      page: 1,//博客页码数
-      blogsLists: [],//博客数据
-      blogsIndex: 6,//每一页最多包含的博客数目
-      pageDefault: 1,//默认博客页码
-      sideBarDisplay: false,//sideBar的显示与隐藏
-      timer: null,//用于节流函数
-      scrollEvent: null, //监听事件
-      toBottom: false, //判断是否滚动到页面底部
-      toTopEvent: null, //判断距离页面顶部的监听事件
+      blogsNum: 0,// 博客数据长度
+      page: 1,// 博客页码数
+      blogsLists: [],// 博客数据
+      blogsIndex: 6,// 每一页最多包含的博客数目
+      pageDefault: 1,// 默认博客页码
+      sideBarDisplay: false,// sideBar的显示与隐藏
+      timer: null,// 用于节流函数
+      scrollEvent: null, // 监听事件
+      toBottom: false, // 判断是否滚动到页面底部
+      toTopEvent: null, // 判断距离页面顶部的监听事件
       blockIndex: 0,
       value: "",
       routeType: ''
@@ -122,7 +122,7 @@ export default {
 
           if (errNum === -1) {
             this.$toast({
-              toastText: _(msg || '获取数据失败'),
+              toastText: msg || '获取数据失败',
               duration: 300
             });
 
@@ -133,8 +133,8 @@ export default {
             return;
           }
 
-          this.blogsNum = data.length;//获取博客列表数据的总长度
-          this.blogsLists = data;     //湖片区博客列表数据
+          this.blogsNum = data.length;// 获取博客列表数据的总长度
+          this.blogsLists = data;     // 湖片区博客列表数据
 
           // 动态设置博客列表的高度
           // if(!this.browserRedirect()){
@@ -197,11 +197,11 @@ export default {
      */
     judgeToBottom (){
       let gap = this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
-      if (gap > - 100) {
+      if (gap > -100) {
         this.toBottom = true;
         window.removeEventListener("scroll",this.scrollEvent,true);
 
-        this.blockIndex = 1000; //假如一开始就是位于底部，给一个默认值，加载所有列表项
+        this.blockIndex = 1000; // 假如一开始就是位于底部，给一个默认值，加载所有列表项
         window.removeEventListener("scroll",this.toTopEvent,true);
       }
     },
@@ -213,11 +213,11 @@ export default {
      * @author: yuhui
      */
     judgeScrollHei (){
-      const coverHei = 700; //距离顶部图片的高度
-      const item = 351; //一个div块的高度加margin
+      const coverHei = 700; // 距离顶部图片的高度
+      const item = 351; // 一个div块的高度加margin
       let toCoverTop = this.getScrollTop() + this.getWindowHeight() - coverHei;
 
-      let itemIndex = Math.ceil(toCoverTop/item); //大概估算滑动到了第几个滑块那里
+      let itemIndex = Math.ceil(toCoverTop / item); // 大概估算滑动到了第几个滑块那里
       let index = itemIndex;
       this.blockIndex = index;
     },
@@ -285,7 +285,7 @@ export default {
     },
 
     init () {
-      this.getBlogItem();//页面挂载的时候就获取博客列表数据
+      this.getBlogItem();// 页面挂载的时候就获取博客列表数据
 
       this.scrollEvent = this.judgeToBottom;
       window.addEventListener('scroll',this.scrollEvent,true);
@@ -301,10 +301,9 @@ export default {
   },
 
   metaInfo: {
-    title: _('{0} 一个记录日常生活的博客', 'Xlink Blog'),
+    title: 'Xlink Blog 一个记录日常生活的博客',
     meta: [
-      { vmid: 'keywords', name: 'keywords', content:
-        _('博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,{0},个人{1}', 'Xlink Blog', 'Blog')}
+      { vmid: 'keywords', name: 'keywords', content: '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,Xlink Blog,个人Blog'}
     ]
   }
 };

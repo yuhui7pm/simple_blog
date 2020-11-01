@@ -11,6 +11,10 @@
   * 如果mock数据不存在，那么请求真实数据时，就把数据保存到mock文件夹对应的js文件里
   * @param {*} data 要写入js文件的格式化数据 
   */
+
+let fs = require('fs');
+let path = require('path');
+
 const echoTpl = data => {
   return `
     exports.check = () => {

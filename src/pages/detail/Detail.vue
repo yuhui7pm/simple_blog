@@ -39,7 +39,7 @@ import WriteComment from './components/comments/WriteComment.vue';
 import CommentLists from './components/comments/CommentLists.vue';
 
 export default {
-  name: 'Detail', //不能与下面组件名字重读，否则会堆栈溢出
+  name: 'Detail', // 不能与下面组件名字重读，否则会堆栈溢出
   components: {
     Title,
     Context,
@@ -49,7 +49,7 @@ export default {
 
   data (){
     return{
-      insertStatus: true,//判断用户有没有点击回复评论，
+      insertStatus: true,// 判断用户有没有点击回复评论，
       blogContent: {}
     };
   },
@@ -67,7 +67,7 @@ export default {
   watch: {
     blogId (val) {
       if (val) {
-        this.getBlogContent(); //博客内容
+        this.getBlogContent(); // 博客内容
       }
     }
   },
@@ -75,7 +75,7 @@ export default {
   activated (){
     this.insertStatus = true;
 
-    //当页面没有跳转到首页时，自己主动跳转
+    // 当页面没有跳转到首页时，自己主动跳转
     window.addEventListener("hashchange",this.jumpToHome, false);
   },
 
@@ -98,7 +98,7 @@ export default {
         if((res.status === 200) && (res.statusText === 'OK')){
           res = res.data;
           const data = res.data;
-          this.blogContent = data[0];     //博客列表数据
+          this.blogContent = data[0];     // 博客列表数据
         }
       });
     },
@@ -120,7 +120,7 @@ export default {
           '博客,个人博客,优秀的个人博客,个人网站,优秀的个人网站,记录日常生活的博客网站,Xlink Blog,个人Blog' + this.blogContent.title }
       ]
     };
-  },
+  }
 };
 </script>
 

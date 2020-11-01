@@ -14,7 +14,7 @@ promise.polyfill();
 import Vue from 'vue';
 import App from './app.vue';
 import router from './router/index.js';
-import 'animate.css'; //wow动画库
+import 'animate.css'; // wow动画库
 import VueI18n from 'vue-i18n';
 import './utils/global';
 import Vuex from 'vuex';
@@ -42,7 +42,7 @@ oMeta3.content = '这是一个个人博客分享平台，主要有日常说说�
 oMeta3.name = 'description';
 head.appendChild(oMeta3);
 
-//兼容IE
+// 兼容IE
 var oMeta4 = document.createElement('meta');
 oMeta4.content = "IE=edge,chrome=1";
 oMeta4.httpEquiv = "X-UA-Compatible";
@@ -60,7 +60,7 @@ const I18N = new VueI18n({
   }
 });
 
-//给绑定节点渲染一个vue组件
+// 给绑定节点渲染一个vue组件
 new Vue({
   i18n: I18N,
   router: router,

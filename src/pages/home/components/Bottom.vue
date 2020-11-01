@@ -69,7 +69,7 @@ export default {
       this.startTime();
     },1000);
 
-    //页面挂载时获取页面总的访问数据
+    // 页面挂载时获取页面总的访问数据
     this.initVisitedNum();
     // 更新页面访问数据
     this.getVisitedNumber();
@@ -80,24 +80,24 @@ export default {
   },
   methods: {
     startTime (){
-      let initData= new Date("2/17/2020");
-      let today=new Date();
+      let initData = new Date("2/17/2020");
+      let today = new Date();
       let timeGap = today.getTime() - initData.getTime();
-      let M = 24*60*60*1000;
-      let a = timeGap/M;
+      let M = 24 * 60 * 60 * 1000;
+      let a = timeGap / M;
       let A = Math.floor(a);
-      let b = (a-A)*24;
+      let b = (a - A) * 24;
       let B = Math.floor(b);
-      let c = (b-B)*60;
-      let C = Math.floor((b-B)*60);
-      let D = Math.floor((c-C)*60);
-      this.$refs.webRuntime.innerHTML='网站运行了' + this.checkTime(A) + '天' 
-          + this.checkTime(B) + "时"+ this.checkTime(C) +"分"+ this.checkTime(D) +"秒";
+      let c = (b - B) * 60;
+      let C = Math.floor((b - B) * 60);
+      let D = Math.floor((c - C) * 60);
+      this.$refs.webRuntime.innerHTML = '网站运行了' + this.checkTime(A) + '天' 
+          + this.checkTime(B) + "时" + this.checkTime(C) + "分" + this.checkTime(D) + "秒";
     },
 
     checkTime (i){
-      if(i<10){
-        i="0"+i;
+      if(i < 10){
+        i = "0" + i;
       }
       return i;
     },
@@ -114,7 +114,7 @@ export default {
       }
 
       // 过了30分钟，我就加1
-      let dateGap = (dateNow - getVisited)/(1000*60);
+      let dateGap = (dateNow - getVisited) / (1000 * 60);
       if(dateGap >= 30){
         this.updateVisitedNum(visited,dateNow);
         return;
@@ -122,18 +122,18 @@ export default {
     },
 
     updateVisitedNum (visited,dateNow){
-      this.setCache(visited,dateNow);//重新赋值，刷新缓存
-      this.addVisitedNum();  //往后端发送请求
+      this.setCache(visited,dateNow);// 重新赋值，刷新缓存
+      this.addVisitedNum();  // 往后端发送请求
       return;
     },
 
     updateContextVisitedNum (){
-      this.wholeVisitedNum +=1;
-      this.todayVisitedNum +=1;
+      this.wholeVisitedNum += 1;
+      this.todayVisitedNum += 1;
     },
 
     setCache (key,value){
-      if(key=='') return false;
+      if(key == '') return false;
       localStorage.setItem(key, value);
     },
 
@@ -151,21 +151,21 @@ export default {
         today: date.year + '-' + date.month + '-' + date.day
       },{
         headers: {
-          'Access-Control-Allow-Origin': '*',  //解决cors头问题
-          'Access-Control-Allow-Credentials': 'true', //解决session问题
+          'Access-Control-Allow-Origin': '*',  // 解决cors头问题
+          'Access-Control-Allow-Credentials': 'true', // 解决session问题
           'Content-Type': 'application/json'
         },
-        withCredentials: true //跨域请求要想带上cookie
+        withCredentials: true // 跨域请求要想带上cookie
       }).then(res=>{
-        if(res.status==200&&res.statusText==='OK'){
-          this.updateContextVisitedNum(); //更新文本内容，加1
+        if(res.status == 200 && res.statusText === 'OK'){
+          this.updateContextVisitedNum(); // 更新文本内容，加1
         }
       });
     },
 
     initVisitedNum (){
       axios.get("/api/blog/getBlogVisited").then(res=>{
-        if(res.status==200&&res.statusText==='OK'){
+        if(res.status == 200 && res.statusText === 'OK'){
           res = res.data;
           const data = res.data[0];
           this.wholeVisitedNum = data.wholeVisitedNum;

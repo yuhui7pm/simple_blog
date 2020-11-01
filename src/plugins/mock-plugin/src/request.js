@@ -24,7 +24,7 @@ module.exports = function (host, req) {
 
   return new Promise ((resolve, reject) => {
 
-    /// 将一个URL字符串转换成对象并返回。
+    // / 将一个URL字符串转换成对象并返回。
     let parse = url.parse(host);
 
     proxy = http.request({
@@ -35,7 +35,7 @@ module.exports = function (host, req) {
       headers: req.headers
     }, proxyRes => {
 
-      clearTimeout(request_timer);
+      // clearTimeout(request_timer);
 
       // 等待响应60秒超时
       let responseTimer = setTimeout(function () {

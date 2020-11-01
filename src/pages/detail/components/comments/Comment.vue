@@ -17,7 +17,7 @@
     <div :key="item.createtime" class="comment">
       <img
         class="user-icon"
-        :src="(item.iconurl!==null)?userIconUrl(item.iconurl):iconUrl"
+        :src="item.iconurl?userIconUrl(item.iconurl):iconUrl"
         alt="用户头像"
       >
       <div class="comment-right">
@@ -215,7 +215,7 @@ export default {
      * @return {Object} 返回新的图片路径
      * @author: yuhui
      */
-    userIconUrl (name){
+    userIconUrl (name) {
       return require('../../../../assets/userIcon/' + name);
     },
 

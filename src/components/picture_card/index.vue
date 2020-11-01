@@ -62,7 +62,7 @@ export default {
   computed: {
     picUrl () {
       // let url = this.picture.url
-      return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`);
+      return require(`../../assets/images/pic_demo${Math.floor(Math.random() * 6)}.jpg`);
     }
   }
 };

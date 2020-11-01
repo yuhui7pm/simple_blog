@@ -14,7 +14,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    blogItemWidth: 960,
+    blogItemWidth: 960
   },
 
   mutations: {

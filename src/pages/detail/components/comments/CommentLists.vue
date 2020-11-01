@@ -14,7 +14,6 @@
       <div v-for="(item,index) in commentsLists" :key="item.createtime" class="comment-write">
         <div style="transition-duration:2s;" :class="'deleteWrapper'+index">
           <Comment
-            :key="index"
             class="commentOne"
             :insert="index"
             :item="item"
@@ -24,7 +23,6 @@
             @delete-comments-lists="getCommentsItem"
           />
           <WriteComment
-            :key="item.createtime"
             :class="['writeComment','addWrite'+index]"
             :blog-id="blogId"
             :order="index"
@@ -174,8 +172,10 @@ export default {
       return deletedArr;
     },
 
-    async addNewComment () {
-      await this.getCommentsItem();
+    addNewComment () {
+
+      // 传到了另外一个组件里面。没有传到这里来。
+      this.getCommentsItem();
       this.closeOther();
     },
 

@@ -38,9 +38,9 @@ export default {
 
   data () {
     return {
-      reqPicUrl: require('../../' + picUrl)
+      reqPicUrl: require('../../' + this.picUrl)
     };
-  },
+  }
 
   // computed: {
   //   reqPicUrl () {
