@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
+  name: 'Title', // 不能与下面组件名字重读，否则会堆栈溢出
   components: {
   },
   props: {

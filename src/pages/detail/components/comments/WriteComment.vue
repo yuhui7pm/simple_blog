@@ -17,7 +17,7 @@
       <button title="提交评论" @click="submitComments">
         <img src="../../../../assets/icons/submit.svg" width="32" height="32">
       </button>
-      <Shaky style="float:left" />
+      <Shaky style="float:left" @write-emoji="writeEmoji" />
       <div class="writer-wrapper">
         <div class="writer-icon" />
         <input
@@ -34,7 +34,6 @@
 
 <script>
 import Shaky from './Shaky.vue';
-import { eventBus } from '@/assets/bus';
 import axios from 'axios'; 
 import storage from 'good-storage';
 
@@ -71,13 +70,6 @@ export default {
     }
   },
 
-  mounted (){
-    this.clearValue();
-
-    eventBus.$on('write-emoji',emoji => {
-      emoji && this.insert(emoji,this);
-    });
-  },
   methods: {
     /**
      * @description: 有可能表情会加在文字中间,一定要加这一句，否则移动端会有问题
@@ -126,8 +118,8 @@ export default {
 
       axios.post('/api/writeComment', params,{
         headers: {
-          'Access-Control-Allow-Origin': '*',  //解决cors头问题
-          'Access-Control-Allow-Credentials': 'true', //解决session问题
+          'Access-Control-Allow-Origin': '*',  // 解决cors头问题
+          'Access-Control-Allow-Credentials': 'true', // 解决session问题
           'Content-Type': 'application/json'
         },
         withCredentials: true
@@ -140,10 +132,9 @@ export default {
           });
         }
 
-        eventBus.$emit('add-new-comment');
+        this.$emit('add-new-comment');
         this.clearValue();
-        eventBus.$off('write-emoji');
-        this.deleteCommentFlag(this.blogId, createTime);//可删除标志位保存到缓存中
+        this.deleteCommentFlag(this.blogId, createTime);// 可删除标志位保存到缓存中
       }).catch(err => {
         console.log('err:',err);
       });
@@ -155,9 +146,9 @@ export default {
     },
 
     judgeNull (){
-      let tip = ''; //提示信息，判断用户名和评论是否为空
+      let tip = ''; // 提示信息，判断用户名和评论是否为空
 
-      //判断用户名和评论是否为空
+      // 判断用户名和评论是否为空
       if(!this.username){
         tip += '用户名不能为空';
       }
@@ -176,9 +167,8 @@ export default {
     },
 
     randomPic (){
-      let num = Math.ceil(Math.random()*34);
-      let name = num + '.jpg';
-      this.picName = name;
+      const PIC_NUM = 34;
+      this.picName = Math.ceil(Math.random() * PIC_NUM) + '.jpg';
       return name;
     },
 
@@ -186,6 +176,10 @@ export default {
       this.picName = '';
       this.username = '';
       this.comment = '';
+    },
+
+    writeEmoji (emoji) {
+      emoji && this.insert(emoji,this);
     }
   }
 };

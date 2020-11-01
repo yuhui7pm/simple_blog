@@ -45,6 +45,9 @@ module.exports = {
     'generator-star-spacing': 2, // 生成器函数*的前后空格
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 禁止使用debugger
     'no-irregular-whitespace': 'off',
-    "key-spacing": [2, { "beforeColon": false, "afterColon": true }]//对象字面量中冒号的前后空格
+    "key-spacing": [2, { "beforeColon": false, "afterColon": true }],// 对象字面量中冒号的前后空格\
+    "space-infix-ops": 2,
+    "spaced-comment": [2, "always", { "markers": ["global", "globals", "eslint", "eslint-disable", "*package", "!", ","] }],
+    "space-unary-ops": [2, { "words": true, "nonwords": false }]
   }
 };

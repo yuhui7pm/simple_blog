@@ -7,12 +7,12 @@
  * @LastEditTime: 2020-05-18 18:38:20
  -->
 <template>
-  <div :key="commentkey" class="comments-wrapper">
+  <div class="comments-wrapper">
     <div class="comments">
       <!-- 在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加“”.native“”事件是无法触发的。
 　　  可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。 -->
       <div v-for="(item,index) in commentsLists" :key="item.createtime" class="comment-write">
-        <div style="transition-duration:2s;" :class="&quot;deleteWrapper&quot;+index">
+        <div style="transition-duration:2s;" :class="'deleteWrapper'+index">
           <Comment
             :key="index"
             class="commentOne"
@@ -20,13 +20,16 @@
             :item="item"
             :blog-id="blogId"
             @reply-comment="replyIt"
+            @change-comments-lists="changeCommentsLists"
+            @delete-comments-lists="getCommentsItem"
           />
           <WriteComment
             :key="item.createtime"
-            :class="['writeComment','addWrite&quot'+index]"
+            :class="['writeComment','addWrite'+index]"
             :blog-id="blogId"
             :order="index"
             :reply-name="replyName"
+            @add-new-comment="addNewComment"
           />
         </div>
       </div>
@@ -37,10 +40,9 @@
 <script>
 import WriteComment from './WriteComment.vue';
 import Comment from './Comment.vue';
-import { eventBus } from '@/assets/bus';
 import axios from 'axios';
 export default {
-  name: 'CommetsList', //不能与下面组件名字重读，否则会堆栈溢出
+  name: 'CommetsList', // 不能与下面组件名字重读，否则会堆栈溢出
   components: {
     Comment,
     WriteComment
@@ -54,7 +56,7 @@ export default {
   data (){
     return{
       statusArr: [],
-      count: -1,//用于计数
+      count: -1, // 用于计数
       replyName: '',
       commentsLists: [],
       ind: null,
@@ -63,32 +65,9 @@ export default {
   },
 
   mounted (){
-    this.getCommentsItem();//页面挂载的时候就获取评论列表数据
-
-    eventBus.$on('change-comments-lists',obj=>{
-      let commentsLists = this.commentsLists;
-      // console.log('obj===',obj)
-      let arr = this.changeListsStatus(obj,commentsLists);
-      this.commentsLists = arr;
-    });
-
-    eventBus.$on('add-new-comment',() => {
-      this.commentkey += 1;
-      this.getCommentsItem();
-      this.closeOther();
-    });
-    
-    eventBus.$on('delete-comments-lists',obj=>{
-      let deletedArr = this.deleteLists(obj,this.commentsLists);
-      this.commentsLists = deletedArr;
-    });
+    this.getCommentsItem();// 页面挂载的时候就获取评论列表数据
   },
-  
-  beforeDestroy () {
-    eventBus.$off('add-new-comment');
-    eventBus.$off('change-comments-lists');
-    eventBus.$off('delete-comments-lists');
-  },
+
   methods: {
     /**
      * @description: 点击评论时，只在该条评论下面显示输入框，其他地方不显示
@@ -97,28 +76,28 @@ export default {
      * @author: yuhui
      */
     insertReply (index){
-      this.statusArr[index] = !this.statusArr[index]; //评论底部显示评论框
-      this.$emit('remove-reply',!this.statusArr[index]); //最开始的时候肯定是显示的
-      if(index!==this.count){
-        this.statusArr[this.count]=false; //点击另一个评论，上一个评论的点评输入框消失
+      this.statusArr[index] = !this.statusArr[index]; // 评论底部显示评论框
+      this.$emit('remove-reply',!this.statusArr[index]); // 最开始的时候肯定是显示的
+      if(index !== this.count){
+        this.statusArr[this.count] = false; // 点击另一个评论，上一个评论的点评输入框消失
       }
       this.count = index;
 
       // 评论区域的显示与隐藏
-      for(let i=0;i<this.commentsLists.length;i++){
-        document.getElementsByClassName('addWrite'+i)[0].style.paddingTop = 0;
-        document.getElementsByClassName('addWrite'+i)[0].style.margin = '5px 0 10px';
+      for(let i = 0;i < this.commentsLists.length;i++){
+        document.getElementsByClassName('addWrite' + i)[0].style.paddingTop = 0;
+        document.getElementsByClassName('addWrite' + i)[0].style.margin = '5px 0 10px';
   
         if(this.statusArr[i] === true){
-          document.getElementsByClassName('addWrite'+i)[0].style.display = 'block';
-          document.getElementsByClassName('addWrite'+i)[0].style.opacity = 0;
+          document.getElementsByClassName('addWrite' + i)[0].style.display = 'block';
+          document.getElementsByClassName('addWrite' + i)[0].style.opacity = 0;
           setTimeout(()=>{
-            document.getElementsByClassName('addWrite'+i)[0].style.transition = "opacity 0.5s";
-            document.getElementsByClassName('addWrite'+i)[0].style.opacity = 1;
+            document.getElementsByClassName('addWrite' + i)[0].style.transition = "opacity 0.5s";
+            document.getElementsByClassName('addWrite' + i)[0].style.opacity = 1;
           },5);
         }else{
-          document.getElementsByClassName('addWrite'+i)[0].style.transition = "opacity 0.5s";
-          document.getElementsByClassName('addWrite'+i)[0].style.opacity = 0;
+          document.getElementsByClassName('addWrite' + i)[0].style.transition = "opacity 0.5s";
+          document.getElementsByClassName('addWrite' + i)[0].style.opacity = 0;
           setTimeout(()=>{
             document.getElementsByClassName('writeComment')[i].style.display = 'none';
           },500);
@@ -138,17 +117,17 @@ export default {
      * @return: 
      * @author: yuhui
      */
-    getCommentsItem (){
-      this.commentsLists = [];//置空
-      axios.get("/api/blog/getComments",{
+    async getCommentsItem () {
+      this.commentsLists = [];// 置空
+      await axios.get("/api/blog/getComments",{
         params: {
           blogId: this.blogId
         }
       }).then(res=>{
-        if(res.status==200&&res.statusText==='OK'){
+        if(res.status == 200 && res.statusText === 'OK'){
           res = res.data;
           const data = res.data;
-          this.commentsLists = data.reverse();     //博客列表数据
+          this.commentsLists = data.reverse();     // 博客列表数据
         }
       });
     },
@@ -160,9 +139,9 @@ export default {
      * @author: yuhui
      */
     closeOther (){
-      for(let i=0;i<this.commentsLists.length-1;i++){
+      for(let i = 0;i < this.commentsLists.length - 1;i++){
         this.statusArr[i] = false;
-        document.getElementsByClassName("addWrite"+i)[0].style.display = 'none';
+        document.getElementsByClassName("addWrite" + i)[0].style.display = 'none';
       }
       this.$emit('remove-reply',true);
     },
@@ -176,8 +155,8 @@ export default {
      */
     changeListsStatus (obj,list){
       let newArr = list.map(function (value) {
-        if(value.createtime==obj.createtime){
-          //IE11 这里有问题
+        if(value.createtime == obj.createtime){
+          // IE11 这里有问题
           value.likestar = obj.likeNum;
         }
         return value;
@@ -185,21 +164,25 @@ export default {
       return newArr;
     },
 
-    /**
-     * @description: 删除评论数据
-     * @param {Object} obj 需要删除的评论数据 
-     * @param {Object} list 所有的评论数据
-     * @return: {Object} deleteArr 删除某一项之后的评论数据
-     * @author: yuhui
-     */
     deleteLists (obj,list){
       let deletedArr = list;
-      for(let i=0; i<list.length; i++) {
-        if (list[i].createtime==obj.createtime) {
+      for(let i = 0; i < list.length; i++) {
+        if (list[i].createtime == obj.createtime) {
           deletedArr.splice(i,1);
         }
       }
       return deletedArr;
+    },
+
+    async addNewComment () {
+      await this.getCommentsItem();
+      this.closeOther();
+    },
+
+    changeCommentsLists (obj) {
+      let commentsLists = this.commentsLists;
+      let arr = this.changeListsStatus(obj,commentsLists);
+      this.commentsLists = arr;
     }
   }
 };

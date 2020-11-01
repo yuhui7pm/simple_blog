@@ -56,13 +56,10 @@
 
 <script>
 import axios from 'axios';
-// import heart_click from '@/assets/icons/heart_click.svg';
-// import heart_unclick from '@/assets/icons/heart_unclick.svg';
 import { timestampToTime } from '@/utils/time';
 import storage from 'good-storage';
-import { eventBus } from '@/assets/bus';
 export default {
-  name: 'Comment', //不能与下面组件名字重读，否则会堆栈溢出
+  name: 'Comment', // 不能与下面组件名字重读，否则会堆栈溢出
   components: {
   },
   props: {
@@ -113,7 +110,7 @@ export default {
     deleteIcon (){
       let deleteKey = 'delete_blogId_' + this.blogId + '_createtime_' + this.item.createtime; 
       let sta = storage.get(deleteKey);
-      if(sta===true){
+      if(sta === true){
         this.deleteIconShow = true;
       }else{
         this.deleteIconShow = false;
@@ -133,8 +130,8 @@ export default {
         createtime: time
       },{
         headers: {
-          'Access-Control-Allow-Origin': '*',  //解决cors头问题
-          'Access-Control-Allow-Credentials': 'true', //解决session问题
+          'Access-Control-Allow-Origin': '*',  // 解决cors头问题
+          'Access-Control-Allow-Credentials': 'true', // 解决session问题
           'Content-Type': 'application/json'
         },
         withCredentials: true
@@ -145,10 +142,7 @@ export default {
           let likeKey = 'blogId_' + this.blogId + '_time_' + time;
           storage.remove(likeKey);
 
-          eventBus.$emit('delete-comments-lists',{
-            username: name,
-            createtime: time
-          });
+          this.$emit('delete-comments-lists');
         }
       }).catch(err => {
         console.log('err:',err);
@@ -173,7 +167,7 @@ export default {
      */
     changeHeart (){
       // 点击切换爱心图片
-      this.heartChange=!this.heartChange;
+      this.heartChange = !this.heartChange;
 
       let likeKey = 'blogId_' + this.blogId + '_time_' + this.item.createtime;
 
@@ -181,7 +175,7 @@ export default {
       let status = storage.get(likeKey); 
       let num = parseInt(this.$refs.praiseNum.innerText);
 
-      if(status!==true){
+      if(status !== true){
         this.$refs.praiseNum.innerText = num + 1;
         storage.set(likeKey,true);
       }else{
@@ -189,10 +183,10 @@ export default {
         storage.set(likeKey,false);
       }
       
-      //向后端发送请求，保存数据
+      // 向后端发送请求，保存数据
       let username = this.item.username,
         createtime = this.item.createtime,
-        likeStatusParam = storage.get(likeKey)||'',
+        likeStatusParam = storage.get(likeKey) || '',
         likeNum = this.$refs.praiseNum.innerText;
 
       axios.post('/api/clickLikeIcon',{
@@ -204,12 +198,12 @@ export default {
           'Content-Type': 'application/json'
         }
       }).then(res=>{
-        if(res && res.status==200 && res.statusText==='OK'){
-          eventBus.$emit('change-comments-lists',{
+        if(res && res.status == 200 && res.statusText === 'OK'){
+          this.$emit('change-comments-lists',{
             username,
             createtime,
             likeStatus: likeStatusParam,
-            likeNum,
+            likeNum
           });
         }
       });
@@ -222,7 +216,7 @@ export default {
      * @author: yuhui
      */
     userIconUrl (name){
-      return require('../../../../assets/userIcon/'+name);
+      return require('../../../../assets/userIcon/' + name);
     },
 
     /**

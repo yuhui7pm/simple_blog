@@ -47,21 +47,20 @@
 
 <script>
 
-import { eventBus } from '@/assets/bus';
 let EmojiUrl = require('../../../../../static/mock/emoji.json');
 export default {
   name: 'Shaky',
   data (){
     return{
-      emojiLists: [],//颜表情列表数据
-      qqEmojiLists: [],//qq表情包
+      emojiLists: [],// 颜表情列表数据
+      qqEmojiLists: [],// qq表情包
       emojiFlag: true,
-      status: false,//表情选项框的显示与隐藏
-      isShow: false,
+      status: false,// 表情选项框的显示与隐藏
+      isShow: false
     };
   },
   mounted (){
-    //点击颜色其它区域隐藏
+    // 点击颜色其它区域隐藏
     document.addEventListener('click', this.emojiDisplay,true);
   },
   destroyed (){
@@ -90,13 +89,13 @@ export default {
      */
     emojiDisplay (e){
       let _this = this;
-      if((e.target.className=='emoji-wrapper'||e.target.className=="shaky shakyInner")
-        &&this.isShow!==true){
-        this.isShow=true;
-      }else if(e.target.className=="emojiTitle"){
-        this.isShow=true;
+      if((e.target.className == 'emoji-wrapper' || e.target.className == "shaky shakyInner")
+        && this.isShow !== true){
+        this.isShow = true;
+      }else if(e.target.className == "emojiTitle"){
+        this.isShow = true;
       }else{
-        _this.isShow=false;
+        _this.isShow = false;
       }
     },
     
@@ -106,9 +105,9 @@ export default {
      * @return: 
      * @author: yuhui
      */
-    writeEmoji (emoji){
-      eventBus.$emit('write-emoji', emoji);
-    },
+    writeEmoji (emoji) {
+      this.$emit('write-emoji', emoji);
+    }
   }
 };
 </script>
