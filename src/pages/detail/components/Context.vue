@@ -7,31 +7,31 @@
  * @LastEditTime: 2020-05-18 17:37:20
  -->
 <template>
-    <div class="wrapper">
-        <div class="context-wrapper">
-            <div class="context">
-                {{ blogContent.context }}
-            </div>
-        </div>  
-    </div>
+  <div class="wrapper">
+    <div class="context-wrapper">
+      <div class="context">
+        {{ blogContent.context }}
+      </div>
+    </div>  
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
-    components:{
-    },
-    props:{
-        blogContent: {
-            type: Object,
-            default: () => {
-                return {
-                    context: ''
-                }
-            }
-        }
+  name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
+  components: {
+  },
+  props: {
+    blogContent: {
+      type: Object,
+      default: () => {
+        return {
+          context: ''
+        };
+      }
     }
-}
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

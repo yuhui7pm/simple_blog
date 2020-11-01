@@ -12,7 +12,7 @@
   * @param {*} data 要写入js文件的格式化数据 
   */
 const echoTpl = data => {
-    return `
+  return `
     exports.check = () => {
       return false;
     }
@@ -20,38 +20,38 @@ const echoTpl = data => {
     exports.mockData = () => {
       return ${data};
     }
-  `
-}
+  `;
+};
 
 const dirExists = (filePath) => {
-    return new Promise((resolve, reject) => {
-        fs.access(filePath, err => {
-            if (err) {
-                fs.appendFileSync(filePath, '', 'utf-8', (err) => {
-                    if (err) {
-                        return console.log('该文件不存在，重新创建失败！')
-                    }
-                    console.log("文件不存在，已新创建")
-                })
-                reject(false)
-            } else {
-                resolve(true)
-            }
-        })
-    })
-}
+  return new Promise((resolve, reject) => {
+    fs.access(filePath, err => {
+      if (err) {
+        fs.appendFileSync(filePath, '', 'utf-8', (err) => {
+          if (err) {
+            return console.log('该文件不存在，重新创建失败！');
+          }
+          console.log("文件不存在，已新创建");
+        });
+        reject(false);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+};
 
-const writeMockFile = async function(filePath, body) {
-    await dirExists(path.dirname(filePath))
+const writeMockFile = async function (filePath, body) {
+  await dirExists(path.dirname(filePath));
   
-    fs.writeFile(filePath, echoTpl(JSON.stringify(body)), function(err) {
-        if (err) {
-            console.log(`写入文件失败`)
-        }
-    })
-}
+  fs.writeFile(filePath, echoTpl(JSON.stringify(body)), function (err) {
+    if (err) {
+      console.log(`写入文件失败`);
+    }
+  });
+};
 
 module.exports = {
-    echoTpl,
-    writeMockFile
-}
+  echoTpl,
+  writeMockFile
+};

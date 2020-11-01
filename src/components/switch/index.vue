@@ -1,69 +1,69 @@
 <template>
-    <div>
-        <span
-            class="weui-switch"
-            :class="{'weui-switch-on': isChecked}"
-            :value="value"
-            style="position: relative;"
-            @click="toggle"
-        >
-            <div
-                v-if="isChecked && direction.length > 0"
-                style="width: 100%; height: 100%; position: absolute; padding: 0 5px; line-height: 20px; color: #fff; user-select: none;"
-            >
-                {{ direction[0] }}
-            </div>
-            <div
-                v-if="!isChecked && direction.length > 0"
-                style="width: 100%; height: 100%; position: absolute; padding: 0 5px; right: 2px; line-height: 22px; color: #fff; text-align: right; user-select: none;"
-            >
-                {{ direction[1] }}
-            </div>
-        </span>
-    </div>
+  <div>
+    <span
+      class="weui-switch"
+      :class="{'weui-switch-on': isChecked}"
+      :value="value"
+      style="position: relative;"
+      @click="toggle"
+    >
+      <div
+        v-if="isChecked && direction.length > 0"
+        style="width: 100%; height: 100%; position: absolute; padding: 0 5px; line-height: 20px; color: #fff; user-select: none;"
+      >
+        {{ direction[0] }}
+      </div>
+      <div
+        v-if="!isChecked && direction.length > 0"
+        style="width: 100%; height: 100%; position: absolute; padding: 0 5px; right: 2px; line-height: 22px; color: #fff; text-align: right; user-select: none;"
+      >
+        {{ direction[1] }}
+      </div>
+    </span>
+  </div>
 </template>
 <script>
 export default {
-    name: 'SwitchComponent',
-    props: {
-        value: {
-            type: Boolean,
-            default: true
-        },
-        text: {
-            type: String,
-            default: ''
-        }
+  name: 'SwitchComponent',
+  props: {
+    value: {
+      type: Boolean,
+      default: true
     },
-    data() {
-        return {
-            isChecked: this.value
-        }
-    },
-    computed: {
-        direction() {
-            if (this.text) {
-                return this.text.split('|')
-            } else {
-                return []
-            }
-        }
-    },
-    watch: {
-        value(val) {
-            this.isChecked = val
-        },
-        isChecked(val) {
-            this.$emit('change', val)
-        }
-    },
-
-    methods: {
-        toggle() {
-            this.isChecked = !this.isChecked
-        }
+    text: {
+      type: String,
+      default: ''
     }
-}
+  },
+  data () {
+    return {
+      isChecked: this.value
+    };
+  },
+  computed: {
+    direction () {
+      if (this.text) {
+        return this.text.split('|');
+      } else {
+        return [];
+      }
+    }
+  },
+  watch: {
+    value (val) {
+      this.isChecked = val;
+    },
+    isChecked (val) {
+      this.$emit('change', val);
+    }
+  },
+
+  methods: {
+    toggle () {
+      this.isChecked = !this.isChecked;
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
     .weui-switch {

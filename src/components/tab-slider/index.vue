@@ -7,66 +7,66 @@
  * @LastEditTime: 2020-10-18 12:07:33
 -->
 <template>
-    <div class="tabs-slider__wrapper">
-        <div class="tab-slider__row-wrapper" @click="changeTab($event)">
-            <div
-                v-for="(tab, index) in tabs" 
-                :key="uuid(index)"
-                class="tab-slider"
-            >
-                <a class="tab-slider__name" :class="tabValue == tab.name ? 'tab-clicked' : ''">
-                    {{ tab.name }}
-                </a>
-            </div>
-        </div>
+  <div class="tabs-slider__wrapper">
+    <div class="tab-slider__row-wrapper" @click="changeTab($event)">
+      <div
+        v-for="(tab, index) in tabs" 
+        :key="uuid(index)"
+        class="tab-slider"
+      >
+        <a class="tab-slider__name" :class="tabValue == tab.name ? 'tab-clicked' : ''">
+          {{ tab.name }}
+        </a>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import { uuid } from '@/utils/util.js'
+import { uuid } from '@/utils/util.js';
 export default {
-    name: "TabSlider",    
-    props: {
-        tabs: {
-            type: Array,
-            default: () => {
-                return []
-            }
-        }
-    },
-    data() {
-        return {
-            tabValue: ''
-        }
-    },
-
-    watch: {
-        tabs: {
-            deep: true,
-            immediate: true,
-            handler(val) {
-                val.length && (this.tabValue = val[0].name)
-            }
-        },
-
-        tabValue(val) {
-            this.$emit('tab-click', val)
-        }
-    },
-  
-    methods: {
-        uuid,
-
-        changeTab(e) {
-            this.tabValue = e.target.innerText.trim()
-        },
-
-        setTabValue(val) {
-            console.log(val, '设置值')
-            this.tabValue = val
-        }
+  name: "TabSlider",    
+  props: {
+    tabs: {
+      type: Array,
+      default: () => {
+        return [];
+      }
     }
-}
+  },
+  data () {
+    return {
+      tabValue: ''
+    };
+  },
+
+  watch: {
+    tabs: {
+      deep: true,
+      immediate: true,
+      handler (val) {
+        val.length && (this.tabValue = val[0].name);
+      }
+    },
+
+    tabValue (val) {
+      this.$emit('tab-click', val);
+    }
+  },
+  
+  methods: {
+    uuid,
+
+    changeTab (e) {
+      this.tabValue = e.target.innerText.trim();
+    },
+
+    setTabValue (val) {
+      console.log(val, '设置值');
+      this.tabValue = val;
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>

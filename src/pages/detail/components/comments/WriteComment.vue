@@ -7,214 +7,214 @@
  * @LastEditTime: 2020-05-18 18:40:09
  -->
 <template>
-    <div class="write-wrapper" @click="test">
-        <textarea
-            ref="commentContext" v-model="str" placeholder="在这里输入你的评论"
-            @input="commentFlag=true"
-        />
-        <div class="but-wrapper">
-            <button title="提交评论" @click="submitComments">
-                <img src="../../../../assets/icons/submit.svg" width="32" height="32">
-            </button>
-            <Shaky style="float:left" />
-            <div class="writer-wrapper">
-                <div class="writer-icon" />
-                <input
-                    ref="username" class="username" placeholder="昵称(必填)"
-                    maxlength="8" @input="nameFlag=true"
-                >
-            </div>
-        </div>
+  <div class="write-wrapper" @click="test">
+    <textarea
+      ref="commentContext" v-model="str" placeholder="在这里输入你的评论"
+      @input="commentFlag=true"
+    />
+    <div class="but-wrapper">
+      <button title="提交评论" @click="submitComments">
+        <img src="../../../../assets/icons/submit.svg" width="32" height="32">
+      </button>
+      <Shaky style="float:left" />
+      <div class="writer-wrapper">
+        <div class="writer-icon" />
+        <input
+          ref="username" class="username" placeholder="昵称(必填)"
+          maxlength="8" @input="nameFlag=true"
+        >
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import Shaky from './Shaky.vue'
-import { eventBus } from '@/assets/bus'
-import axios from 'axios' 
-import storage from 'good-storage'
+import Shaky from './Shaky.vue';
+import { eventBus } from '@/assets/bus';
+import axios from 'axios'; 
+import storage from 'good-storage';
 export default {
-    name:'Write',
-    components:{
-        Shaky
+  name: 'Write',
+  components: {
+    Shaky
+  },
+  props: {
+    blogId: {
+      type: Number,
+      default: 0
     },
-    props:{
-        blogId: {
-            type: Number,
-            default: 0
-        },
-        name: {
-            type: String,
-            default: ''
-        },
-        order: {
-            type: Number,
-            default: 0
-        }
+    name: {
+      type: String,
+      default: ''
     },
-    data(){
-        return{
-            str:"",
-            nameFlag:true,//用户名是否为空
-            emailFlag:true,//email格式校验
-            websiteFlag:true,//网站格式校验
-            commentFlag:true,//评论是否为空
-            replyWho:'',
-            picName:''
-        }
-    },
-    beforeMount(){
-        sessionStorage.setItem('replyName', '')
-        this.str = ''
-    },
-    mounted(){  
-        this.picName = ''
-        this.$refs[`commentContext`].value = ''
-        this.$refs.username.value = ''
+    order: {
+      type: Number,
+      default: 0
+    }
+  },
+  data (){
+    return{
+      str: "",
+      nameFlag: true,//用户名是否为空
+      emailFlag: true,//email格式校验
+      websiteFlag: true,//网站格式校验
+      commentFlag: true,//评论是否为空
+      replyWho: '',
+      picName: ''
+    };
+  },
+  beforeMount (){
+    sessionStorage.setItem('replyName', '');
+    this.str = '';
+  },
+  mounted (){  
+    this.picName = '';
+    this.$refs[`commentContext`].value = '';
+    this.$refs.username.value = '';
     
-        let _this = this
-        eventBus.$on('write-emoji',emoji=>{
-            emoji && _this.insert(emoji,_this)
-        })
+    let _this = this;
+    eventBus.$on('write-emoji',emoji=>{
+      emoji && _this.insert(emoji,_this);
+    });
+  },
+  methods: {
+    test (){
+      console.log("++++++++++",this.order);
     },
-    methods:{
-        test(){
-            console.log("++++++++++",this.order)
-        },
-        /**
+    /**
      * @description: 有可能表情会加在文字中间,一定要加这一句，否则移动端会有问题
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
-        async insert(myValue, _this) {
-            const myField = _this.$refs[`commentContext`]
-            if (myValue && myField && (myField.selectionStart || myField.selectionStart === 0)) {
-                let startPos = myField.selectionStart
-                let endPos = myField.selectionEnd
-                _this.str = myField.value.substring(0, startPos) + myValue 
-                        + myField.value.substring(endPos, myField.value.length)
-                await _this.$nextTick() // 这句是重点, 圈起来
-                myField.focus()
-                myField.setSelectionRange(endPos + myValue.length, endPos + myValue.length)
-            } else {
-                _this.str += myValue
-            }
-        },
+    async insert (myValue, _this) {
+      const myField = _this.$refs[`commentContext`];
+      if (myValue && myField && (myField.selectionStart || myField.selectionStart === 0)) {
+        let startPos = myField.selectionStart;
+        let endPos = myField.selectionEnd;
+        _this.str = myField.value.substring(0, startPos) + myValue 
+                        + myField.value.substring(endPos, myField.value.length);
+        await _this.$nextTick(); // 这句是重点, 圈起来
+        myField.focus();
+        myField.setSelectionRange(endPos + myValue.length, endPos + myValue.length);
+      } else {
+        _this.str += myValue;
+      }
+    },
 
-        /**
+    /**
      * @description: 点击提交评论按钮，提交评论数据
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
-        submitComments(){
-            let replyUser = sessionStorage.getItem('replyName')
-            let username = String(this.$refs.username.value)
-            const commentContext = this.$refs[`commentContext`].value
+    submitComments (){
+      let replyUser = sessionStorage.getItem('replyName');
+      let username = String(this.$refs.username.value);
+      const commentContext = this.$refs[`commentContext`].value;
 
-            let nameComment = this.nullAlert(username,commentContext)
-            let createTime = Date.now()
+      let nameComment = this.nullAlert(username,commentContext);
+      let createTime = Date.now();
 
-            if(replyUser && replyUser.length>0){
-                username+='@'+replyUser.split('@')[0]
-            }   
+      if(replyUser && replyUser.length>0){
+        username+='@'+replyUser.split('@')[0];
+      }   
       
-            if(nameComment&&this.websiteFlag&&this.commentFlag){
-                axios.post('/api/writeComment',{
-                    username,
-                    commentContext,
-                    createTime,
-                    iconUrl:this.randomPic(),
-                    blogId:this.blogId,
-                },{
-                    headers: {
-                        'Access-Control-Allow-Origin':'*',  //解决cors头问题
-                        'Access-Control-Allow-Credentials':'true', //解决session问题
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials : true
-                }).then(res=>{
-                    if(res.status==200){
-                        eventBus.$emit('add-new-comment',{
-                            username,
-                            comments:commentContext,
-                            createtime:createTime,
-                            iconurl:this.picName,
-                            blogId:this.blogId,
-                            likestar:0
-                        })
+      if(nameComment&&this.websiteFlag&&this.commentFlag){
+        axios.post('/api/writeComment',{
+          username,
+          commentContext,
+          createTime,
+          iconUrl: this.randomPic(),
+          blogId: this.blogId,
+        },{
+          headers: {
+            'Access-Control-Allow-Origin': '*',  //解决cors头问题
+            'Access-Control-Allow-Credentials': 'true', //解决session问题
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        }).then(res=>{
+          if(res.status==200){
+            eventBus.$emit('add-new-comment',{
+              username,
+              comments: commentContext,
+              createtime: createTime,
+              iconurl: this.picName,
+              blogId: this.blogId,
+              likestar: 0
+            });
               
-                        //清空输入框
-                        sessionStorage.setItem('replyName', '')
-                        this.$refs[`commentContext`].value = ''
-                        this.$refs.username.value = ''
-                        this.str = ''             
-                        eventBus.$off('write-emoji')
+            //清空输入框
+            sessionStorage.setItem('replyName', '');
+            this.$refs[`commentContext`].value = '';
+            this.$refs.username.value = '';
+            this.str = '';             
+            eventBus.$off('write-emoji');
               
-                        this.$emit('close-comment')
+            this.$emit('close-comment');
 
-                        //可删除标志位保存到缓存中
-                        this.deleteCommentFlag(this.blogId,createTime)
-                    }
-                }).catch(err => {
-                    console.log('err:',err)
-                })
-            }   
-        },
+            //可删除标志位保存到缓存中
+            this.deleteCommentFlag(this.blogId,createTime);
+          }
+        }).catch(err => {
+          console.log('err:',err);
+        });
+      }   
+    },
     
-        /**
+    /**
      * @description: 写了哪一条评论，就保存到缓存中，判断该用户是否可以删除
      * @param {Number} blogid 该篇博客的id 
      * @param {Number} createTime 该条评论的创建时间 
      * @return: 
      * @author: yuhui
      */
-        deleteCommentFlag(blogid,createTime){
-            let deleteKey = 'delete_blogId_' + blogid + '_createtime_' + createTime 
-            storage.set(deleteKey,true)
-        },
+    deleteCommentFlag (blogid,createTime){
+      let deleteKey = 'delete_blogId_' + blogid + '_createtime_' + createTime; 
+      storage.set(deleteKey,true);
+    },
 
-        /**
+    /**
      * @description: 提交时，用户名和评论为空校验
      * @param {String} username 评论输入框所填写的用户名 
      * @param {String} commentContext 评论输入框所填写的评论内容
      * @return: 
      * @author: yuhui
      */
-        nullAlert(username,commentContext){
-            let tip = '' //提示信息，判断用户名和评论是否为空
-            //判断用户名和评论是否为空
-            if(username.length===0){
-                this.nameFlag=false
-                tip+='用户名不能为空 '
-            }
-            if(commentContext.length===0){
-                this.commentFlag=false
-                tip+='评论不能为空'
-            }
-            if(username.length===0||commentContext.length===0){
-                alert(tip)
-                return false
-            }else{
-                return true
-            }
-        },
+    nullAlert (username,commentContext){
+      let tip = ''; //提示信息，判断用户名和评论是否为空
+      //判断用户名和评论是否为空
+      if(username.length===0){
+        this.nameFlag=false;
+        tip+='用户名不能为空 ';
+      }
+      if(commentContext.length===0){
+        this.commentFlag=false;
+        tip+='评论不能为空';
+      }
+      if(username.length===0||commentContext.length===0){
+        alert(tip);
+        return false;
+      }else{
+        return true;
+      }
+    },
 
-        /**
+    /**
      * @description: 生成随机的评论头像图片
      * @param {type} 
      * @return: 
      * @author: yuhui
      */
-        randomPic(){
-            let num = Math.ceil(Math.random()*34)
-            let name = num + '.jpg'
-            this.picName = name
-            return name
-        }
+    randomPic (){
+      let num = Math.ceil(Math.random()*34);
+      let name = num + '.jpg';
+      this.picName = name;
+      return name;
     }
-}
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

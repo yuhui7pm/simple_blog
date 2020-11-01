@@ -8,26 +8,26 @@
  -->
 
 <template>
-    <div v-show="toastFlag" class="toast">
-        {{ toastText }}
-    </div>
+  <div v-show="toastFlag" class="toast">
+    {{ toastText }}
+  </div>
 </template>
 
 <script>
 export default {
-    name:'Toast',
-    props:{
-        toastText: {
-            type: String,
-            default: ''
-        },
-        toastFlag:Boolean
+  name: 'Toast',
+  props: {
+    toastText: {
+      type: String,
+      default: ''
     },
-    data() {
-        return {
-        }
-    }
-}
+    toastFlag: Boolean
+  },
+  data () {
+    return {
+    };
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

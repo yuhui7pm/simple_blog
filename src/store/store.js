@@ -6,20 +6,20 @@
  * @LastEditors: yuhui
  * @LastEditTime: 2020-10-18 13:57:02
  */
-import Vue from 'vue'
+import Vue from 'vue';
 
-import Vuex from 'vuex'
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
-        blogItemWidth: 960,
-    },
+  state: {
+    blogItemWidth: 960,
+  },
 
-    mutations: {
+  mutations: {
     
-    }
-})
+  }
+});
 
-export default store
+export default store;

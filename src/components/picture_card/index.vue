@@ -1,71 +1,71 @@
 <template>
+  <div
+    @mouseover="showMask=true"
+    @mouseout="showMask=false"
+  >
     <div
-        @mouseover="showMask=true"
-        @mouseout="showMask=false"
+      class="pic-card" 
+      :style="{width: cardWidth}"
     >
-        <div
-            class="pic-card" 
-            :style="{width: cardWidth}"
-        >
-            <img
-                :src="picUrl"
-                :alt="picture.name"
-                class="pic-card__img"
-            >
+      <img
+        :src="picUrl"
+        :alt="picture.name"
+        class="pic-card__img"
+      >
     
-            <div v-show="showMask" :class="showMask && 'pic-card__mask'" />
+      <div v-show="showMask" :class="showMask && 'pic-card__mask'" />
 
-            <div class="pic-card__icon-wrapper">
-                <div class="pic-card__vedio-icon" />
-                <div v-show="showMask" class="pic-card__zan-msg-wrapper">
-                    <circle-icon key="zan" pic-url="assets/icons/card_zan.svg" :num="22" />
-                    <circle-icon key="msg" pic-url="assets/icons/card_msg.svg" :num="1" />
-                </div>
-            </div>
-
-            <p class="pic-card__content-introduce">
-                这里是商品介绍
-            </p>
+      <div class="pic-card__icon-wrapper">
+        <div class="pic-card__vedio-icon" />
+        <div v-show="showMask" class="pic-card__zan-msg-wrapper">
+          <circle-icon key="zan" pic-url="assets/icons/card_zan.svg" :num="22" />
+          <circle-icon key="msg" pic-url="assets/icons/card_msg.svg" :num="1" />
         </div>
+      </div>
+
+      <p class="pic-card__content-introduce">
+        这里是商品介绍
+      </p>
     </div>
+  </div>
 </template>
 
 <script>
-import picTest from '@/assets/images/pic_demo.jpg'
-import CircleIcon from '@/components/circle-icon/index.vue'
+import picTest from '@/assets/images/pic_demo.jpg';
+import CircleIcon from '@/components/circle-icon/index.vue';
 
 export default {
-    name: 'Card',
-    components: {
-        CircleIcon
+  name: 'Card',
+  components: {
+    CircleIcon
+  },
+  props: {
+    cardWidth: {
+      type: String,
+      default: '220px'
     },
-    props: {
-        cardWidth: {
-            type: String,
-            default: '220px'
-        },
-        picture: {
-            type: Object,
-            default: () => {
-                return {
-                    url: picTest,
-                    name: '图片demo'
-                }
-            }
-        }
-    },
-    data() {
+    picture: {
+      type: Object,
+      default: () => {
         return {
-            showMask: false
-        }
-    },
-    computed: {
-        picUrl() {
-            // let url = this.picture.url
-            return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`)
-        }
+          url: picTest,
+          name: '图片demo'
+        };
+      }
     }
-}
+  },
+  data () {
+    return {
+      showMask: false
+    };
+  },
+  computed: {
+    picUrl () {
+      // let url = this.picture.url
+      return require(`../../assets/images/pic_demo${Math.floor(Math.random()*6)}.jpg`);
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>

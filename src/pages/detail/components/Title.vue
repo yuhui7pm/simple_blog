@@ -7,44 +7,44 @@
  * @LastEditTime: 2020-05-17 17:20:54
  -->
 <template>
-    <div class="blogTitle">
-        <img :src="blogContent.picurl" class="pic-left" alt="封面图片">
-        <div class="right-wrapper">
-            <div class="title-tag">
-                {{ `NO.${blogIndOrder} | ${common.timestampToTime(blogContent.createtime,'toDay')}` }}
-            </div>
-            <h1>{{ blogContent.title }}</h1>
-            <audio
-                ref="audioMusic" :src="blogContent.musicurl" controls="controls"
-                preload
-            />
-        </div>
-    </div>  
+  <div class="blogTitle">
+    <img :src="blogContent.picurl" class="pic-left" alt="封面图片">
+    <div class="right-wrapper">
+      <div class="title-tag">
+        {{ `NO.${blogIndOrder} | ${common.timestampToTime(blogContent.createtime,'toDay')}` }}
+      </div>
+      <h1>{{ blogContent.title }}</h1>
+      <audio
+        ref="audioMusic" :src="blogContent.musicurl" controls="controls"
+        preload
+      />
+    </div>
+  </div>  
 </template>
 
 <script>
 
 export default {
-    name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
-    components:{
+  name: 'Title', //不能与下面组件名字重读，否则会堆栈溢出
+  components: {
+  },
+  props: {
+    blogContent: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     },
-    props:{
-        blogContent: {
-            type: Object,
-            default: () => {
-                return {}
-            }
-        },
-        blogIndOrder: {
-            type: Number,
-            default: 0
-        }
-    },
-    data(){
-        return{
-        }
+    blogIndOrder: {
+      type: Number,
+      default: 0
     }
-}
+  },
+  data (){
+    return{
+    };
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

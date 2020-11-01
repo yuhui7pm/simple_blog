@@ -8,46 +8,46 @@
 -->
 
 <template>
-    <div class="circle-icon__wrapper" :style="{width: size, height: size}">
-        <div class="circle-icon__circle" :style="{backgroundImage: 'url('+ reqPicUrl + ')'}" />
-        <p v-show="!!num" class="circle-icon__num">
-            {{ num }}
-        </p>
-    </div>
+  <div class="circle-icon__wrapper" :style="{width: size, height: size}">
+    <div class="circle-icon__circle" :style="{backgroundImage: 'url('+ reqPicUrl + ')'}" />
+    <p v-show="!!num" class="circle-icon__num">
+      {{ num }}
+    </p>
+  </div>
 </template>
 
 
 <script>
 export default {
-    props: {
-        num: {
-            type: Number,
-            default: 0
-        },
-
-        picUrl: {
-            type: String,
-            default: 'assets/icons/card_zan.svg'
-        },
-
-        size: {
-            type: String,
-            default: '40px'
-        }
+  props: {
+    num: {
+      type: Number,
+      default: 0
     },
 
-    data() {
-        return {
-            reqPicUrl: require('../../' + picUrl)
-        }
+    picUrl: {
+      type: String,
+      default: 'assets/icons/card_zan.svg'
     },
 
-    // computed: {
-    //   reqPicUrl () {
-    //     return require('../../' + this.picUrl);
-    //   }
-    // }
-}
+    size: {
+      type: String,
+      default: '40px'
+    }
+  },
+
+  data () {
+    return {
+      reqPicUrl: require('../../' + picUrl)
+    };
+  },
+
+  // computed: {
+  //   reqPicUrl () {
+  //     return require('../../' + this.picUrl);
+  //   }
+  // }
+};
 </script>
 
 <style lang="less" scoped>

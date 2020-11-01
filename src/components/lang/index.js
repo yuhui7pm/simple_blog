@@ -6,12 +6,12 @@
  * @LastEditors: yuhui
  * @LastEditTime: 2020-10-05 22:05:23
  */
-import Lang from './index.vue'
+import Lang from './index.vue';
 
 const LANG = {
-    install:function(Vue) {
-        Vue.component('Lang', Lang)
-    }
-}
+  install: function (Vue) {
+    Vue.component('Lang', Lang);
+  }
+};
 
-export default LANG
+export default LANG;

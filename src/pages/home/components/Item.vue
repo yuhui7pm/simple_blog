@@ -7,82 +7,72 @@
  * @LastEditTime: 2020-10-18 13:24:30
  -->
 <template>
-    <ol>
-        <!-- <router-link
-      tag="li"
+  <ol>
+    <router-link
       v-for="(list,index) of blogLists"
-      :key="list.id"
-      :style="(blockIndex>index)?'background:white':''"
-      :class="[(blockIndex>index)&&(index>0)?'animate__fadeInUp animate__slow':'',
-        index===0?'animate__fadeInUp animate__slow':'','animate__animated item-wrapper']"
+      :key="uuid(index)"
+      tag="li"
+      :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
       :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
-    > -->
-        <router-link
-            v-for="(list,index) of blogLists"
-            :key="index"
-            tag="li"
-            :class="['animate__fadeInUp animate__slow','animate__animated item-wrapper']"
-            :to="{path:'/detail',query:{id:list.id,blogInd:blogsLen-index}}"
-        >
-            <div>
-                <img class="item-left" :src="list.picurl" alt="博客列表图片">
-                <div class="item-right">
-                    <p class="createTime">
-                        No.{{ blogLists.length - index }} | {{ common.timestampToTime(list.createtime,'toDay') }}
-                    </p>
-                    <h2 class="article-header">
-                        {{ list.title }}
-                    </h2>
-                    <p class="introduction">
-                        {{ list.introduction }}
-                    </p>
-                </div>
-            </div>
-        </router-link>
-    </ol>
+    >
+      <div>
+        <img class="item-left" :src="list.picurl" alt="博客列表图片">
+        <div class="item-right">
+          <p class="createTime">
+            No.{{ blogLists.length - index }} | {{ common.timestampToTime(list.createtime,'toDay') }}
+          </p>
+          <h2 class="article-header">
+            {{ list.title }}
+          </h2>
+          <p class="introduction">
+            {{ list.introduction }}
+          </p>
+        </div>
+      </div>
+    </router-link>
+  </ol>
 </template>
 
 <script>
 
-import { WOW } from 'wowjs'
-import 'animate.css'
+import { WOW } from 'wowjs';
+import 'animate.css';
+import { uuid } from '@/utils/util.js';
 
 export default {
-    name:'Article',
-    props:{
-        blogsLen: {
-            type: Number,
-            default: 0
-        },
-        blogLists: {
-            type: Array,
-            default: () => {
-                return []
-            }
-        },
-        blogsIndex: {
-            type: Number,
-            default: 0
-        },
-        blockIndex:{
-            type: Number,
-            default: 0
-        }
+  name: 'Article',
+  props: {
+    blogsLen: {
+      type: Number,
+      default: 0
     },
-    data(){
-        return{
-        }
+    blogLists: {
+      type: Array,
+      default: () => {
+        return [];
+      }
     },
-    mounted(){
-    // 在项目加载完成之后初始化wow
-        let wow = new WOW({
-            offset: 100,
-            mobile: true,
-            live:false
-        })
-        wow.init()
+    blogsIndex: {
+      type: Number,
+      default: 0
+    },
+    blockIndex: {
+      type: Number,
+      default: 0
     }
-}
+  },
+  mounted () {
+    let wow = new WOW({
+      offset: 100,
+      mobile: true,
+      live: false
+    });
+    wow.init();
+  },
+  methods: {
+    uuid
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

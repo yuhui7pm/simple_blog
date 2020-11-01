@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 通过express中间件截取请求，返回mock数据
  * @version: 1.0
  * @Author: yuhui
  * @Date: 2020-10-03 21:51:51

@@ -7,23 +7,23 @@
  * @LastEditTime: 2020-10-18 12:47:40
  -->
 <template>
-    <div id="app">
-        <!-- 用来对组件进行缓存，从而节省性能 -->
-        <keep-alive> 
-            <!-- router-view 当做是一个容器，它渲染的组件是你使用 vue-router 指定的。比如： -->
-            <router-view /><!--承载路由组件-->
-        </keep-alive>
-    </div>
+  <div id="app">
+    <!-- 用来对组件进行缓存，从而节省性能 -->
+    <keep-alive> 
+      <!-- router-view 当做是一个容器，它渲染的组件是你使用 vue-router 指定的。比如： -->
+      <router-view /><!--承载路由组件-->
+    </keep-alive>
+  </div>
 </template>
 
 <script>
 export default {
-    name:'App',
-    data(){
-        return{
-        }
-    }
-}
+  name: 'App',
+  data (){
+    return{
+    };
+  }
+};
 </script>
 
 <style lang="less" scoped>
